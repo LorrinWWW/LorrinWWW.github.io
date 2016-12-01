@@ -1,7 +1,7 @@
 ---
 title: 数据挖掘笔记 Note of datamining
 date: 2016-11-30 15:35:24
-categories: programming
+categories: [programming, unfinished]
 tags: [datamining]
 ---
 
