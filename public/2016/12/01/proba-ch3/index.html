@@ -1,0 +1,777 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="math,probability," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="几种常见分布
+ 若不在区间内，f=0
+
+loi uniforme
+
+f(x)=\frac{1}{b-a} si\ x \in [a,b]
+loi exponentielle
+
+f(x) = \lambda e^{-\lambda x} si\ x \ge 0 \\
+E[X] = \frac{1}{\lambda}, Var(X) = \lambda^2
+Loi de weibull
+
+f(x)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="proba-ch3 实域概率和特征方程">
+<meta property="og:url" content="http://lorrin.cn/2016/12/01/proba-ch3/index.html">
+<meta property="og:site_name" content="Jue's Blog">
+<meta property="og:description" content="几种常见分布
+ 若不在区间内，f=0
+
+loi uniforme
+
+f(x)=\frac{1}{b-a} si\ x \in [a,b]
+loi exponentielle
+
+f(x) = \lambda e^{-\lambda x} si\ x \ge 0 \\
+E[X] = \frac{1}{\lambda}, Var(X) = \lambda^2
+Loi de weibull
+
+f(x)">
+<meta property="og:updated_time" content="2016-12-01T15:28:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="proba-ch3 实域概率和特征方程">
+<meta name="twitter:description" content="几种常见分布
+ 若不在区间内，f=0
+
+loi uniforme
+
+f(x)=\frac{1}{b-a} si\ x \in [a,b]
+loi exponentielle
+
+f(x) = \lambda e^{-\lambda x} si\ x \ge 0 \\
+E[X] = \frac{1}{\lambda}, Var(X) = \lambda^2
+Loi de weibull
+
+f(x)">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lorrin.cn/2016/12/01/proba-ch3/"/>
+
+
+
+
+
+  <title> proba-ch3 实域概率和特征方程 | Jue's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Jue's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">math and programming</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://lorrin.cn/2016/12/01/proba-ch3/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jue">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jue's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jue's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                proba-ch3 实域概率和特征方程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-01T14:54:10+01:00">
+                2016-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/math/" itemprop="url" rel="index">
+                    <span itemprop="name">math</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ol>
+<li><p>几种常见分布</p>
+<p> 若不在区间内，f=0</p>
+<ol>
+<li><p>loi uniforme</p>
+<script type="math/tex; mode=display">
+f(x)=\frac{1}{b-a} si\ x \in [a,b]</script></li>
+<li><p>loi exponentielle</p>
+<script type="math/tex; mode=display">
+f(x) = \lambda e^{-\lambda x} si\ x \ge 0 \\
+E[X] = \frac{1}{\lambda}, Var(X) = \lambda^2</script></li>
+<li><p>Loi de weibull</p>
+<script type="math/tex; mode=display">
+f(x) = \alpha \lambda^\alpha x^{\alpha-1}e^{-(\lambda x)^\alpha} si\ x \ge 0\\
+E[X] = \frac{\Gamma(1+1/\alpha)}{\lambda}, Var(X) = \frac{\Gamma(1+2/\alpha)}{\lambda^2}</script></li>
+<li><p>loi gamma</p>
+<script type="math/tex; mode=display">
+f(x) = \frac{\lambda}{\Gamma(p)}(\lambda x)^{p-1}e^{-\lambda x}\\
+E[X] = \frac{p}{\lambda}, Var(X) = \frac{p}{\lambda^2}</script></li>
+<li><p>loi normale</p>
+<script type="math/tex; mode=display">
+f(x) = \frac{1}{\sqrt{2\pi}\sigma}exp[-\frac{(x-m)^2}{2\sigma^2}], x \in R\\
+E[X] = m, Var(X) = \sigma^2</script></li>
+<li><p>Loi lognormale</p>
+<script type="math/tex; mode=display">
+f(x) = \frac{1}{\sqrt{2\pi}\sigma x}exp[-\frac{(\ln x-m)^2}{2\sigma^2}], x \ge 0 \\
+E[X] = e^{m+\sigma^2/2}, Var(X) = e^{2m+\sigma^2}(e^{\sigma^@}-1)</script></li>
+<li><p>Loi du $ \chi^2 $</p>
+<script type="math/tex; mode=display">
+X = U_1^2+...+U_n^2 \\
+U_i\ est\ de\ loi\ \mathcal{N}(0,1) \\
+E[X] = n, Var(X) = 2n</script></li>
+<li><p>Loi de Student</p>
+<script type="math/tex; mode=display">
+X = \frac{U}{\sqrt{\frac{Z}{n}}} \\
+U\ suit\ la\ loi\ normale\ \mathcal{N}(0,1) \\
+Z\text{ est independante de U et suit la loi du }\chi^2\text{ a n degres de liberte}</script></li>
+</ol>
+</li>
+<li><p>特征函数</p>
+<script type="math/tex; mode=display">
+\varphi_X: \mathbb{R^N} \rightarrow \mathbb{C} \\
+t \rightarrow \varphi_X(t) = E[e^{i<t,X>}] = \int_{\mathbb{R}^N}{e^{i<t,X>}P_X(dx)}</script><p>我们说特征函数是对X进行基于PX的傅立叶变换 = =好绕</p>
+<p>若PX存在概率密度 $f \in L^1$</p>
+<script type="math/tex; mode=display">
+\varphi_X(t) = \int_{\mathbb{R}^N}{e^{i<t,X>}f(x)dx}</script><ul>
+<li><p>性质</p>
+<ul>
+<li><script type="math/tex; mode=display">
+\forall t \in \mathbb{R}^N, |\varphi_X(t)| \le 1=> \varphi_X(0) = 1</script><script type="math/tex; mode=display">
+\varphi_{\lambda X+a}(t) = e^{iat}\varphi_X(\lambda t)</script><script type="math/tex; mode=display">
+\varphi_X 是一个半正函数，即 \\
+\forall z_1,...,z_n\in \mathbb{C}, \sum_{1 \le j, k\le n}{z_j \varphi_X(t_j-t_k)\bar{z_k}} \ge 0</script></li>
+</ul>
+</li>
+<li><p>其他性质</p>
+<ul>
+<li><p>特征函数连续</p>
+</li>
+<li><p>PX以lebesgue测度绝对连续，则</p>
+</li>
+<li><script type="math/tex; mode=display">
+\lim_{|t|\rightarrow \infty}{\varphi_X(t)} = 0</script></li>
+<li><p>XY，它们拥有相同的P，当且仅当</p>
+</li>
+<li><script type="math/tex; mode=display">
+\varphi_X=\varphi_Y</script></li>
+<li><p>逆变换</p>
+</li>
+<li><script type="math/tex; mode=display">
+\forall x \in \mathbb{R}^N, f(x)=\frac{1}{(2\pi)^N}\int_{\mathbb{R}^N}{e^{-i<t,X>}\varphi_X(t)}dt</script></li>
+</ul>
+</li>
+<li><p>特征方程和独立性</p>
+<ul>
+<li><p>定理</p>
+<script type="math/tex; mode=display">
+X_1,...,X_N \text{ 是独立的，当且仅当它们的特征方程满足：} \\
+\forall t = (t_1,...,t_N) \in \mathbb{R}^N; \varphi_X(t) = \prod_{k=1}^{N}{\varphi_{X_k}(t_k) } \\
+where\ X = (X_1,...,X_N)</script></li>
+<li><p>性质</p>
+<script type="math/tex; mode=display">
+X_1,...,X_n independants, P_{X_1},...,P_{X_N}. \\
+\text{La loi de } \sum{X_i} \text{est le produit de concolution } \prod{P_{X_i}} \\
+\text{Pour fonction caracteristique } \sum{\varphi_{X_i}} \text{definie par} \\
+\forall t \in \mathbb{R}^N; \varphi_{X+...+X_n}(t) = \prod_{i=1}^{n}{\varphi_{X_i}(t) }</script></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/math/" rel="tag"># math</a>
+          
+            <a href="/tags/probability/" rel="tag"># probability</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/01/proba-ch2/" rel="next" title="proba-ch2 随机变量">
+                <i class="fa fa-chevron-left"></i> proba-ch2 随机变量
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/01/proba-ch4/" rel="prev" title="proba-ch4 高斯向量">
+                proba-ch4 高斯向量 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jue" />
+          <p class="site-author-name" itemprop="name">Jue</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jue</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

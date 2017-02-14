@@ -7,6 +7,8 @@ tags: [math, probability]
 
 该笔记只是记录在法国学的一些东西，因为学的是法语的翻译可能有些摸不着头脑，并且记的凌乱，望见谅。
 
+另外，这里的概率论是基于测度论的概率论，这里假设已经学过测度学了。
+
 # Part 1 公理、概率空间
 
 {% post_link proba-ch1 Savoir plus  %}
@@ -30,7 +32,3 @@ tags: [math, probability]
 # Part 6 条件数学期望
 
 {% post_link proba-ch6 Savoir plus  %}
-
-# Part 7 随机过程
-
-{% post_link proba-ch7 Savoir plus  %}

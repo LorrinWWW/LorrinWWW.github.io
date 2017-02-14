@@ -31,3 +31,4 @@ $$
   \mathcal{N}(\mu,D) \text{在Lebesgue测度下，在}\mathbb{R}^N\text{上绝对连续} \\
   x \longmapsto \frac{1}{(2\pi)^{N/2}\sqrt{\det D}}e^{-\frac{1}{2}<x-\mu,D^{-1}(x-\mu)>}
   $$
+

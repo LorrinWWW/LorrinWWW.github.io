@@ -1,0 +1,938 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="programming,datamining,classification,prediction," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="基本知识主要分为两个步骤：
+
+建立一个描述已知数据集类别或概念的模型。
+分类规则形式、决策树形式，或数学公式形式。
+
+利用所获得的模型进行分类操作。
+首先要对模型分类准确率进行估计。
+若其准确率可以接受，则可以使用该模型进行分类。       
+
+
+可以根据以下几条标准对各种分类方法进行比较:
+
+预测准确率，它描述(学习所获)模型能够正确预测未知对象类别或(类别)数值的能力。
+速度，它描述在构造和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据挖掘-分类与预测">
+<meta property="og:url" content="http://lorrin.cn/2016/12/26/datamining-class-pred/index.html">
+<meta property="og:site_name" content="Jue's Blog">
+<meta property="og:description" content="基本知识主要分为两个步骤：
+
+建立一个描述已知数据集类别或概念的模型。
+分类规则形式、决策树形式，或数学公式形式。
+
+利用所获得的模型进行分类操作。
+首先要对模型分类准确率进行估计。
+若其准确率可以接受，则可以使用该模型进行分类。       
+
+
+可以根据以下几条标准对各种分类方法进行比较:
+
+预测准确率，它描述(学习所获)模型能够正确预测未知对象类别或(类别)数值的能力。
+速度，它描述在构造和">
+<meta property="og:updated_time" content="2016-12-26T15:52:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据挖掘-分类与预测">
+<meta name="twitter:description" content="基本知识主要分为两个步骤：
+
+建立一个描述已知数据集类别或概念的模型。
+分类规则形式、决策树形式，或数学公式形式。
+
+利用所获得的模型进行分类操作。
+首先要对模型分类准确率进行估计。
+若其准确率可以接受，则可以使用该模型进行分类。       
+
+
+可以根据以下几条标准对各种分类方法进行比较:
+
+预测准确率，它描述(学习所获)模型能够正确预测未知对象类别或(类别)数值的能力。
+速度，它描述在构造和">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lorrin.cn/2016/12/26/datamining-class-pred/"/>
+
+
+
+
+
+  <title> 数据挖掘-分类与预测 | Jue's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Jue's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">math and programming</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://lorrin.cn/2016/12/26/datamining-class-pred/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jue">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jue's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jue's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据挖掘-分类与预测
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-26T14:56:57+01:00">
+                2016-12-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h1><p>主要分为两个步骤：</p>
+<ol>
+<li><p>建立一个描述已知数据集类别或概念的模型。</p>
+<p>分类规则形式、决策树形式，或数学公式形式。</p>
+</li>
+<li><p>利用所获得的模型进行分类操作。</p>
+<p>首先要对模型分类准确率进行估计。</p>
+<p>若其准确率可以接受，则可以使用该模型进行分类。       </p>
+</li>
+</ol>
+<p>可以根据以下几条标准对各种分类方法进行比较:</p>
+<ol>
+<li>预测准确率，它描述(学习所获)模型能够正确预测未知对象类别或(类别)数值的能力。</li>
+<li>速度，它描述在构造和使用模型时的计算效率。 </li>
+<li>鲁棒性，它描述在数据带有噪声和有数据遗失情况下，(学习所获)模型仍能进行正确预测的能力。 </li>
+<li>可扩展性，它描述对处理大量数据并构造相应学习模型所需要的能力。</li>
+<li>易理解性，它描述学习所获模型表示的可理解程度。 在本章的后面各节，将要陆续介绍上述有关问题的实现方法。</li>
+</ol>
+<h1 id="基于决策树的分类"><a href="#基于决策树的分类" class="headerlink" title="基于决策树的分类"></a>基于决策树的分类</h1><ol>
+<li><p>决策树的生成算法</p>
+<ul>
+<li><p>基本决策树算法</p>
+<p>本质是一个贪心算法，自上而下分而治之。</p>
+</li>
+</ul>
+</li>
+<li><p>属性选择方法</p>
+<p>信息量</p>
+<script type="math/tex; mode=display">
+I(s_1,…,s_m) = - \sum_{i=1}^{m}{p_i \log (p_i)}</script><p>利用属性A划分当前样本集合所需要的信息可以计算：</p>
+<script type="math/tex; mode=display">
+E(A) = \sum_{j=1}^{v}{\frac{s_{1j}+s_{2j}+...+s_{mj}}{s}I(s_1,…,s_m) }</script><p>E(A)的值越小，说明其子集划分结果越纯，即越好。而对于一个子集Sj，它的信息为</p>
+<script type="math/tex; mode=display">
+I(s_{1j},…,s_{mj}) = - \sum_{i=1}^{m}{p_{ij} \log (p_{ij})}</script><p>这样利用属性A对当前分支结点进行相应样本集合划分所获得的信息增益是:</p>
+<script type="math/tex; mode=display">
+Gain(A) =I(s_1,…,s_m)- E(A)</script><p>也就是说Gain(A)被认为是利用属性A进行划分后，所获的的信息熵的减少量。</p>
+<p>决策树归纳算法计算每个属性的Gain，选择信息增益最大的属性，作为测试属性并由此产生相应的分支节点。</p>
+</li>
+<li><p>树枝的修剪</p>
+<ol>
+<li><p>事前修剪</p>
+<p>基本原理是设置一个阀值，当某一节点的的样本数少于阀值，则停止细分。难点在于设置一个合理的阀值。</p>
+</li>
+<li><p>事后修剪</p>
+<p>从一个充分生长的树中修建。</p>
+<p>可以使用基于代价成本的方法，也可以使用最短描述长度(MDL)。</p>
+<p>前者计算其分类错误率，若修剪枝导致分类错误率变高，则保留，否则剪枝；后者选择最简单的，无需独立的数据测试</p>
+</li>
+</ol>
+</li>
+<li><p>规则获取</p>
+<p>在已经获得了一个决策树的基础上，可以使用”if…else…”语句描述该决策树。</p>
+</li>
+<li><p>基本决策树方法改进及其扩展性</p>
+</li>
+</ol>
+<h1 id="贝叶斯分类方法"><a href="#贝叶斯分类方法" class="headerlink" title="贝叶斯分类方法"></a>贝叶斯分类方法</h1><p>贝叶斯分类器是一个统计分类器，基于贝叶斯定理。</p>
+<p>简单贝叶斯分类器的分类性能可以与决策树和神经网络相比。</p>
+<p>简单贝叶斯分类器假设一个指定类别中各属性的取值是互相独立的，它可以帮助减少计算量。</p>
+<ol>
+<li><p>贝叶斯定理</p>
+<p>设X为一个类别未知的数据样本，H为某个假设，则：</p>
+<script type="math/tex; mode=display">
+P(H|X) = \frac{P(X|H)P(H)}{P(X)}</script></li>
+<li><p>简单贝叶斯分类方法</p>
+<p>步骤说明如下：</p>
+<ol>
+<li><p>每一个数据都是有一个n维特征向量X={x1,…,xn}构成，分别描述其n个属性(A1,…,An)。</p>
+</li>
+<li><p>若有m个不同的类别(C1,…,Cm)，分类器将未知X归属到类别Ci，当仅当</p>
+<script type="math/tex; mode=display">
+P(C_i|X) = \max(P(C_j|X)|1\le j\le m)</script><p>所以我们要找到最大的</p>
+<script type="math/tex; mode=display">
+P(C_i|X) = \frac{P(X|C_i)P(C_i)}{P(X)}</script></li>
+<li><p>要找到它，只需要P(X|Ci)P(Ci)取最大即可。由于各类别的事前概率是未知的，我们假设P(Ci)是互相相等的，这样，第二步中的式子取最大就转化为了寻找最大的P(X|Ci)</p>
+</li>
+<li><p>由于所含的属性比较多，直接计算P(X|Ci)的计算量还是很大的。由于简单贝叶斯分类器假设各属性独立，则：</p>
+<script type="math/tex; mode=display">
+P(X|C_i) = \prod{P(x_k|C_i)}</script><p>可以根据训练数据样本估算P(xk|Ci)的值。具体如下：</p>
+<ul>
+<li><p>若Ak是符号量</p>
+<script type="math/tex; mode=display">
+P(x_k|Ci)=\frac{s_{ik}}{s_i}</script><p>这里sik为训练样本中类别为Ci且属性Ak取vk的样本数。si为训练样本中类别为Ci的样本数。</p>
+</li>
+<li><p>若Ak是连续量</p>
+<script type="math/tex; mode=display">
+P(x_k|Ci)=g(x_k,\mu_{C_i},\sigma_{C_i}) = \frac{1}{\sqrt{2\pi}\sigma_{C_i}}e^{-\frac{(x-\mu_{C_i})^2}{2\sigma^2_{C_i}}}</script><p>其中$g(x<em>k,\mu</em>{C<em>i},\sigma</em>{C_i})$ï为属性为Ak的高斯规范密度函数。</p>
+</li>
+</ul>
+</li>
+<li><p>为了预测X的分类，我们通过上述方法估计各个类别的正确率，将X归属到可能性最高的类别。</p>
+</li>
+</ol>
+</li>
+<li><p>贝叶斯信念网络</p>
+<p>简单贝叶斯假设属性相互独立，从而简化计算，而实际上属性相互依赖的情况比较常见，所以又出现了贝叶斯信念网络，用于描述这种相互关联的概率分布。</p>
+<p>贝叶斯信念网络提供了一个图形模型来描述其中的因果关系。信念网络包括两个部分。</p>
+<ul>
+<li><p>第一部分是有向无环图</p>
+<p>每一个节点代表随机变量。</p>
+<p>每一条弧代表一个概率依赖。</p>
+<p>给定父节点，每个变量有条件的独立于图中非子节点。</p>
+</li>
+<li><p>第二部分是包含所有变量的条件概率表(CPT)</p>
+<p>对于一个变量Z，CPT定义了P(Z|parent(Z))，由此可以得到一个表。</p>
+<p>例如，LunCancer的父节点是FamilyHistory和Smoker，</p>
+</li>
+</ul>
+</li>
+</ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>FH, S</th>
+<th>FH, ~S</th>
+<th>~FH, S</th>
+<th>~FH, ~S</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LungCancer</td>
+<td>0.8</td>
+<td>0.5</td>
+<td>0.7</td>
+<td>0.1</td>
+</tr>
+<tr>
+<td>~LungCancer</td>
+<td>0.2</td>
+<td>0.5</td>
+<td>0.3</td>
+<td>0.9</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>数据对象的联合概率通过如下公式计算。</p>
+<script type="math/tex; mode=display">
+P(z_1,...,z_n) = \prod{P(z_i|parent(z_i))}</script><ol>
+<li><p>贝叶斯信念网络的学习</p>
+<p>学习算法步骤如下：</p>
+<ol>
+<li><p>计算下降梯度</p>
+<script type="math/tex; mode=display">
+\frac{\partial\ln{P_w(S)}}{\partial w_{ijk}} = \sum_{d=1}^{s}{\frac{P(Y_i=y_{ij}, U_i=u_{ik} |X_d)}{w_{ijk}}}</script><p>​<br>左边是计算训练集合S中每个样本Xd的概率。设这一概率为p。</p>
+<p>由Yi和Ui表示隐含变量，p可通过样本中可观察到的变量以及标准贝叶斯网络推理计算得到。</p>
+</li>
+<li><p>沿梯度方向前进一小步，权重更新计算如下</p>
+<script type="math/tex; mode=display">
+w_{ijk} \leftarrow w_{ijk} + (l)\frac{\partial\ln{P_w(S)}}{\partial w_{ijk}}</script><p>l为学习速率代表学习步长。通常学习速率为较小的常数。</p>
+</li>
+<li><p>重新规格化权重</p>
+<p>保证wijk的取值在0～1，其和等于1.</p>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="神经网络分类方法"><a href="#神经网络分类方法" class="headerlink" title="神经网络分类方法"></a>神经网络分类方法</h1><ol>
+<li><p>多层反馈神经网络</p>
+<p>输入同时赋给第一层(输入层)单元，这些单元输出赋予权重，输出给第二层(隐藏层)。</p>
+<p>隐藏层的带权输出又作为输入再馈给另一隐层。</p>
+<p>最后的隐层结点带权输出馈给输出层单元，最终给出相应样本的预测输出。</p>
+<p>该网络是前馈的，即每一个反馈只能发送到前面的输出层或隐含层。</p>
+<p>它也是全连接的，即每一个层中单元均与前面一层的各单元相连接。</p>
+<p>只要中间隐层足够多的话，多层前馈网络中的线性阈值函数，可以充分逼近任何函数。</p>
+</li>
+<li><p>神经网络结构</p>
+<p>确定结构，即：</p>
+<ul>
+<li>输入层的单元数</li>
+<li>隐含层的个数(和层数)</li>
+<li>每个隐含层的单元数目</li>
+<li>输出层单元数目</li>
+</ul>
+<p>对输入值规格化，一般取值在0～1.</p>
+<p>离散数据可以为每一个取值增加一个节点进行编码。例如A={a0,a1,a2}则我们设立三个输入单元I0, I1, I2，每个单元默认为0，若A=a0，则I1置为1.</p>
+<p>此外没有什么特定的规律或规则来指导隐含层的最佳单元数量，它的确定是一个不断试错的过程。</p>
+</li>
+<li><p>后传方法</p>
+<p>后传方法不断地处理一个训练样本集。将处理结果与训练样本已知类别比较所获误差，修改权重，使网络输出与实际类别之间的均方差最小。权重的修改是后传的，即从前向后的。</p>
+<p>其收敛性不能保证。</p>
+<p>流程(伪代码)：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 定义sum函数，以变量x对f(x)求和</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum</span><span class="params">(f<span class="params">(x)</span>, x)</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="comment"># 初始化</span></div><div class="line">init();</div><div class="line"></div><div class="line"><span class="keyword">while</span> !conditions:           <span class="comment"># 条件不满足时</span></div><div class="line">    <span class="keyword">for</span> X <span class="keyword">in</span> samples:</div><div class="line">        <span class="keyword">for</span> each layer:      <span class="comment"># 每个隐含层和输出层</span></div><div class="line">            O[j] = <span class="number">1</span> / (<span class="number">1</span> + exp( - I[j]))</div><div class="line">            I[j] = sum(w[i][j]O[i], i) + theta[j]</div><div class="line">        <span class="keyword">for</span> each unit of output layer <span class="keyword">as</span> j:    <span class="comment"># 每个输出层单元j，计算向后传播误差</span></div><div class="line">            Err[j] = O[j] * (<span class="number">1</span> - O[j]) * (T[j] - O[j])</div><div class="line">        <span class="keyword">for</span> each unit of hidden layer <span class="keyword">as</span> j:    <span class="comment"># 每个隐含层单元j，从最后一层到第一层隐含层</span></div><div class="line">            Err[j] = O[j] * (<span class="number">1</span> - O[j]) * sum(Err[k] * w[i][j][k], k)</div><div class="line">        <span class="keyword">for</span> each w[i][j] <span class="keyword">in</span> the network:       <span class="comment"># network中的权重wij</span></div><div class="line">            delta_w[i][j] = (l) * Err[j] * O[i]     <span class="comment"># (l)是学习速率，取值在0～1</span></div><div class="line">            w[i][j] += delta_w[i][j]</div><div class="line">        <span class="keyword">for</span> each theta[j] <span class="keyword">in</span> the network:      <span class="comment"># network中的偏差thetaij</span></div><div class="line">            delta_theta[j] = (l) * Err[j]</div><div class="line">            v[i] = theta[j] + delta_theta[j]</div></pre></td></tr></table></figure>
+<p>看伪代码基本就能明白它的过程了。虽然伪代码可能写的比较迷。。。</p>
+</li>
+</ol>
+<h1 id="基于关联的分类方法"><a href="#基于关联的分类方法" class="headerlink" title="基于关联的分类方法"></a>基于关联的分类方法</h1><p>略，后面会详细说。</p>
+<h1 id="其他分类"><a href="#其他分类" class="headerlink" title="其他分类"></a>其他分类</h1><p>其他分类我也没有细看，纪录一下名字，以后有时间再看。</p>
+<ol>
+<li><p>k-最邻近方法</p>
+<p>这个很简单，就是比较两个点的欧式距离。比较基本的分类方法，略。</p>
+</li>
+<li><p>基于示例推理</p>
+</li>
+<li><p>遗传算法</p>
+</li>
+<li><p>粗糙集方法</p>
+</li>
+<li><p>模糊集合方法</p>
+</li>
+</ol>
+<h1 id="预测方法"><a href="#预测方法" class="headerlink" title="预测方法"></a>预测方法</h1><ol>
+<li><p>线形与多变量回归</p>
+<p>线性代数、概率统计、数值计算方法里都学过。核心是利用最小二乘法。</p>
+</li>
+<li><p>非线性回归</p>
+<p>例如多项式回归</p>
+<script type="math/tex; mode=display">
+Y = \alpha + \beta_1 X+\beta_2 X^2+\beta_3 X^3</script><p>为了将其转化为线性形式，令：</p>
+<script type="math/tex; mode=display">
+X_1 = X;X_2 = X^2 ; X_3 = X^3</script><p>接下来就用最小二乘法即可。</p>
+</li>
+<li><p>其他回归模型</p>
+<p>对数回归、泊松回归等</p>
+</li>
+</ol>
+<h1 id="分类器准确性"><a href="#分类器准确性" class="headerlink" title="分类器准确性"></a>分类器准确性</h1><p>分层k次交叉验证方法普遍应用于对分类器预测准确性的评估方面。而bagging方法和boosting方法则通过学习和组合多个(单)分类器来帮助提高整个(数据训练样本所获)分类器的预测准确性。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/programming/" rel="tag"># programming</a>
+          
+            <a href="/tags/datamining/" rel="tag"># datamining</a>
+          
+            <a href="/tags/classification/" rel="tag"># classification</a>
+          
+            <a href="/tags/prediction/" rel="tag"># prediction</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/14/ML-CNN/" rel="next" title="ML CNN">
+                <i class="fa fa-chevron-left"></i> ML CNN
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/28/learning-OS-and-building-LorriOS/" rel="prev" title="learning OS and building LorriOS">
+                learning OS and building LorriOS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jue" />
+          <p class="site-author-name" itemprop="name">Jue</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本知识"><span class="nav-number">1.</span> <span class="nav-text">基本知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基于决策树的分类"><span class="nav-number">2.</span> <span class="nav-text">基于决策树的分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#贝叶斯分类方法"><span class="nav-number">3.</span> <span class="nav-text">贝叶斯分类方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#神经网络分类方法"><span class="nav-number">4.</span> <span class="nav-text">神经网络分类方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基于关联的分类方法"><span class="nav-number">5.</span> <span class="nav-text">基于关联的分类方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他分类"><span class="nav-number">6.</span> <span class="nav-text">其他分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#预测方法"><span class="nav-number">7.</span> <span class="nav-text">预测方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分类器准确性"><span class="nav-number">8.</span> <span class="nav-text">分类器准确性</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jue</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

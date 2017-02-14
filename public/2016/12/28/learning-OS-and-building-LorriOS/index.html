@@ -1,0 +1,780 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="OS,kernel," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="暂时用以记录操作系统的学习，以及开发自己的一个toy OS，作为一个项目日志?(如果能成功的话。。)。写这个东西的目的还是给我自己看的（估计其他人也会看的一头雾水吧，笑），毕竟人不太可能一次就找到正确的道路，所以日志写起来可能非常乱糟糟。所以说这只是一个记录，没有什么真正的参考价值。等这个toy os完成的差不多了，我应该会再来总结和记录一下。
+另外，下面的DayN并不是真正的天数，毕竟平时也要上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="learning OS and building LorriOS">
+<meta property="og:url" content="http://lorrin.cn/2016/12/28/learning-OS-and-building-LorriOS/index.html">
+<meta property="og:site_name" content="Jue's Blog">
+<meta property="og:description" content="暂时用以记录操作系统的学习，以及开发自己的一个toy OS，作为一个项目日志?(如果能成功的话。。)。写这个东西的目的还是给我自己看的（估计其他人也会看的一头雾水吧，笑），毕竟人不太可能一次就找到正确的道路，所以日志写起来可能非常乱糟糟。所以说这只是一个记录，没有什么真正的参考价值。等这个toy os完成的差不多了，我应该会再来总结和记录一下。
+另外，下面的DayN并不是真正的天数，毕竟平时也要上">
+<meta property="og:updated_time" content="2017-01-10T11:58:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="learning OS and building LorriOS">
+<meta name="twitter:description" content="暂时用以记录操作系统的学习，以及开发自己的一个toy OS，作为一个项目日志?(如果能成功的话。。)。写这个东西的目的还是给我自己看的（估计其他人也会看的一头雾水吧，笑），毕竟人不太可能一次就找到正确的道路，所以日志写起来可能非常乱糟糟。所以说这只是一个记录，没有什么真正的参考价值。等这个toy os完成的差不多了，我应该会再来总结和记录一下。
+另外，下面的DayN并不是真正的天数，毕竟平时也要上">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lorrin.cn/2016/12/28/learning-OS-and-building-LorriOS/"/>
+
+
+
+
+
+  <title> learning OS and building LorriOS | Jue's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Jue's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">math and programming</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://lorrin.cn/2016/12/28/learning-OS-and-building-LorriOS/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jue">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jue's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jue's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                learning OS and building LorriOS
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-28T15:00:08+01:00">
+                2016-12-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/unfinished/" itemprop="url" rel="index">
+                    <span itemprop="name">unfinished</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>暂时用以记录操作系统的学习，以及开发自己的一个toy OS，作为一个项目日志?(如果能成功的话。。)。写这个东西的目的还是给我自己看的（估计其他人也会看的一头雾水吧，笑），毕竟人不太可能一次就找到正确的道路，所以日志写起来可能非常乱糟糟。所以说这只是一个记录，没有什么真正的参考价值。等这个toy os完成的差不多了，我应该会再来总结和记录一下。</p>
+<p>另外，下面的DayN并不是真正的天数，毕竟平时也要上课，不可能连续进行。所以大概是按每一次尝试，来进行划分的。</p>
+<hr>
+<p>刚开始浏览了一下操作系统的基本知识，按考研复习的来吧，然后看的忽然有点跃跃欲试就想能不能写一个简单的OS。</p>
+<h1 id="Day1"><a href="#Day1" class="headerlink" title="Day1:"></a>Day1:</h1><p>一开始从《30天自制操作系统》开始看，以前有一点汇编基础所以看起来感觉还是可以接受的。</p>
+<p>看到第三天就下不去了，倒不是因为内容看不懂，而是环境的问题吧。作者是基于win，用了很多小程序，我用的是os x，很多时候要找一些替代方法。参考网上linux的解决方案，毕竟os x还是不太一样，到下面这一步就是不行，把haribote.bin写到myos.img。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># makefile</div><div class="line">mkdir -p /tmp/floppy</div><div class="line">mount -o loop myos.img /tmp/floppy -o fat=12 # 这一条在mac不适用</div><div class="line">sleep 1</div><div class="line">cp haribote.bin /tmp/floppy</div><div class="line">sleep 1</div><div class="line">umount /tmp/floppy</div></pre></td></tr></table></figure>
+<p>Os x 上貌似不能直接mount，当然我也尝试了一些其他的办法，最终失败，感觉不太想再花时间在细枝末节上，打算回法国后在ubuntu下开发，或者和书上保持一样，在win下开发。</p>
+<h1 id="Day2"><a href="#Day2" class="headerlink" title="Day2:"></a>Day2:</h1><p>第二天开始阅读《ORANGE’S：一个操作系统的实现》，并打算先阅读，等了解大致情况再动手，不然也只是抄代码，并且在一知半解的情况下容易卡在一些细枝末节的地方。</p>
+<p>同时也可以参考UnixV6，这个是MIT用于教学写的一个类unix的OS，有配套的课程。</p>
+<p>两天下来感觉mac用于web开发十分方便，但是内核开发感觉网上的文档、案例偏少，当然主要也是我比较弱，不能够举一反三。一般来说，要不是面向初学者如《30天》而采用win，要不就是使用linux（果然linux才是王道= =）</p>
+<p>下面是在mac上编译uv6的配置（没有测试，纯搬运）</p>
+<blockquote>
+<h3 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h3><ol>
+<li>Install <a href="http://itunes.apple.com/us/app/xcode/id497799835" target="_blank" rel="external">Xcode</a>.  After installing Xcode install the Command Line Tools from the Downloads section of Xcode’s preferences.  I’ve installed Xcode Version 4.5 (4G182).</li>
+<li>Install <a href="http://mxcl.github.com/homebrew/" target="_blank" rel="external">Homebrew</a></li>
+<li><p>Install pre-requisites for building xv6</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;        $ brew install glib gmp mpfr pkgconfig ppl</div><div class="line">&gt;        $ brew install libmpc --use-llvm</div><div class="line">&gt;        $ brew install qemu --use-gcc</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Install GNU binutils</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;        $ <span class="built_in">cd</span> /tmp</div><div class="line">&gt;        $ curl -O http://ftp.gnu.org/gnu/binutils/binutils-2.22.tar.gz</div><div class="line">&gt;        $ tar -xvzf binutils-2.22.tar.gz</div><div class="line">&gt;        $ ./configure --target=i386-jos-elf --disable-nls --prefix=/opt/gnu</div><div class="line">&gt;        $ make</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Install GCC 4.5 via Homebrew</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;        $ <span class="built_in">cd</span> /tmp</div><div class="line">&gt;        $ curl -O http://ftp.gnu.org/gnu/gcc/gcc-4.7.2/gcc-4.7.2.tar.gz</div><div class="line">&gt;        $ <span class="built_in">cd</span> gcc-4.7.2</div><div class="line">&gt;        $ ./configure --target=i386-jos-elf --disable-nls --without-headers --with-newlib --disable-threads --disable-shared --disable-libmudflap --disable-libssp --with-system-zlib --disable-lto --with-gmp=/usr/<span class="built_in">local</span> --enable-languages=c --prefix=/opt/gnu</div><div class="line">&gt;        $ LDFLAGS=-L/usr/lib make</div><div class="line">&gt;        $ make install</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<h3 id="Install-and-build-xv6-with-GCC"><a href="#Install-and-build-xv6-with-GCC" class="headerlink" title="Install and build xv6 with GCC"></a>Install and build xv6 with GCC</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;$ git <span class="built_in">clone</span> git://pdos.csail.mit.edu/xv6/xv6.git</div><div class="line">&gt;<span class="built_in">cd</span> xv6</div><div class="line">&gt;make qemu-nox</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<h1 id="Day3"><a href="#Day3" class="headerlink" title="Day3:"></a>Day3:</h1><p>目前跟着ORANGE，暂时比较顺利，开发环境仍然是mac。基于freedos下成功进入了保护模式。</p>
+<p>下面就保护模式做一点笔记。</p>
+<p>关于保护模式网上的资料很多，在为什么需要保护模式这个问题上，这里有一个非常直接的要求——我们的系统要运行在32位上，实模式仅支持16位寻址。当然保护模式远远不止如此，但是对于初学者（比如现在的我，囧），它应该是最大的用途之一。</p>
+<ul>
+<li><p>GDT</p>
+<p> 首先要先说一下GDT(Global Descriptor Table)，它是全局描述符表。GDT只有一张，位置任意，通过LGDT指令被存储在GDTR寄存器。</p>
+</li>
+<li><p>Selector</p>
+<p> 由GDTR访问全局描述符表是通过“段选择子”（实模式下的段寄存器）来完成的。</p>
+</li>
+<li><p>LDT</p>
+<p> 局部描述符表LDT(Local Descriptor Table)。和GDT类似，直观上与GDT结构相同（其段选择子TI置位），功能上隶属于GDT。GDT只有一张，LDT有多张，每个任务可以有一张。</p>
+</li>
+</ul>
+<p>如果第一次听到上面几个名词，可能还是比较懵逼。我们看看它是怎么运作的。</p>
+<ol>
+<li>进行一系列初始化，包括定义GDT，LDT，选择子等</li>
+<li>系统默认进入实模式</li>
+<li>加载GDT，进入保护模式</li>
+<li>加载不同的LDT，以进入不同的子任务</li>
+<li>退出保护模式，反回实模式。</li>
+</ol>
+<p>上面只列出了关键步骤，实际上还有很多细节问题，这里只是简单记录其大致思想，所以没有提。</p>
+<p>不管怎么说，姑且是跨入了保护模式的大门。</p>
+<h1 id="Day4"><a href="#Day4" class="headerlink" title="Day4:"></a>Day4:</h1><h3 id="特权级"><a href="#特权级" class="headerlink" title="特权级"></a>特权级</h3><p>在IA32分段机制中，特权级有4个特权级别，</p>
+<ul>
+<li>LEVEL 0: 内核</li>
+<li>LEVEL 1, 2: 服务</li>
+<li>LEVEL 3: 应用程序</li>
+</ul>
+<p>处理器通过识别CPL(current privilege level)、DPL(descriptor privilege level)、RPL(requested privilege level)这三个特权级进行特权级检验。</p>
+<p>CPL一般被存储在cs和ss的第0位和第1位。CPL等于所在代码段的特权级。当遇到一致代码段时，CPL不改变。（一致代码段能被小于等于它的特权的代码访问）</p>
+<p>DPL是段或门的特权级，写在描述符的属性中。</p>
+<p>RPL是通过选择子的第0位和第1位表现的。</p>
+<p>简单而言，只要CPL和RPL都小于被访问的数据段的DPL就可以了。</p>
+<h3 id="门"><a href="#门" class="headerlink" title="门"></a>门</h3><p>特权级转移可以分为两大类。jmp和call的直接转移；通过描述符间接转移。由于直接转移有诸多的限制，我们常常使用间接转移。</p>
+<p>其中，间接转移又分为：</p>
+<ul>
+<li>指向一个包含目标代码段选择子的门描述符</li>
+<li>指向一个包含目标代码段选择子的TSS</li>
+<li>指向一个任务门，它又指向一个包含目标代码段选择子的TSS</li>
+</ul>
+<p>门描述符分为四种：</p>
+<ul>
+<li>调用门 Call gate</li>
+<li>中断门 Interrupt gate</li>
+<li>陷阱门 Trap gate</li>
+<li>任务门 Task gate</li>
+</ul>
+<h1 id="Day5"><a href="#Day5" class="headerlink" title="Day5:"></a>Day5:</h1><h3 id="页表"><a href="#页表" class="headerlink" title="页表"></a>页表</h3><p>实模式下，int 15h 获得内存信息</p>
+<p>页表这一块看的有点心急，感觉理解不是很到位。以后等弄的更清楚了再来总结。</p>
+<p>中途调试的时候总是出问题，没想到最后发现一开始32位代码的权限就定义错了。从现在出错的经历来看，os如果崩了的话，一般是权限问题（可能是因为我现在写的内容不多吧）。所以务必小心检查权限。</p>
+<p>书上的代码有一点不是很理解，在PagingDemo它使用了大量的push却没有pop。据我的理解的话，push是把数据存到栈中，而无法改变栈外的内存，它也没有使用ret之类的与栈相关的指令，目前不是很理解。</p>
+<p>不理解细节也没办法，先试着看看后面的内容吧。</p>
+<h3 id="中断和异常"><a href="#中断和异常" class="headerlink" title="中断和异常"></a>中断和异常</h3><p>IDT，中断描述符表。IDT中的描述符可以是：</p>
+<ul>
+<li>中断门描述符</li>
+<li>陷阱门描述符</li>
+<li>任务门描述符</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OS/" rel="tag"># OS</a>
+          
+            <a href="/tags/kernel/" rel="tag"># kernel</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/26/datamining-class-pred/" rel="next" title="数据挖掘-分类与预测">
+                <i class="fa fa-chevron-left"></i> 数据挖掘-分类与预测
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/07/Bayes-estimation/" rel="prev" title="贝叶斯估计 Bayes estimation">
+                贝叶斯估计 Bayes estimation <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jue" />
+          <p class="site-author-name" itemprop="name">Jue</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Day1"><span class="nav-number">1.</span> <span class="nav-text">Day1:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day2"><span class="nav-number">2.</span> <span class="nav-text">Day2:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration"><span class="nav-number">2.0.1.</span> <span class="nav-text">Configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-and-build-xv6-with-GCC"><span class="nav-number">2.0.2.</span> <span class="nav-text">Install and build xv6 with GCC</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day3"><span class="nav-number">3.</span> <span class="nav-text">Day3:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day4"><span class="nav-number">4.</span> <span class="nav-text">Day4:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特权级"><span class="nav-number">4.0.1.</span> <span class="nav-text">特权级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#门"><span class="nav-number">4.0.2.</span> <span class="nav-text">门</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day5"><span class="nav-number">5.</span> <span class="nav-text">Day5:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#页表"><span class="nav-number">5.0.1.</span> <span class="nav-text">页表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中断和异常"><span class="nav-number">5.0.2.</span> <span class="nav-text">中断和异常</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jue</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
