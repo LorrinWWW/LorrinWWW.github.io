@@ -86,7 +86,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Jue's Blog">
-<meta property="og:url" content="http://lorrin.cn/page/4/index.html">
+<meta property="og:url" content="https://codeurJue.github.io/page/4/index.html">
 <meta property="og:site_name" content="Jue's Blog">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jue's Blog">
@@ -117,7 +117,7 @@
 
 
 
-  <link rel="canonical" href="http://lorrin.cn/page/4/"/>
+  <link rel="canonical" href="https://codeurJue.github.io/page/4/"/>
 
 
 
@@ -160,7 +160,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">math and programming</p>
+  <p class="site-subtitle"></p>
 </div>
 
 <div class="site-nav-toggle">
@@ -246,7 +246,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lorrin.cn/2016/12/01/proba-ch5/">
+  <link itemprop="mainEntityOfPage" href="https://codeurJue.github.io/2016/11/27/Note-of-learning-Algo/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jue">
@@ -271,8 +271,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/12/01/proba-ch5/" itemprop="url">
-                  proba-ch5 数列和随机变量系列
+                <a class="post-title-link" href="/2016/11/27/Note-of-learning-Algo/" itemprop="url">
+                  算法笔记 Note of learning Algo
                 </a>
               
             
@@ -286,8 +286,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-01T23:14:28+01:00">
-                2016-12-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-27T12:38:32+01:00">
+                2016-11-27
               </time>
             
 
@@ -305,8 +305,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/math/" itemprop="url" rel="index">
-                    <span itemprop="name">math</span>
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
                   </a>
                 </span>
 
@@ -342,485 +342,73 @@
       
         
           
-            <h1 id="数列和随机变量系列"><a href="#数列和随机变量系列" class="headerlink" title="数列和随机变量系列"></a>数列和随机变量系列</h1><ol>
-<li><p>零一律</p>
-<blockquote>
-<p><strong>零一律</strong>是概率论中的一个定律，它是安德雷·柯尔莫哥洛夫发现的，因此有时也叫柯尔莫哥洛夫零一律。其内容是：有些事件发生的概率不是几乎一（几乎肯定发生），就是几乎零（几乎肯定不发生）。这样的事件被称为“尾事件”。 — wiki</p>
-</blockquote>
-<script type="math/tex; mode=display">
-(X_n)_{n \in \mathbb{N}} v.a. \\
-\mathcal{T}_n = \sigma(X_k; k \ge n) \\
-\mathcal{T}_{\infty} = \cap_{n \in \mathbb{N}}{\mathcal{T}_n} \text{ est   appelee tribu de queue de la suite } (X_n)_{n \in \mathbb{N}}</script><ul>
-<li><p>定理(loi de zero-un)</p>
-<p>如果存在一个事件A属于$\mathcal{T}_{\infty}$，则P(A)等于0或1。</p>
-</li>
-</ul>
-</li>
-<li><p>不同定义</p>
-<ul>
-<li><p>convergence presque sure</p>
-<p>定义，当存在一个事件满足以下条件</p>
-<script type="math/tex; mode=display">
-\exists \Omega^*, \forall \omega \in \Omega^*, \lim_{n \rightarrow \infty}{X_n(\omega)} = X(\omega)</script><p>我们认为一个随机变量序列趋向(p.s.)一个随机变量。即</p>
-<script type="math/tex; mode=display">
-P\{\omega \in \Omega^*: \lim_{n \rightarrow \infty}{X_n(\omega)} = X(\omega)\} = 1</script></li>
-<li><p>Convergence dans Lp</p>
-<p>定义。首先Xn和X都在Lp空间下，并且其差值的绝对值的p次方的期望的极限等于零。- -|||</p>
-<p>也就是</p>
-<script type="math/tex; mode=display">
-\lim_{n \rightarrow \infty}{E[|X_n-X|^p]} = 0</script></li>
-<li><p>convergence en probabilite</p>
-<p>定义，满足以下条件，称依概率收敛。</p>
-<script type="math/tex; mode=display">
-\forall \varepsilon, \lim_{n \to \infty}{P\{\omega:X_n(\omega)-X(\omega)>\varepsilon}\}=0 \\
-ou\  \lim_{n \to \infty}{P\{X_n-X>\varepsilon}\}=0</script><p>定理，</p>
+            <h1 id="Data-Structure"><a href="#Data-Structure" class="headerlink" title="Data Structure"></a>Data Structure</h1><a href="/2016/11/27/complexity/" title="How to calcul the complexity?">How to calcul the complexity?</a> 
+<a href="/2016/11/27/compression/" title="How to make a compression?">How to make a compression?</a>
 <ol>
-<li>如果Xn趋向X(p.s.)，则fXn趋向fX(p.s.)</li>
-<li>如果Xn趋向X(P)，则fXn趋向fX(P)</li>
-</ol>
-<p>定理，</p>
-<p>Xn是实随机变量，以下关系等价</p>
-<script type="math/tex; mode=display">
-X_n \xrightarrow{P} X \Leftrightarrow \lim_{n \to \infty} E(\frac{|X_n-X|}{1+|X_n-X|}) = 0</script><p>定理，</p>
-<p>Xn是实随机变量，则</p>
-<script type="math/tex; mode=display">
-若X_n \xrightarrow{L^P}X, X_n \xrightarrow{P}{X} \\
-若X_n \to X p.s., X_n \xrightarrow{P}{X} \\</script><p>定理，</p>
-<p>Xn是实随机变量，若Xn依概率收敛于X，我们能找到一个序列</p>
-<script type="math/tex; mode=display">
-(X_{n_k})_{k \in \mathbb{N}}</script><p>使得</p>
-<script type="math/tex; mode=display">
-X_n \to X, p.s.</script><p>定理，</p>
-<p>Xn是实随机变量，若Xn依概率收敛于X，并存在一个$Y \in L^p, |X_n| \le Y$，则</p>
-<script type="math/tex; mode=display">
-X \in L^p并且 X_n \xrightarrow{L^p}X</script></li>
+<li>The data : int, double, etc.</li>
+<li>The basic data structure<ul>
+<li>Container</li>
+<li>Table </li>
+<li>Stack </li>
+<li>Queue </li>
+<li>List</li>
 </ul>
 </li>
+<li>Tree<ul>
+<li>Arbres binaires - 二叉树<ul>
+<li>ABR - 二叉树的查询</li>
+</ul>
+</li>
+<li>Arbres n-aires</li>
+</ul>
+</li>
+<li>Dictionary <ul>
+<li>Hash table - Table de hachage - 哈希表</li>
+</ul>
+</li>
+<li><strong>Heap - Tas - 堆 </strong><ul>
+<li>二叉堆</li>
+<li>堆排序</li>
+</ul>
+</li>
+<li>Find-Union</li>
 </ol>
+<h1 id="Method-of-programming"><a href="#Method-of-programming" class="headerlink" title="Method of programming"></a>Method of programming</h1><a href="/2016/11/27/Method-of-programming-facing-to-exams/" title="Savoir plus">Savoir plus</a>
 <ol>
-<li><p>波莱尔－坎泰利引理</p>
-<blockquote>
-<p>大致上，波莱尔－坎泰利引理说明了，如果有无穷个概率事件，它们发生的概率之和是有限的，那么其中的无限多个事件一同发生的概率是零。这个定理实际上是测度论的结论在概率论中的应用。 —wiki</p>
-</blockquote>
+<li>Echaustive / force brute - 穷举法</li>
+<li>Try-error - Essai-erreur 试错法</li>
+<li>Glouton - 贪心法</li>
+<li>Recursif - recursive - 递归</li>
+<li>Divede merge - Diviser pour regner - 分治</li>
+<li>Dynamic - Dynamique - 动态规划</li>
+</ol>
+<h1 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a>Graph</h1><a href="/2016/11/27/graph/" title="Savoir plus">Savoir plus</a>
 <ol>
-<li>如果有无穷个概率事件，它们发生的概率之和是有限的，那么其中的无限多个事件一同发生的概率是零。</li>
-<li>如果有无穷个概率事件，无限多个事件一同发生的概率是零，那么它们发生的概率之和是有限的。</li>
-</ol>
-</li>
-<li><p>大数定律</p>
-<blockquote>
-<p>在数学与统计学中，大数定律又称大数法则、大数律，是描述相当多次数重复实验的结果的定律。根据这个定律知道，样本数量越多，则其平均就越趋近期望值。 — wiki</p>
-</blockquote>
-<ul>
-<li><p>强大数定律</p>
-<script type="math/tex; mode=display">
-X_n \in L^2 \text{若它们独立同分布且在同一个概率空间，则} \\
-lim_{n \to \infty}{\frac{\sum_{i=1}^{n}{X_i}}{n}} = \mu \ p.s.</script></li>
-<li><p>切比雪夫大数定律</p>
-<script type="math/tex; mode=display">
-X_n  \text{若它们独立同分布且在同一个概率空间，则} \\
-lim_{n \to \infty}{\frac{\sum_{i=1}^{n}{X_i}}{n}} = \mu \ p.s. \text{ 当且仅当} E[X_i] \text{对于所有i存在}</script></li>
+<li>Traversal - parcours - 遍历<ul>
+<li>BFS</li>
+<li>DFS</li>
 </ul>
 </li>
-<li><p>Convergence en loi</p>
-<p>弱趋向：</p>
-<script type="math/tex; mode=display">
-\int_{\mathbb{R}^N}{f(x)\nu_n(dx)} \xrightarrow{n \to \infty} \int_{\mathbb{R}^N}{f(x)\nu(dx)}</script><p>定义，若PXn弱趋向于PX，则Xn是 convergence en loi vers X。记为：</p>
-<script type="math/tex; mode=display">
-X_n \xrightarrow{\mathcal{D}} X</script><p>定理，</p>
-<script type="math/tex; mode=display">
-X_n \xrightarrow{\mathcal{D}} X \Leftrightarrow \lim_{n \to \infty}E[f(X_n)] = E[f(X)]</script><p>定理，</p>
-<script type="math/tex; mode=display">
-X_n \xrightarrow{P} X \Rightarrow X_n \xrightarrow{\mathcal{D}} X</script><p>定理，si Xn converge en loi vers une v.a. constante presque surement, alors elle converge en probabilite.</p>
-<ul>
-<li>离散变量的convergence en loi</li>
-<li>分布函数的convergence en loi</li>
-<li>特征函数的convergence en loi</li>
+<li>Critical path method - plus court chemin<ul>
+<li>Dijkstra</li>
+<li>Floyd</li>
+<li>Bellman-Ford</li>
 </ul>
-<p>均略=_=</p>
 </li>
-<li><p>中心极限定理</p>
-<script type="math/tex; mode=display">
-若Var(X_n) < \infty \\
-记S_n = \sum{Xi} \\
-\frac{S_n-n\mu}{\sigma\sqrt{n}} \xrightarrow{\mathcal{D}} \mathcal{N}(0,1)</script><p>​</p>
+<li>Tree - arbre<ul>
+<li>Prim</li>
+<li>Kruskal</li>
+</ul>
 </li>
 </ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lorrin.cn/2016/12/01/proba-ch4/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jue">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Jue's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Jue's Blog" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/01/proba-ch4/" itemprop="url">
-                  proba-ch4 高斯向量
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-01T16:28:52+01:00">
-                2016-12-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/math/" itemprop="url" rel="index">
-                    <span itemprop="name">math</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>定义</p>
-<p>Un vecteur aléatoire est dit gaussien si toute combinaison linéaire de ses composantes suit une loi gaussienne.</p>
-<p>也就是：</p>
-<script type="math/tex; mode=display">
-\forall \lambda_1,...,\lambda_N \in \mathbb{R} , \sum_{j=1}^{N}{\lambda_jX_j \text{ suit une loi normale.}}</script><ul>
-<li><p>特征函数</p>
-<script type="math/tex; mode=display">
-\varphi_X: t \rightarrow e^{i < \mu, t> -\frac{1}{2}<t,Dt>} \\
-=> \varphi_X = e^{i\sum_{j=1}^{N}{\mu_j t_j}- \frac{1}{2}\sum_{1\le j,k\le N}{t_j D_{j,k}t_k}}</script><p>$\mu$, le vecteur moyenne, 平均向量</p>
-<p>D, la matrice de covariances de X, 协方差矩阵</p>
-</li>
-<li><p>理论，X=(X1,…,XN) 是高斯向量，则Xj相互独立当仅当其协方差矩阵D为对角线矩阵。（也就是只有自己和自己的协方差不为零）</p>
-</li>
-<li><p>Densite de la loi d’un vecteur gaussien</p>
-<script type="math/tex; mode=display">
-D \ne 0 \\
-\mathcal{N}(\mu,D) \text{在Lebesgue测度下，在}\mathbb{R}^N\text{上绝对连续} \\
-x \longmapsto \frac{1}{(2\pi)^{N/2}\sqrt{\det D}}e^{-\frac{1}{2}<x-\mu,D^{-1}(x-\mu)>}</script></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lorrin.cn/2016/12/01/proba-ch3/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jue">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Jue's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Jue's Blog" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/01/proba-ch3/" itemprop="url">
-                  proba-ch3 实域概率和特征方程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-01T14:54:10+01:00">
-                2016-12-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/math/" itemprop="url" rel="index">
-                    <span itemprop="name">math</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><p>几种常见分布</p>
-<p> 若不在区间内，f=0</p>
-<ol>
-<li><p>loi uniforme</p>
-<script type="math/tex; mode=display">
-f(x)=\frac{1}{b-a} si\ x \in [a,b]</script></li>
-<li><p>loi exponentielle</p>
-<script type="math/tex; mode=display">
-f(x) = \lambda e^{-\lambda x} si\ x \ge 0 \\
-E[X] = \frac{1}{\lambda}, Var(X) = \lambda^2</script></li>
-<li><p>Loi de weibull</p>
-<script type="math/tex; mode=display">
-f(x) = \alpha \lambda^\alpha x^{\alpha-1}e^{-(\lambda x)^\alpha} si\ x \ge 0\\
-E[X] = \frac{\Gamma(1+1/\alpha)}{\lambda}, Var(X) = \frac{\Gamma(1+2/\alpha)}{\lambda^2}</script></li>
-<li><p>loi gamma</p>
-<script type="math/tex; mode=display">
-f(x) = \frac{\lambda}{\Gamma(p)}(\lambda x)^{p-1}e^{-\lambda x}\\
-E[X] = \frac{p}{\lambda}, Var(X) = \frac{p}{\lambda^2}</script></li>
-<li><p>loi normale</p>
-<script type="math/tex; mode=display">
-f(x) = \frac{1}{\sqrt{2\pi}\sigma}exp[-\frac{(x-m)^2}{2\sigma^2}], x \in R\\
-E[X] = m, Var(X) = \sigma^2</script></li>
-<li><p>Loi lognormale</p>
-<script type="math/tex; mode=display">
-f(x) = \frac{1}{\sqrt{2\pi}\sigma x}exp[-\frac{(\ln x-m)^2}{2\sigma^2}], x \ge 0 \\
-E[X] = e^{m+\sigma^2/2}, Var(X) = e^{2m+\sigma^2}(e^{\sigma^@}-1)</script></li>
-<li><p>Loi du $ \chi^2 $</p>
-<script type="math/tex; mode=display">
-X = U_1^2+...+U_n^2 \\
-U_i\ est\ de\ loi\ \mathcal{N}(0,1) \\
-E[X] = n, Var(X) = 2n</script></li>
-<li><p>Loi de Student</p>
-<script type="math/tex; mode=display">
-X = \frac{U}{\sqrt{\frac{Z}{n}}} \\
-U\ suit\ la\ loi\ normale\ \mathcal{N}(0,1) \\
-Z\text{ est independante de U et suit la loi du }\chi^2\text{ a n degres de liberte}</script></li>
-</ol>
-</li>
-<li><p>特征函数</p>
-<script type="math/tex; mode=display">
-\varphi_X: \mathbb{R^N} \rightarrow \mathbb{C} \\
-t \rightarrow \varphi_X(t) = E[e^{i<t,X>}] = \int_{\mathbb{R}^N}{e^{i<t,X>}P_X(dx)}</script><p>我们说特征函数是对X进行基于PX的傅立叶变换 = =好绕</p>
-<p>若PX存在概率密度 $f \in L^1$</p>
-<script type="math/tex; mode=display">
-\varphi_X(t) = \int_{\mathbb{R}^N}{e^{i<t,X>}f(x)dx}</script><ul>
-<li><p>性质</p>
-<ul>
-<li><script type="math/tex; mode=display">
-\forall t \in \mathbb{R}^N, |\varphi_X(t)| \le 1=> \varphi_X(0) = 1</script><script type="math/tex; mode=display">
-\varphi_{\lambda X+a}(t) = e^{iat}\varphi_X(\lambda t)</script><script type="math/tex; mode=display">
-\varphi_X 是一个半正函数，即 \\
-\forall z_1,...,z_n\in \mathbb{C}, \sum_{1 \le j, k\le n}{z_j \varphi_X(t_j-t_k)\bar{z_k}} \ge 0</script></li>
-</ul>
-</li>
-<li><p>其他性质</p>
-<ul>
-<li><p>特征函数连续</p>
-</li>
-<li><p>PX以lebesgue测度绝对连续，则</p>
-</li>
-<li><script type="math/tex; mode=display">
-\lim_{|t|\rightarrow \infty}{\varphi_X(t)} = 0</script></li>
-<li><p>XY，它们拥有相同的P，当且仅当</p>
-</li>
-<li><script type="math/tex; mode=display">
-\varphi_X=\varphi_Y</script></li>
-<li><p>逆变换</p>
-</li>
-<li><script type="math/tex; mode=display">
-\forall x \in \mathbb{R}^N, f(x)=\frac{1}{(2\pi)^N}\int_{\mathbb{R}^N}{e^{-i<t,X>}\varphi_X(t)}dt</script></li>
-</ul>
-</li>
-<li><p>特征方程和独立性</p>
-<ul>
-<li><p>定理</p>
-<script type="math/tex; mode=display">
-X_1,...,X_N \text{ 是独立的，当且仅当它们的特征方程满足：} \\
-\forall t = (t_1,...,t_N) \in \mathbb{R}^N; \varphi_X(t) = \prod_{k=1}^{N}{\varphi_{X_k}(t_k) } \\
-where\ X = (X_1,...,X_N)</script></li>
-<li><p>性质</p>
-<script type="math/tex; mode=display">
-X_1,...,X_n independants, P_{X_1},...,P_{X_N}. \\
-\text{La loi de } \sum{X_i} \text{est le produit de concolution } \prod{P_{X_i}} \\
-\text{Pour fonction caracteristique } \sum{\varphi_{X_i}} \text{definie par} \\
-\forall t \in \mathbb{R}^N; \varphi_{X+...+X_n}(t) = \prod_{i=1}^{n}{\varphi_{X_i}(t) }</script></li>
-</ul>
-</li>
+<p>*backtracking</p>
+<p>*Branch and bound</p>
+<h1 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h1><ol>
+<li>排序<ul>
+<li>选择，冒泡</li>
+<li>分治（fusion）</li>
+<li>快速</li>
+<li>tas </li>
 </ul>
 </li>
 </ol>
@@ -862,7 +450,7 @@ X_1,...,X_n independants, P_{X_1},...,P_{X_N}. \\
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lorrin.cn/2016/12/01/proba-ch2/">
+  <link itemprop="mainEntityOfPage" href="https://codeurJue.github.io/2016/11/27/complexity/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jue">
@@ -887,8 +475,8 @@ X_1,...,X_n independants, P_{X_1},...,P_{X_N}. \\
             
               
                 
-                <a class="post-title-link" href="/2016/12/01/proba-ch2/" itemprop="url">
-                  proba-ch2 随机变量
+                <a class="post-title-link" href="/2016/11/27/complexity/" itemprop="url">
+                  复杂度 complexity
                 </a>
               
             
@@ -902,8 +490,8 @@ X_1,...,X_n independants, P_{X_1},...,P_{X_N}. \\
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-01T12:17:33+01:00">
-                2016-12-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-27T10:52:05+01:00">
+                2016-11-27
               </time>
             
 
@@ -921,8 +509,8 @@ X_1,...,X_n independants, P_{X_1},...,P_{X_N}. \\
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/math/" itemprop="url" rel="index">
-                    <span itemprop="name">math</span>
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
                   </a>
                 </span>
 
@@ -958,354 +546,45 @@ X_1,...,X_n independants, P_{X_1},...,P_{X_N}. \\
       
         
           
-            <ul>
-<li>​</li>
-</ul>
-<script type="math/tex; mode=display">
-\pi-system</script><ul>
-<li><p>R上的概率测度</p>
-<ul>
-<li><p>分布函数 la fonction de repartition</p>
-<script type="math/tex; mode=display">
-F:x\xrightarrow{}F(x) = P(] - \infty,x] ) \\ F:x\xrightarrow{}F(x) = \int_{ ]-\infty,x] }{f(t).\lambda(dt)}</script></li>
-<li><p>定理</p>
-<p>如果F是分布函数，则当且仅当满足以下三个条件。</p>
-<script type="math/tex; mode=display">
-(i) F 递增\\(ii)F 右连续\\(iii) \lim_{n \rightarrow - \infty}{F(x)=0}, \lim_{n \rightarrow+\infty}{F(x)=1}</script></li>
-<li><p>性质</p>
-<script type="math/tex; mode=display">
-P(\{x\}) = F(x) - F(x-)</script></li>
-</ul>
+            <h1 id="计算复杂度-Calcul-the-complexity"><a href="#计算复杂度-Calcul-the-complexity" class="headerlink" title="计算复杂度 - Calcul the complexity"></a>计算复杂度 - Calcul the complexity</h1><p>这里我们只考虑时间复杂度。</p>
+<p>There, we only discuss the time complexity.</p>
+<h2 id="通常-Normal"><a href="#通常-Normal" class="headerlink" title="通常 - Normal"></a>通常 - Normal</h2><ol>
+<li><p>Single operation - O(1)</p>
 </li>
-<li><p>R^N上的概率测度</p>
-<ul>
-<li><p>定义</p>
-<script type="math/tex; mode=display">
-F:(x_1,...,x_N)\xrightarrow{}F(x_1,...,x_N) = P(\prod_{i=1}^{N}] - \infty,x_i] )</script></li>
-<li><p>定义</p>
-<script type="math/tex; mode=display">
-P(dx_1,...,dx_N) = f(x_1,...,x_N)dx_1...dx_N \\ where||f||_{L^2}</script></li>
-</ul>
+<li><p>Loop</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(n)</span>:</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(n):</div><div class="line">   		<span class="keyword">pass</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(n)</span>:</span></div><div class="line">	<span class="keyword">while</span> i &lt; n :</div><div class="line">    	i += <span class="number">1</span></div></pre></td></tr></table></figure>
+<p>— O(n)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(n)</span>:</span></div><div class="line">    <span class="keyword">while</span> i &lt; n :</div><div class="line">        i *= <span class="number">2</span></div></pre></td></tr></table></figure>
+<p>— O(logn)</p>
+<p>Etc.</p>
+<h2 id="递归-Recursion"><a href="#递归-Recursion" class="headerlink" title="递归 - Recursion"></a>递归 - Recursion</h2><ol>
+<li><p>代入法</p>
+<p>预估其复杂度，代入原方程，若相符，则可能为解。</p>
+<p>ex:</p>
+<p>T(n) = 2*T(n/2) + O(n)</p>
+<p>假设 T(n) = kn^2</p>
+<p>代入原式，成立。</p>
+<p>接下来用数学归纳法验证。</p>
 </li>
-<li><p>随机变量</p>
-<ul>
-<li><p>定义</p>
-<script type="math/tex; mode=display">
-Soit(\Omega,{\cal F})\rightarrow (E, {\cal E}); X:\Omega \rightarrow E \\ \forall A\in {\cal E}; X^{-1}(A) \in {\cal F}</script><p>X就是一个随机变量</p>
+<li><p>迭代法</p>
+<p>   迭代地展开递归方程的右端，使其成为一个非递归的和式，随后进行复杂度计算</p>
+<p>   ex:</p>
+<p>   T(n) = T(n-1) + O(1)</p>
+<p>   T(1) = O(1)</p>
+<p>   所以，T(n) = T(n-1) + O(1) = T(n-1) + 2 <em> O(1) = … = n</em>O(1) = O(n)</p>
 </li>
-<li><p>定义 tribu engendree par X</p>
-<script type="math/tex; mode=display">
-X^{-1}({\cal E}) = \{X^{-1}(A); A \in {\cal E}\} \\ \sigma(X)</script></li>
-</ul>
+<li><p>套用公式</p>
+<p>   对于形如</p>
+<p>   T(n) = aT(n/b) +f(n)</p>
+<p>   的方程已有固定判断法，套用公式即可。</p>
 </li>
-<li><p>随机变量的loi</p>
-<ul>
-<li>定义<script type="math/tex; mode=display">
-\forall A \in {\cal E}; P_X(A) = P(\{\omega: X(\omega) \in A\}) = P(X^{-1}(A))</script></li>
-</ul>
-</li>
-<li><p>积分</p>
-<ul>
-<li><p>数学期望定义</p>
-<script type="math/tex; mode=display">
-E[X] = \int_{\Omega}{X(\omega).P(d\omega)}= \int_{\Omega}{X.dP}</script></li>
-<li><p>定理</p>
-<script type="math/tex; mode=display">
-(X_n)_{n\in N} 是随机变量</script><ul>
-<li><p>单调趋向性：若Xn非负且趋于X，则</p>
-<script type="math/tex; mode=display">
-\lim_{n \rightarrow \infty}{E[X_n]} = E[X]</script></li>
-<li><p>Fatou引理：若Xn非负</p>
-<script type="math/tex; mode=display">
-E[\lim_{n \rightarrow \infty}{\inf{X_n}}] \leq \lim_{n \rightarrow \infty}{\inf{E[X_n]}}</script></li>
-<li><p>convergence dominee: 若limXn = X p.s 若存在Z in L1，且|Xn|&lt;=Z，则</p>
-<script type="math/tex; mode=display">
-\lim_{n \rightarrow \infty}{E[X_n]} = E[X]</script></li>
-</ul>
-</li>
-<li><p>性质(Inegalite de Markov)</p>
-<p>若X是随机变量并admettant un moment d’ordre 1, 对于实数a&gt;0</p>
-<script type="math/tex; mode=display">
-P(|X| \geq a) \leq \frac{E[|X|]}{a}</script></li>
-<li><p>转化定理</p>
-<script type="math/tex; mode=display">
-E[h(X)] = \int_E{h(x)P_X(dx)}</script></li>
-<li><p>定义</p>
-<script type="math/tex; mode=display">
-un\ moment\ d'ordre\ n: \int_\Omega{|X|^ndP} < \infty</script></li>
-<li><p>性质，若0&lt;p&lt;q，可以得到Lq被Lp包含。</p>
-</li>
-<li><p>定义方差，前面说过了</p>
-<ul>
-<li><script type="math/tex; mode=display">
-Var(aX+b) = a^2 Var(X) \\ P(|X-E[X]| \geq a) \leq \frac{Var(X)}{a^2}</script></li>
-<li><p>若X几乎处处等于同一个常数，当仅当Var(X) = 0</p>
-</li>
-</ul>
-</li>
-<li><p>定理，与离散相似的</p>
-<script type="math/tex; mode=display">
-E[h(X)] = \int_E{h(x)f_X(dx)}</script><p>特别的</p>
-<script type="math/tex; mode=display">
-P(X \in A) = E[1_{\{X\in A\}}] = \int_A{f_X(dx)}</script></li>
-</ul>
-</li>
-<li><p>Vecteurs aleatoires</p>
-<p>X = (X1,…,XN) 与多元离散随机变量类似。</p>
-<ul>
-<li><p>协方差</p>
-<script type="math/tex; mode=display">
-Cov(X,Y) = E[(X-E[X])(Y-E[Y])] = E[XY] - E[X]E[Y]</script><ul>
-<li>性质<script type="math/tex; mode=display">
-Cov(X,X) =Var(X) \\ Cov(X,Y) = Cov(Y,X) \\ Var(X+Y) = Var(X) +Var(Y) +2Cov(X,Y)</script></li>
-</ul>
-</li>
-<li><p>相关系数</p>
-<script type="math/tex; mode=display">
-\rho(X,Y) = \frac{Cov(X,Y)}{\sigma(X)\sigma(Y)}, \sigma(X) = \sqrt{Var(X)}, -1 \leq \rho \leq 1</script></li>
-<li><p>改变变量</p>
-<script type="math/tex; mode=display">
-\forall y \in R^N; f_Y(y) = \frac{f_X(h^{-1}(y))}{|det(Jh(h^{-1}))|} 1_D(y)</script></li>
-<li><p>边际概率，顾名思义，略</p>
-</li>
-</ul>
-</li>
-<li><p>独立变量</p>
-<p>定义略</p>
-<ul>
-<li><p>定理，满足下列条件之一，则XY独立</p>
-<ol>
-<li><p>对于所有A，B</p>
-<script type="math/tex; mode=display">
-P(X \in A, Y\in B) = P(X\in A)</script></li>
-<li><p>对于所有f，g</p>
-<script type="math/tex; mode=display">
-E[f(X)g(Y)] = E[f(X)] E[g(Y)]</script></li>
-<li><p>对于所有f，g，f(X)和g(Y)是独立的</p>
+<li><p>差分方程法</p>
+<p>   利用查分方程解，这个比较复杂，这里先占个位，以后在补。</p>
 </li>
 </ol>
 </li>
-<li><p>性质</p>
-<script type="math/tex; mode=display">
-\text{Soient (X, Y) un couple de variables aleatoires a valeurs dans } E\otimes F \text{ muni de la tribu produit } \mathcal{E} \otimes \tilde{\mathcal{E}}. \\ \text{ X et Y sont independantes si et seulement si la lor jointe du couple (X, Y) est egale a la mesure produit } P_X \otimes P_Y.</script><script type="math/tex; mode=display">
-\text{注：对于XY相互独立，} P((X,Y)\in A \times B) = P_X(A)P_Y(B) \\
-P_X \otimes P_Y(A \times B) = P_X(A)P_Y(B)</script></li>
-<li><p>定理，对于随机变量XY，他们相互独立，当且仅当</p>
-<script type="math/tex; mode=display">
-\forall (x,y) \in R^2; F_{(X,Y)}(x,y) = F_X(x)F_Y(y)</script></li>
-<li><p>定理，对于(X,Y)在lebesgue测度上绝对连续，XY相互独立当且仅当</p>
-<script type="math/tex; mode=display">
-\forall (x,y) \in R^2; f_{(X,Y)}(x,y) = f_X(x)f_Y(y)</script></li>
-<li><p>性质，XY admettant un moment d’ordre 1, 相互独立，则</p>
-</li>
-<li><script type="math/tex; mode=display">
-E[XY]=E[X]E[Y]</script></li>
-<li><p>性质，XY admettant un moment d’ordre 2, Cov(X,Y)=0, 则</p>
-</li>
-<li><script type="math/tex; mode=display">
-Var(X+Y) =Var(X) + Var(Y)</script><p>​</p>
-</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lorrin.cn/2016/12/01/proba-ch1/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jue">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Jue's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Jue's Blog" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/01/proba-ch1/" itemprop="url">
-                  proba-ch1 概率空间
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-01T12:17:29+01:00">
-                2016-12-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/math/" itemprop="url" rel="index">
-                    <span itemprop="name">math</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>一个基本的不等式，当</li>
-</ul>
-<script type="math/tex; mode=display">
-P(\cup(A_n)) \leq \sum_{n \in N}^{}{P(A_n)}</script><ul>
-<li>如果An递增</li>
-</ul>
-<script type="math/tex; mode=display">
-P(\cup(A_n)) = \lim_{n -> + \inf}{P(A_n)}</script><ul>
-<li>如果An递减</li>
-</ul>
-<script type="math/tex; mode=display">
-P(\cap(A_n)) = \lim_{n -> + \inf}{P(A_n)}</script><ul>
-<li>条件概率定义，略</li>
-<li>性质</li>
-</ul>
-<script type="math/tex; mode=display">
-P({A_1}\cap{...}\cap{A_{n-1}}) = P(A_1)P(A_2|A_1)...P(A_n|A_1\cap{...}\cap{A_{n-1}})</script><ul>
-<li>定理(Equation de partition)</li>
-</ul>
-<script type="math/tex; mode=display">
-P(A) = \sum_{n}{P(A|E_n)P(E_n)}</script><ul>
-<li>定理(de Bay)</li>
-</ul>
-<script type="math/tex; mode=display">
-P(E_n|A) = \frac{P(A|E_n)P(E_n)}{\sum_{m}{P(A|E_m)PE_m}}</script><ul>
-<li><p>两个独立事件概率，略</p>
-</li>
-<li><p>定理</p>
-<p>对一可数或有限事件集，P({wn}) = pn，若对pn求和，则P存在且唯一。</p>
-</li>
-<li><p>均值定义，</p>
-<script type="math/tex; mode=display">
-E[X] = \sum_{\omega \in{\Omega}}{X(\omega) P(\omega)}</script></li>
-<li><p>方差定义</p>
-</li>
-</ul>
-<script type="math/tex; mode=display">
-Var(X) = E[(X - E(X))^2] = E[X^2] - (E(X)^2)</script><ul>
-<li><p>几种分布</p>
-<ul>
-<li><p>Loi discrete uniforme，</p>
-</li>
-<li><script type="math/tex; mode=display">
-\forall k \in \{1,...,n\}, P(X=k) = \frac{1}{n}</script><script type="math/tex; mode=display">
-E[X] = \frac{n+1}{2}</script></li>
-<li><p>Loi de Bernoulli，</p>
-<script type="math/tex; mode=display">
-P(X=1) = p, t P(X=0) = 1-p</script><script type="math/tex; mode=display">
-E[N] = p, Var(N) = p(1-p)</script></li>
-<li><p>Loi binomiale 二项分布，略</p>
-<script type="math/tex; mode=display">
-E[N] = np, Var(N) = np(1-p)</script></li>
-<li><p>Loi geometrique </p>
-<script type="math/tex; mode=display">
-P(N=n) = P^n(1-p),$$</script><p>E[N] = np, Var(N) = np(1-p)<br>$$</p>
-</li>
-<li><p>Distribution de Poisson</p>
-<script type="math/tex; mode=display">
-P(X=n)=\frac{\lambda^n}{n!}e^{-\lambda},</script><script type="math/tex; mode=display">
-E[X] = \lambda, Var(X) = \lambda</script></li>
-</ul>
-</li>
-</ul>
+</ol>
 
           
         
@@ -1339,7 +618,7 @@ E[X] = \lambda, Var(X) = \lambda</script></li>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
   </nav>
 
 
@@ -1380,7 +659,7 @@ E[X] = \lambda, Var(X) = \lambda</script></li>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1397,7 +676,7 @@ E[X] = \lambda, Var(X) = \lambda</script></li>
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

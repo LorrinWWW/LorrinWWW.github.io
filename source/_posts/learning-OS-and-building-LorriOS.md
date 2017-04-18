@@ -13,6 +13,8 @@ tags: [OS, kernel]
 
 刚开始浏览了一下操作系统的基本知识，按考研复习的来吧，然后看的忽然有点跃跃欲试就想能不能写一个简单的OS。
 
+[源代码](https://github.com/codeurJue/lorriOS)
+
 # Day1:
 
 一开始从《30天自制操作系统》开始看，以前有一点汇编基础所以看起来感觉还是可以接受的。
@@ -31,51 +33,15 @@ umount /tmp/floppy
 
 Os x 上貌似不能直接mount，当然我也尝试了一些其他的办法，最终失败，感觉不太想再花时间在细枝末节上，打算回法国后在ubuntu下开发，或者和书上保持一样，在win下开发。
 
+\*后面通过Docker解决
+
 # Day2:
 
 第二天开始阅读《ORANGE'S：一个操作系统的实现》，并打算先阅读，等了解大致情况再动手，不然也只是抄代码，并且在一知半解的情况下容易卡在一些细枝末节的地方。
 
-同时也可以参考UnixV6，这个是MIT用于教学写的一个类unix的OS，有配套的课程。
+同时也可以参考xv6，这个是MIT用于教学写的一个类unix的OS，有配套的课程。
 
 两天下来感觉mac用于web开发十分方便，但是内核开发感觉网上的文档、案例偏少，当然主要也是我比较弱，不能够举一反三。一般来说，要不是面向初学者如《30天》而采用win，要不就是使用linux（果然linux才是王道= =）
-
-下面是在mac上编译uv6的配置（没有测试，纯搬运）
-
->### Configuration
->
->1.  Install [Xcode](http://itunes.apple.com/us/app/xcode/id497799835).  After installing Xcode install the Command Line Tools from the Downloads section of Xcode's preferences.  I've installed Xcode Version 4.5 (4G182).
->2.  Install [Homebrew](http://mxcl.github.com/homebrew/)
->3.  Install pre-requisites for building xv6
->    ```bash
->        $ brew install glib gmp mpfr pkgconfig ppl
->        $ brew install libmpc --use-llvm
->        $ brew install qemu --use-gcc
->    ```
->4.  Install GNU binutils
->    ```bash
->        $ cd /tmp
->        $ curl -O http://ftp.gnu.org/gnu/binutils/binutils-2.22.tar.gz
->        $ tar -xvzf binutils-2.22.tar.gz
->        $ ./configure --target=i386-jos-elf --disable-nls --prefix=/opt/gnu
->        $ make
->    ```
->5.  Install GCC 4.5 via Homebrew
->    ```bash
->        $ cd /tmp
->        $ curl -O http://ftp.gnu.org/gnu/gcc/gcc-4.7.2/gcc-4.7.2.tar.gz
->        $ cd gcc-4.7.2
->        $ ./configure --target=i386-jos-elf --disable-nls --without-headers --with-newlib --disable-threads --disable-shared --disable-libmudflap --disable-libssp --with-system-zlib --disable-lto --with-gmp=/usr/local --enable-languages=c --prefix=/opt/gnu
->        $ LDFLAGS=-L/usr/lib make
->        $ make install
->    ```
->
->### Install and build xv6 with GCC
->
->```bash
->$ git clone git://pdos.csail.mit.edu/xv6/xv6.git
->cd xv6
->make qemu-nox
->```
 
 # Day3:
 
@@ -167,3 +133,58 @@ IDT，中断描述符表。IDT中的描述符可以是：
 - 中断门描述符
 - 陷阱门描述符
 - 任务门描述符
+
+# Day6:
+
+写着是第六天，实际应该是好久之后了= =
+
+期间已经实现了中断和异常的初始化，并能捕获异常，占个位置以后再详细写。
+
+现在着手实现进程。
+
+**进场表、进程体、GDT和TSS的关系：**
+
+1. 进程表和GDT。进程表内的LDT选择子对应一个GDT中的描述符，也就是说每一个进程表对应一个GDT中的描述符。
+2. 进程表和进程。进程表用于描述进程。
+3. GDT和TSS。GDT中有一个描述符对应TSS。
+
+**初始化进场表、进程体、GDT和TSS：**
+
+1. 准备任意进程体。
+
+   任意函数即可。
+
+2. 初始化进程表。
+
+   进程表结构定义在process.h。在global.c中声明一个全局进程表，它是一个进程的数组，包含所有进程。
+
+   在新建进程前，需要初始化进程表。
+
+   填充GDT中进程LDT的描述符，在protect.c。
+
+3. 准备GDT和TSS。
+
+   TSS结构定义在protect.h。
+
+   填充GDT中TSS描述符，在protect.c。
+
+   TSS准备好了，然后加载tr，在kernel.asm。
+
+**从启动时间顺序上，第一个进程的启动过程如下：**
+
+准备进程体
+
+=> 初始化GDT中的TSS和LDT两个描述符，初始化TSS
+
+=> 准备进程表
+
+=> 完成跳转 ring0 -> ring1
+
+### 添加一个任务的总结
+
+按orange书所说，或参考minix，建立了task_table包含所有进程信息，通过遍历它初始化进程。
+
+1. 添加一个进程体，即一个函数，并声明它 (一般在proto.h中声明)
+2. 在task_table中添加一个进程 (global.c)
+3. 添加宏：修改进程数量(++)和定义堆栈空间 (process.h)
+4. 再次编译即可

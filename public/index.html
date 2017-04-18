@@ -86,7 +86,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Jue's Blog">
-<meta property="og:url" content="http://lorrin.cn/index.html">
+<meta property="og:url" content="https://codeurJue.github.io/index.html">
 <meta property="og:site_name" content="Jue's Blog">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jue's Blog">
@@ -117,7 +117,7 @@
 
 
 
-  <link rel="canonical" href="http://lorrin.cn/"/>
+  <link rel="canonical" href="https://codeurJue.github.io/"/>
 
 
 
@@ -160,7 +160,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">math and programming</p>
+  <p class="site-subtitle"></p>
 </div>
 
 <div class="site-nav-toggle">
@@ -246,7 +246,729 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lorrin.cn/2017/02/11/Hilbert-space/">
+  <link itemprop="mainEntityOfPage" href="https://codeurJue.github.io/2017/04/15/OS-notes/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jue">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jue's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jue's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/15/OS-notes/" itemprop="url">
+                  OS notes
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-15T18:59:08+02:00">
+                2017-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/unfinished/" itemprop="url" rel="index">
+                    <span itemprop="name">unfinished</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Operating-System"><a href="#Operating-System" class="headerlink" title="Operating System"></a>Operating System</h1><p>This is the note or keywords of a course in udacity.</p>
+<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><ul>
+<li>Processes and process management</li>
+<li>Threads and concurrency</li>
+<li>resource management</li>
+<li>OS services</li>
+<li>OS support for distributed services</li>
+<li>Data cendter and cloud</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="OS-Elements"><a href="#OS-Elements" class="headerlink" title="OS Elements"></a>OS Elements</h3><p>Abstractions</p>
+<ul>
+<li>Process, thread, file, socket, memory pape</li>
+</ul>
+<p>Mechanisms</p>
+<ul>
+<li>Create, schedule, open, write, allocate</li>
+</ul>
+<p>Policies</p>
+<ul>
+<li>Least - recently used (LRU) etc.</li>
+</ul>
+<h3 id="System-call"><a href="#System-call" class="headerlink" title="System call"></a>System call</h3><p>Two ways for a user process to execute a priviledged call.</p>
+<ul>
+<li>User process calls hardware directly, and that will cause a trap, the kernel check if it is legal</li>
+<li>User process executes system call.</li>
+</ul>
+<p>user/kernel transitions are not cheap!</p>
+<h3 id="OS-services"><a href="#OS-services" class="headerlink" title="OS services"></a>OS services</h3><ul>
+<li>Scheduler =&gt; CPU</li>
+<li>Mem manager</li>
+<li>Block device driver</li>
+<li>file system</li>
+<li>…</li>
+</ul>
+<h3 id="Linux-Architecture"><a href="#Linux-Architecture" class="headerlink" title="Linux Architecture"></a>Linux Architecture</h3><p>User interface : <strong>Users</strong> &lt;= user mode</p>
+<p>Library interface : <strong>Standards utility programs</strong> (shell, editor, compilors) &lt;= user mode</p>
+<p>System call interface : <strong>Standard licrary</strong> (open, close, read, write, fork) &lt;= user mode</p>
+<p><strong>Linux operating system</strong> &lt;= kernel mode</p>
+<p><strong>Hardware</strong></p>
+<h2 id="Processes-and-Process-Management"><a href="#Processes-and-Process-Management" class="headerlink" title="Processes and Process Management"></a>Processes and Process Management</h2><p>A process:</p>
+<ul>
+<li>state of execution<ul>
+<li>Program counter</li>
+<li>stack</li>
+</ul>
+</li>
+<li>parts and temporary holding area<ul>
+<li>Data, register</li>
+</ul>
+</li>
+<li>May require special hardware<ul>
+<li>IO devices</li>
+</ul>
+</li>
+</ul>
+<p>Process == state of a program when executing.</p>
+<h3 id="Process-Control-Block-PCB"><a href="#Process-Control-Block-PCB" class="headerlink" title="Process Control Block (PCB)"></a>Process Control Block (PCB)</h3><p>a data structure storing status of a process</p>
+<ul>
+<li>PCB created when process is created</li>
+<li>Certain filds are updated when process state changes</li>
+<li>other fields change too frequently</li>
+</ul>
+<h3 id="Context-switch"><a href="#Context-switch" class="headerlink" title="Context switch"></a>Context switch</h3><p>Hot cache, cold cache</p>
+<h3 id="CPU-scheduler"><a href="#CPU-scheduler" class="headerlink" title="CPU scheduler"></a>CPU scheduler</h3><p>OS must </p>
+<ul>
+<li>preempt</li>
+<li>schedule</li>
+<li>dispatch</li>
+</ul>
+<h3 id="Multi-Processes"><a href="#Multi-Processes" class="headerlink" title="Multi Processes"></a>Multi Processes</h3><p>P1(web server), P2(Database)</p>
+<p>Inter - process communication (IPC) : </p>
+<ul>
+<li>Message - passing IPC</li>
+</ul>
+<ul>
+<li>Shared memory IPC</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://codeurJue.github.io/2017/03/31/EDP-finite-element-method/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jue">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jue's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jue's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/31/EDP-finite-element-method/" itemprop="url">
+                  EDP finite element method
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-31T22:42:08+02:00">
+                2017-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/math/" itemprop="url" rel="index">
+                    <span itemprop="name">math</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/math/unfinished/" itemprop="url" rel="index">
+                    <span itemprop="name">unfinished</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://codeurJue.github.io/2017/03/06/EDP-basic-models/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jue">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jue's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jue's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/06/EDP-basic-models/" itemprop="url">
+                  EDP basic models
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-06T10:04:58+01:00">
+                2017-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/math/" itemprop="url" rel="index">
+                    <span itemprop="name">math</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Examples-of-moedels"><a href="#Examples-of-moedels" class="headerlink" title="Examples of moedels"></a>Examples of moedels</h1><ol>
+<li><p>Problem of Cauchy</p>
+<p><strong>Nomenclature</strong> : problem of Cauchy</p>
+<p><strong>Equation</strong> : system of 2 differential equations of order 2</p>
+<p><strong>Conditions</strong> : initials (all the data from the same point) i.e. fix time</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+  \begin{cases}
+    \frac{dS}{dt}(t) = F(S,R)  ,  \\
+    \frac{dR}{dt}(t) = G(S,R) ,  \\
+    S(0) = S^0 \\
+    R(0) = R^0
+  \end{cases}
+\end{equation}</script></li>
+<li><p>Problem of Dirichlet</p>
+<p><strong>Nomenclature</strong> : problem of Dirichlet</p>
+<p><strong>Equation</strong> : scalar differential equation of order 2.</p>
+<p><strong>Conditions</strong> : prescribed value at the edge</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+  \begin{cases}
+- \frac{d}{dx} ( k \frac{d\theta}{dx})(x) + \theta(x) = f(x) 0<x<L, \\
+  \theta(0) = \theta_0, \theta(L) = \theta_L \\
+\end{cases}
+\end{equation}</script><p><strong>Remark:</strong></p>
+<ul>
+<li>如果k是常数，解为指数函数；若否，我们可以用两种数值计算：les differences finies et les elements finis.</li>
+<li>可以使用<em>射击法</em>，认为$\theta(L)$由$\theta’(0)$得到，接下来就是验证是否能找到一个好的$\theta’(0)$使$\theta(L)=\theta(L) = \theta_L$</li>
+</ul>
+</li>
+</ol>
+<h3 id="Physic-examples"><a href="#Physic-examples" class="headerlink" title="Physic examples"></a>Physic examples</h3><ul>
+<li><p>Fluide environnant au repos</p>
+<script type="math/tex; mode=display">
+\rho c_v \partial_t{\theta} - div(k\cdot\overrightarrow{grad}(\theta)) = f</script><ul>
+<li>init condition:<script type="math/tex; mode=display">
+\theta(0,.) = \theta_0</script></li>
+</ul>
+</li>
+<li><p>condition at the edges could be:</p>
+<ul>
+<li><p>condition of Dirichlet:</p>
+<script type="math/tex; mode=display">
+\theta(t,.) = g(t)</script></li>
+<li><p>Condition of Neumann:</p>
+<script type="math/tex; mode=display">
+\overrightarrow{grad}(\theta)(t,.) \cdot \vec{n}= h(t)</script></li>
+<li><p>Condition of Dirichlet and Neumann: Mix</p>
+</li>
+</ul>
+</li>
+<li><p>Fluide environnant en mouvement a une vitesse $\vec u(t,x)$</p>
+<script type="math/tex; mode=display">
+\rho c_v \partial_t{\theta} - div(\rho c_v \theta \vec u) - div(k\cdot\overrightarrow{grad}(\theta)) = f</script><p>si le fluide est incompressible i.e $\partial_t \rho = 0$ soit encore $div(\vec u) = 0$ (直观上理解，若不可压缩，则速度场一定是连续的，不然一定会在局部压缩), alors:</p>
+<script type="math/tex; mode=display">
+\rho c_v \partial_t{\theta} - \vec u \cdot div(\rho c_v \theta ) - div(k\cdot\overrightarrow{grad}(\theta)) = f</script><p>​</p>
+<p>​</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://codeurJue.github.io/2017/02/11/Sobolev-space/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jue">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jue's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jue's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/11/Sobolev-space/" itemprop="url">
+                  Sobolev space
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-11T14:37:53+01:00">
+                2017-02-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/math/" itemprop="url" rel="index">
+                    <span itemprop="name">math</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/math/unfinished/" itemprop="url" rel="index">
+                    <span itemprop="name">unfinished</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="索伯列夫空间-Sobolev-space"><a href="#索伯列夫空间-Sobolev-space" class="headerlink" title="索伯列夫空间 Sobolev space"></a>索伯列夫空间 Sobolev space</h1><h2 id="感性认识"><a href="#感性认识" class="headerlink" title="感性认识"></a>感性认识</h2><p>摘自wiki：</p>
+<blockquote>
+<p>数学上，一个索博列夫空间是一个由函数组成的赋范向量空间，对于某个给定的p ≥ 1，它对一个函数f和它的直到某个k阶导数加上有限Lp范数的这个条件。</p>
+</blockquote>
+<p>我们通常在C1(函数1阶可导并且1阶导数连续)上研究微分方程的解，但是在偏微分方程上并不是特别方便，人们便开始研究索伯列夫空间。</p>
+<h2 id="范数"><a href="#范数" class="headerlink" title="范数"></a>范数</h2><script type="math/tex; mode=display">
+||f||_{k,p} = (\sum_{i=0}^k{||f^{(i)}||_p^p})^{1/p} \\
+=||f^{(i)}||_p +||f||_p</script><p>赋予了范数的$W^{k,p}$是一个完备空间。</p>
+<h2 id="H-k"><a href="#H-k" class="headerlink" title="$H^k$"></a>$H^k$</h2><p>一些记号：</p>
+<script type="math/tex; mode=display">
+H^k = W^{k,2} \\
+H^1(\Omega) := \{ v\in L^2(\Omega) : \nabla v \in (L^2(\Omega))^d \} \\ \\
+(.,.)_{H^1} : (u,v) \in H^1 \times H^1 \mapsto (u,v)_{L^2} +(\nabla u,\nabla v)_{L^2} \\
+\qquad \qquad \qquad = \int_\Omega {uv} + \sum_{i=1}^d{\int_ \Omega {\partial_{x_i}{u} \partial_{x_i}{v}}}</script><p>范数和半范数：</p>
+<script type="math/tex; mode=display">
+||.||_{H^1}: v \mapsto \sqrt{||v||_{L^2}^2+||\nabla v||_{L^2}^2} \\
+|.|_{H^1(\Omega)} := ||\nabla .||_{L^2(\Omega)} \\
+||.||_{H_0^1} := |.|_{H^1}</script>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://codeurJue.github.io/2017/02/11/Hilbert-space/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jue">
@@ -446,7 +1168,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lorrin.cn/2017/02/07/EDP-basic-matrix-review/">
+  <link itemprop="mainEntityOfPage" href="https://codeurJue.github.io/2017/02/07/EDP-basic-matrix-review/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jue">
@@ -601,7 +1323,7 @@ i.e. \to U^*= U^{-1}</script><p>U是酉矩阵。</p>
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lorrin.cn/2017/01/28/Note-of-statistic/">
+  <link itemprop="mainEntityOfPage" href="https://codeurJue.github.io/2017/01/28/Note-of-statistic/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jue">
@@ -787,7 +1509,7 @@ T= \sum_{j=1}^n{\frac{(n_i-np_i)^2}{np_i}}</script><p>其服从卡方分布，�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lorrin.cn/2017/01/07/Bayes-estimation/">
+  <link itemprop="mainEntityOfPage" href="https://codeurJue.github.io/2017/01/07/Bayes-estimation/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jue">
@@ -957,7 +1679,7 @@ p(\widetilde{x}|\theta) = p(\widetilde{x} |T = t)p_T(t|\theta) \varpropto p_T(t|
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lorrin.cn/2016/12/28/learning-OS-and-building-LorriOS/">
+  <link itemprop="mainEntityOfPage" href="https://codeurJue.github.io/2016/12/28/learning-OS-and-building-LorriOS/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jue">
@@ -1068,33 +1790,15 @@ p(\widetilde{x}|\theta) = p(\widetilde{x} |T = t)p_T(t|\theta) \varpropto p_T(t|
 <p>另外，下面的DayN并不是真正的天数，毕竟平时也要上课，不可能连续进行。所以大概是按每一次尝试，来进行划分的。</p>
 <hr>
 <p>刚开始浏览了一下操作系统的基本知识，按考研复习的来吧，然后看的忽然有点跃跃欲试就想能不能写一个简单的OS。</p>
+<p><a href="https://github.com/codeurJue/lorriOS" target="_blank" rel="external">源代码</a></p>
 <h1 id="Day1"><a href="#Day1" class="headerlink" title="Day1:"></a>Day1:</h1><p>一开始从《30天自制操作系统》开始看，以前有一点汇编基础所以看起来感觉还是可以接受的。</p>
 <p>看到第三天就下不去了，倒不是因为内容看不懂，而是环境的问题吧。作者是基于win，用了很多小程序，我用的是os x，很多时候要找一些替代方法。参考网上linux的解决方案，毕竟os x还是不太一样，到下面这一步就是不行，把haribote.bin写到myos.img。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># makefile</div><div class="line">mkdir -p /tmp/floppy</div><div class="line">mount -o loop myos.img /tmp/floppy -o fat=12 # 这一条在mac不适用</div><div class="line">sleep 1</div><div class="line">cp haribote.bin /tmp/floppy</div><div class="line">sleep 1</div><div class="line">umount /tmp/floppy</div></pre></td></tr></table></figure>
 <p>Os x 上貌似不能直接mount，当然我也尝试了一些其他的办法，最终失败，感觉不太想再花时间在细枝末节上，打算回法国后在ubuntu下开发，或者和书上保持一样，在win下开发。</p>
+<p>*后面通过Docker解决</p>
 <h1 id="Day2"><a href="#Day2" class="headerlink" title="Day2:"></a>Day2:</h1><p>第二天开始阅读《ORANGE’S：一个操作系统的实现》，并打算先阅读，等了解大致情况再动手，不然也只是抄代码，并且在一知半解的情况下容易卡在一些细枝末节的地方。</p>
-<p>同时也可以参考UnixV6，这个是MIT用于教学写的一个类unix的OS，有配套的课程。</p>
+<p>同时也可以参考xv6，这个是MIT用于教学写的一个类unix的OS，有配套的课程。</p>
 <p>两天下来感觉mac用于web开发十分方便，但是内核开发感觉网上的文档、案例偏少，当然主要也是我比较弱，不能够举一反三。一般来说，要不是面向初学者如《30天》而采用win，要不就是使用linux（果然linux才是王道= =）</p>
-<p>下面是在mac上编译uv6的配置（没有测试，纯搬运）</p>
-<blockquote>
-<h3 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h3><ol>
-<li>Install <a href="http://itunes.apple.com/us/app/xcode/id497799835" target="_blank" rel="external">Xcode</a>.  After installing Xcode install the Command Line Tools from the Downloads section of Xcode’s preferences.  I’ve installed Xcode Version 4.5 (4G182).</li>
-<li>Install <a href="http://mxcl.github.com/homebrew/" target="_blank" rel="external">Homebrew</a></li>
-<li><p>Install pre-requisites for building xv6</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;        $ brew install glib gmp mpfr pkgconfig ppl</div><div class="line">&gt;        $ brew install libmpc --use-llvm</div><div class="line">&gt;        $ brew install qemu --use-gcc</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>Install GNU binutils</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;        $ <span class="built_in">cd</span> /tmp</div><div class="line">&gt;        $ curl -O http://ftp.gnu.org/gnu/binutils/binutils-2.22.tar.gz</div><div class="line">&gt;        $ tar -xvzf binutils-2.22.tar.gz</div><div class="line">&gt;        $ ./configure --target=i386-jos-elf --disable-nls --prefix=/opt/gnu</div><div class="line">&gt;        $ make</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>Install GCC 4.5 via Homebrew</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;        $ <span class="built_in">cd</span> /tmp</div><div class="line">&gt;        $ curl -O http://ftp.gnu.org/gnu/gcc/gcc-4.7.2/gcc-4.7.2.tar.gz</div><div class="line">&gt;        $ <span class="built_in">cd</span> gcc-4.7.2</div><div class="line">&gt;        $ ./configure --target=i386-jos-elf --disable-nls --without-headers --with-newlib --disable-threads --disable-shared --disable-libmudflap --disable-libssp --with-system-zlib --disable-lto --with-gmp=/usr/<span class="built_in">local</span> --enable-languages=c --prefix=/opt/gnu</div><div class="line">&gt;        $ LDFLAGS=-L/usr/lib make</div><div class="line">&gt;        $ make install</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<h3 id="Install-and-build-xv6-with-GCC"><a href="#Install-and-build-xv6-with-GCC" class="headerlink" title="Install and build xv6 with GCC"></a>Install and build xv6 with GCC</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;$ git <span class="built_in">clone</span> git://pdos.csail.mit.edu/xv6/xv6.git</div><div class="line">&gt;<span class="built_in">cd</span> xv6</div><div class="line">&gt;make qemu-nox</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
 <h1 id="Day3"><a href="#Day3" class="headerlink" title="Day3:"></a>Day3:</h1><p>目前跟着ORANGE，暂时比较顺利，开发环境仍然是mac。基于freedos下成功进入了保护模式。</p>
 <p>下面就保护模式做一点笔记。</p>
 <p>关于保护模式网上的资料很多，在为什么需要保护模式这个问题上，这里有一个非常直接的要求——我们的系统要运行在32位上，实模式仅支持16位寻址。当然保护模式远远不止如此，但是对于初学者（比如现在的我，囧），它应该是最大的用途之一。</p>
@@ -1155,6 +1859,397 @@ p(\widetilde{x}|\theta) = p(\widetilde{x} |T = t)p_T(t|\theta) \varpropto p_T(t|
 <li>陷阱门描述符</li>
 <li>任务门描述符</li>
 </ul>
+<h1 id="Day6"><a href="#Day6" class="headerlink" title="Day6:"></a>Day6:</h1><p>写着是第六天，实际应该是好久之后了= =</p>
+<p>期间已经实现了中断和异常的初始化，并能捕获异常，占个位置以后再详细写。</p>
+<p>现在着手实现进程。</p>
+<p><strong>进场表、进程体、GDT和TSS的关系：</strong></p>
+<ol>
+<li>进程表和GDT。进程表内的LDT选择子对应一个GDT中的描述符，也就是说每一个进程表对应一个GDT中的描述符。</li>
+<li>进程表和进程。进程表用于描述进程。</li>
+<li>GDT和TSS。GDT中有一个描述符对应TSS。</li>
+</ol>
+<p><strong>初始化进场表、进程体、GDT和TSS：</strong></p>
+<ol>
+<li><p>准备任意进程体。</p>
+<p>任意函数即可。</p>
+</li>
+<li><p>初始化进程表。</p>
+<p>进程表结构定义在process.h。在global.c中声明一个全局进程表，它是一个进程的数组，包含所有进程。</p>
+<p>在新建进程前，需要初始化进程表。</p>
+<p>填充GDT中进程LDT的描述符，在protect.c。</p>
+</li>
+<li><p>准备GDT和TSS。</p>
+<p>TSS结构定义在protect.h。</p>
+<p>填充GDT中TSS描述符，在protect.c。</p>
+<p>TSS准备好了，然后加载tr，在kernel.asm。</p>
+</li>
+</ol>
+<p><strong>从启动时间顺序上，第一个进程的启动过程如下：</strong></p>
+<p>准备进程体</p>
+<p>=&gt; 初始化GDT中的TSS和LDT两个描述符，初始化TSS</p>
+<p>=&gt; 准备进程表</p>
+<p>=&gt; 完成跳转 ring0 -&gt; ring1</p>
+<h3 id="添加一个任务的总结"><a href="#添加一个任务的总结" class="headerlink" title="添加一个任务的总结"></a>添加一个任务的总结</h3><p>按orange书所说，或参考minix，建立了task_table包含所有进程信息，通过遍历它初始化进程。</p>
+<ol>
+<li>添加一个进程体，即一个函数，并声明它 (一般在proto.h中声明)</li>
+<li>在task_table中添加一个进程 (global.c)</li>
+<li>添加宏：修改进程数量(++)和定义堆栈空间 (process.h)</li>
+<li>再次编译即可</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://codeurJue.github.io/2016/12/26/datamining-class-pred/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jue">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jue's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jue's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/26/datamining-class-pred/" itemprop="url">
+                  数据挖掘-分类与预测
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-26T14:56:57+01:00">
+                2016-12-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h1><p>主要分为两个步骤：</p>
+<ol>
+<li><p>建立一个描述已知数据集类别或概念的模型。</p>
+<p>分类规则形式、决策树形式，或数学公式形式。</p>
+</li>
+<li><p>利用所获得的模型进行分类操作。</p>
+<p>首先要对模型分类准确率进行估计。</p>
+<p>若其准确率可以接受，则可以使用该模型进行分类。       </p>
+</li>
+</ol>
+<p>可以根据以下几条标准对各种分类方法进行比较:</p>
+<ol>
+<li>预测准确率，它描述(学习所获)模型能够正确预测未知对象类别或(类别)数值的能力。</li>
+<li>速度，它描述在构造和使用模型时的计算效率。 </li>
+<li>鲁棒性，它描述在数据带有噪声和有数据遗失情况下，(学习所获)模型仍能进行正确预测的能力。 </li>
+<li>可扩展性，它描述对处理大量数据并构造相应学习模型所需要的能力。</li>
+<li>易理解性，它描述学习所获模型表示的可理解程度。 在本章的后面各节，将要陆续介绍上述有关问题的实现方法。</li>
+</ol>
+<h1 id="基于决策树的分类"><a href="#基于决策树的分类" class="headerlink" title="基于决策树的分类"></a>基于决策树的分类</h1><ol>
+<li><p>决策树的生成算法</p>
+<ul>
+<li><p>基本决策树算法</p>
+<p>本质是一个贪心算法，自上而下分而治之。</p>
+</li>
+</ul>
+</li>
+<li><p>属性选择方法</p>
+<p>信息量</p>
+<script type="math/tex; mode=display">
+I(s_1,…,s_m) = - \sum_{i=1}^{m}{p_i \log (p_i)}</script><p>利用属性A划分当前样本集合所需要的信息可以计算：</p>
+<script type="math/tex; mode=display">
+E(A) = \sum_{j=1}^{v}{\frac{s_{1j}+s_{2j}+...+s_{mj}}{s}I(s_1,…,s_m) }</script><p>E(A)的值越小，说明其子集划分结果越纯，即越好。而对于一个子集Sj，它的信息为</p>
+<script type="math/tex; mode=display">
+I(s_{1j},…,s_{mj}) = - \sum_{i=1}^{m}{p_{ij} \log (p_{ij})}</script><p>这样利用属性A对当前分支结点进行相应样本集合划分所获得的信息增益是:</p>
+<script type="math/tex; mode=display">
+Gain(A) =I(s_1,…,s_m)- E(A)</script><p>也就是说Gain(A)被认为是利用属性A进行划分后，所获的的信息熵的减少量。</p>
+<p>决策树归纳算法计算每个属性的Gain，选择信息增益最大的属性，作为测试属性并由此产生相应的分支节点。</p>
+</li>
+<li><p>树枝的修剪</p>
+<ol>
+<li><p>事前修剪</p>
+<p>基本原理是设置一个阀值，当某一节点的的样本数少于阀值，则停止细分。难点在于设置一个合理的阀值。</p>
+</li>
+<li><p>事后修剪</p>
+<p>从一个充分生长的树中修建。</p>
+<p>可以使用基于代价成本的方法，也可以使用最短描述长度(MDL)。</p>
+<p>前者计算其分类错误率，若修剪枝导致分类错误率变高，则保留，否则剪枝；后者选择最简单的，无需独立的数据测试</p>
+</li>
+</ol>
+</li>
+<li><p>规则获取</p>
+<p>在已经获得了一个决策树的基础上，可以使用”if…else…”语句描述该决策树。</p>
+</li>
+<li><p>基本决策树方法改进及其扩展性</p>
+</li>
+</ol>
+<h1 id="贝叶斯分类方法"><a href="#贝叶斯分类方法" class="headerlink" title="贝叶斯分类方法"></a>贝叶斯分类方法</h1><p>贝叶斯分类器是一个统计分类器，基于贝叶斯定理。</p>
+<p>简单贝叶斯分类器的分类性能可以与决策树和神经网络相比。</p>
+<p>简单贝叶斯分类器假设一个指定类别中各属性的取值是互相独立的，它可以帮助减少计算量。</p>
+<ol>
+<li><p>贝叶斯定理</p>
+<p>设X为一个类别未知的数据样本，H为某个假设，则：</p>
+<script type="math/tex; mode=display">
+P(H|X) = \frac{P(X|H)P(H)}{P(X)}</script></li>
+<li><p>简单贝叶斯分类方法</p>
+<p>步骤说明如下：</p>
+<ol>
+<li><p>每一个数据都是有一个n维特征向量X={x1,…,xn}构成，分别描述其n个属性(A1,…,An)。</p>
+</li>
+<li><p>若有m个不同的类别(C1,…,Cm)，分类器将未知X归属到类别Ci，当仅当</p>
+<script type="math/tex; mode=display">
+P(C_i|X) = \max(P(C_j|X)|1\le j\le m)</script><p>所以我们要找到最大的</p>
+<script type="math/tex; mode=display">
+P(C_i|X) = \frac{P(X|C_i)P(C_i)}{P(X)}</script></li>
+<li><p>要找到它，只需要P(X|Ci)P(Ci)取最大即可。由于各类别的事前概率是未知的，我们假设P(Ci)是互相相等的，这样，第二步中的式子取最大就转化为了寻找最大的P(X|Ci)</p>
+</li>
+<li><p>由于所含的属性比较多，直接计算P(X|Ci)的计算量还是很大的。由于简单贝叶斯分类器假设各属性独立，则：</p>
+<script type="math/tex; mode=display">
+P(X|C_i) = \prod{P(x_k|C_i)}</script><p>可以根据训练数据样本估算P(xk|Ci)的值。具体如下：</p>
+<ul>
+<li><p>若Ak是符号量</p>
+<script type="math/tex; mode=display">
+P(x_k|Ci)=\frac{s_{ik}}{s_i}</script><p>这里sik为训练样本中类别为Ci且属性Ak取vk的样本数。si为训练样本中类别为Ci的样本数。</p>
+</li>
+<li><p>若Ak是连续量</p>
+<script type="math/tex; mode=display">
+P(x_k|Ci)=g(x_k,\mu_{C_i},\sigma_{C_i}) = \frac{1}{\sqrt{2\pi}\sigma_{C_i}}e^{-\frac{(x-\mu_{C_i})^2}{2\sigma^2_{C_i}}}</script><p>其中$g(x<em>k,\mu</em>{C<em>i},\sigma</em>{C_i})$ï为属性为Ak的高斯规范密度函数。</p>
+</li>
+</ul>
+</li>
+<li><p>为了预测X的分类，我们通过上述方法估计各个类别的正确率，将X归属到可能性最高的类别。</p>
+</li>
+</ol>
+</li>
+<li><p>贝叶斯信念网络</p>
+<p>简单贝叶斯假设属性相互独立，从而简化计算，而实际上属性相互依赖的情况比较常见，所以又出现了贝叶斯信念网络，用于描述这种相互关联的概率分布。</p>
+<p>贝叶斯信念网络提供了一个图形模型来描述其中的因果关系。信念网络包括两个部分。</p>
+<ul>
+<li><p>第一部分是有向无环图</p>
+<p>每一个节点代表随机变量。</p>
+<p>每一条弧代表一个概率依赖。</p>
+<p>给定父节点，每个变量有条件的独立于图中非子节点。</p>
+</li>
+<li><p>第二部分是包含所有变量的条件概率表(CPT)</p>
+<p>对于一个变量Z，CPT定义了P(Z|parent(Z))，由此可以得到一个表。</p>
+<p>例如，LunCancer的父节点是FamilyHistory和Smoker，</p>
+</li>
+</ul>
+</li>
+</ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>FH, S</th>
+<th>FH, ~S</th>
+<th>~FH, S</th>
+<th>~FH, ~S</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LungCancer</td>
+<td>0.8</td>
+<td>0.5</td>
+<td>0.7</td>
+<td>0.1</td>
+</tr>
+<tr>
+<td>~LungCancer</td>
+<td>0.2</td>
+<td>0.5</td>
+<td>0.3</td>
+<td>0.9</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>数据对象的联合概率通过如下公式计算。</p>
+<script type="math/tex; mode=display">
+P(z_1,...,z_n) = \prod{P(z_i|parent(z_i))}</script><ol>
+<li><p>贝叶斯信念网络的学习</p>
+<p>学习算法步骤如下：</p>
+<ol>
+<li><p>计算下降梯度</p>
+<script type="math/tex; mode=display">
+\frac{\partial\ln{P_w(S)}}{\partial w_{ijk}} = \sum_{d=1}^{s}{\frac{P(Y_i=y_{ij}, U_i=u_{ik} |X_d)}{w_{ijk}}}</script><p>​<br>左边是计算训练集合S中每个样本Xd的概率。设这一概率为p。</p>
+<p>由Yi和Ui表示隐含变量，p可通过样本中可观察到的变量以及标准贝叶斯网络推理计算得到。</p>
+</li>
+<li><p>沿梯度方向前进一小步，权重更新计算如下</p>
+<script type="math/tex; mode=display">
+w_{ijk} \leftarrow w_{ijk} + (l)\frac{\partial\ln{P_w(S)}}{\partial w_{ijk}}</script><p>l为学习速率代表学习步长。通常学习速率为较小的常数。</p>
+</li>
+<li><p>重新规格化权重</p>
+<p>保证wijk的取值在0～1，其和等于1.</p>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="神经网络分类方法"><a href="#神经网络分类方法" class="headerlink" title="神经网络分类方法"></a>神经网络分类方法</h1><ol>
+<li><p>多层反馈神经网络</p>
+<p>输入同时赋给第一层(输入层)单元，这些单元输出赋予权重，输出给第二层(隐藏层)。</p>
+<p>隐藏层的带权输出又作为输入再馈给另一隐层。</p>
+<p>最后的隐层结点带权输出馈给输出层单元，最终给出相应样本的预测输出。</p>
+<p>该网络是前馈的，即每一个反馈只能发送到前面的输出层或隐含层。</p>
+<p>它也是全连接的，即每一个层中单元均与前面一层的各单元相连接。</p>
+<p>只要中间隐层足够多的话，多层前馈网络中的线性阈值函数，可以充分逼近任何函数。</p>
+</li>
+<li><p>神经网络结构</p>
+<p>确定结构，即：</p>
+<ul>
+<li>输入层的单元数</li>
+<li>隐含层的个数(和层数)</li>
+<li>每个隐含层的单元数目</li>
+<li>输出层单元数目</li>
+</ul>
+<p>对输入值规格化，一般取值在0～1.</p>
+<p>离散数据可以为每一个取值增加一个节点进行编码。例如A={a0,a1,a2}则我们设立三个输入单元I0, I1, I2，每个单元默认为0，若A=a0，则I1置为1.</p>
+<p>此外没有什么特定的规律或规则来指导隐含层的最佳单元数量，它的确定是一个不断试错的过程。</p>
+</li>
+<li><p>后传方法</p>
+<p>后传方法不断地处理一个训练样本集。将处理结果与训练样本已知类别比较所获误差，修改权重，使网络输出与实际类别之间的均方差最小。权重的修改是后传的，即从前向后的。</p>
+<p>其收敛性不能保证。</p>
+<p>流程(伪代码)：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 定义sum函数，以变量x对f(x)求和</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum</span><span class="params">(f<span class="params">(x)</span>, x)</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="comment"># 初始化</span></div><div class="line">init();</div><div class="line"></div><div class="line"><span class="keyword">while</span> !conditions:           <span class="comment"># 条件不满足时</span></div><div class="line">    <span class="keyword">for</span> X <span class="keyword">in</span> samples:</div><div class="line">        <span class="keyword">for</span> each layer:      <span class="comment"># 每个隐含层和输出层</span></div><div class="line">            O[j] = <span class="number">1</span> / (<span class="number">1</span> + exp( - I[j]))</div><div class="line">            I[j] = sum(w[i][j]O[i], i) + theta[j]</div><div class="line">        <span class="keyword">for</span> each unit of output layer <span class="keyword">as</span> j:    <span class="comment"># 每个输出层单元j，计算向后传播误差</span></div><div class="line">            Err[j] = O[j] * (<span class="number">1</span> - O[j]) * (T[j] - O[j])</div><div class="line">        <span class="keyword">for</span> each unit of hidden layer <span class="keyword">as</span> j:    <span class="comment"># 每个隐含层单元j，从最后一层到第一层隐含层</span></div><div class="line">            Err[j] = O[j] * (<span class="number">1</span> - O[j]) * sum(Err[k] * w[i][j][k], k)</div><div class="line">        <span class="keyword">for</span> each w[i][j] <span class="keyword">in</span> the network:       <span class="comment"># network中的权重wij</span></div><div class="line">            delta_w[i][j] = (l) * Err[j] * O[i]     <span class="comment"># (l)是学习速率，取值在0～1</span></div><div class="line">            w[i][j] += delta_w[i][j]</div><div class="line">        <span class="keyword">for</span> each theta[j] <span class="keyword">in</span> the network:      <span class="comment"># network中的偏差thetaij</span></div><div class="line">            delta_theta[j] = (l) * Err[j]</div><div class="line">            v[i] = theta[j] + delta_theta[j]</div></pre></td></tr></table></figure>
+<p>看伪代码基本就能明白它的过程了。虽然伪代码可能写的比较迷。。。</p>
+</li>
+</ol>
+<h1 id="基于关联的分类方法"><a href="#基于关联的分类方法" class="headerlink" title="基于关联的分类方法"></a>基于关联的分类方法</h1><p>略，后面会详细说。</p>
+<h1 id="其他分类"><a href="#其他分类" class="headerlink" title="其他分类"></a>其他分类</h1><p>其他分类我也没有细看，纪录一下名字，以后有时间再看。</p>
+<ol>
+<li><p>k-最邻近方法</p>
+<p>这个很简单，就是比较两个点的欧式距离。比较基本的分类方法，略。</p>
+</li>
+<li><p>基于示例推理</p>
+</li>
+<li><p>遗传算法</p>
+</li>
+<li><p>粗糙集方法</p>
+</li>
+<li><p>模糊集合方法</p>
+</li>
+</ol>
+<h1 id="预测方法"><a href="#预测方法" class="headerlink" title="预测方法"></a>预测方法</h1><ol>
+<li><p>线形与多变量回归</p>
+<p>线性代数、概率统计、数值计算方法里都学过。核心是利用最小二乘法。</p>
+</li>
+<li><p>非线性回归</p>
+<p>例如多项式回归</p>
+<script type="math/tex; mode=display">
+Y = \alpha + \beta_1 X+\beta_2 X^2+\beta_3 X^3</script><p>为了将其转化为线性形式，令：</p>
+<script type="math/tex; mode=display">
+X_1 = X;X_2 = X^2 ; X_3 = X^3</script><p>接下来就用最小二乘法即可。</p>
+</li>
+<li><p>其他回归模型</p>
+<p>对数回归、泊松回归等</p>
+</li>
+</ol>
+<h1 id="分类器准确性"><a href="#分类器准确性" class="headerlink" title="分类器准确性"></a>分类器准确性</h1><p>分层k次交叉验证方法普遍应用于对分类器预测准确性的评估方面。而bagging方法和boosting方法则通过学习和组合多个(单)分类器来帮助提高整个(数据训练样本所获)分类器的预测准确性。</p>
 
           
         
@@ -1188,7 +2283,7 @@ p(\widetilde{x}|\theta) = p(\widetilde{x} |T = t)p_T(t|\theta) \varpropto p_T(t|
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1229,7 +2324,7 @@ p(\widetilde{x}|\theta) = p(\widetilde{x} |T = t)p_T(t|\theta) \varpropto p_T(t|
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1246,7 +2341,7 @@ p(\widetilde{x}|\theta) = p(\widetilde{x} |T = t)p_T(t|\theta) \varpropto p_T(t|
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

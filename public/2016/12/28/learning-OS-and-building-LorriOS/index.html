@@ -88,11 +88,11 @@
 另外，下面的DayN并不是真正的天数，毕竟平时也要上">
 <meta property="og:type" content="article">
 <meta property="og:title" content="learning OS and building LorriOS">
-<meta property="og:url" content="http://lorrin.cn/2016/12/28/learning-OS-and-building-LorriOS/index.html">
+<meta property="og:url" content="https://codeurJue.github.io/2016/12/28/learning-OS-and-building-LorriOS/index.html">
 <meta property="og:site_name" content="Jue's Blog">
 <meta property="og:description" content="暂时用以记录操作系统的学习，以及开发自己的一个toy OS，作为一个项目日志?(如果能成功的话。。)。写这个东西的目的还是给我自己看的（估计其他人也会看的一头雾水吧，笑），毕竟人不太可能一次就找到正确的道路，所以日志写起来可能非常乱糟糟。所以说这只是一个记录，没有什么真正的参考价值。等这个toy os完成的差不多了，我应该会再来总结和记录一下。
 另外，下面的DayN并不是真正的天数，毕竟平时也要上">
-<meta property="og:updated_time" content="2017-01-10T11:58:38.000Z">
+<meta property="og:updated_time" content="2017-04-17T15:12:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="learning OS and building LorriOS">
 <meta name="twitter:description" content="暂时用以记录操作系统的学习，以及开发自己的一个toy OS，作为一个项目日志?(如果能成功的话。。)。写这个东西的目的还是给我自己看的（估计其他人也会看的一头雾水吧，笑），毕竟人不太可能一次就找到正确的道路，所以日志写起来可能非常乱糟糟。所以说这只是一个记录，没有什么真正的参考价值。等这个toy os完成的差不多了，我应该会再来总结和记录一下。
@@ -124,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="http://lorrin.cn/2016/12/28/learning-OS-and-building-LorriOS/"/>
+  <link rel="canonical" href="https://codeurJue.github.io/2016/12/28/learning-OS-and-building-LorriOS/"/>
 
 
 
@@ -165,7 +165,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">math and programming</p>
+  <p class="site-subtitle"></p>
 </div>
 
 <div class="site-nav-toggle">
@@ -251,7 +251,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://lorrin.cn/2016/12/28/learning-OS-and-building-LorriOS/">
+  <link itemprop="mainEntityOfPage" href="https://codeurJue.github.io/2016/12/28/learning-OS-and-building-LorriOS/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jue">
@@ -357,33 +357,15 @@
 <p>另外，下面的DayN并不是真正的天数，毕竟平时也要上课，不可能连续进行。所以大概是按每一次尝试，来进行划分的。</p>
 <hr>
 <p>刚开始浏览了一下操作系统的基本知识，按考研复习的来吧，然后看的忽然有点跃跃欲试就想能不能写一个简单的OS。</p>
+<p><a href="https://github.com/codeurJue/lorriOS" target="_blank" rel="external">源代码</a></p>
 <h1 id="Day1"><a href="#Day1" class="headerlink" title="Day1:"></a>Day1:</h1><p>一开始从《30天自制操作系统》开始看，以前有一点汇编基础所以看起来感觉还是可以接受的。</p>
 <p>看到第三天就下不去了，倒不是因为内容看不懂，而是环境的问题吧。作者是基于win，用了很多小程序，我用的是os x，很多时候要找一些替代方法。参考网上linux的解决方案，毕竟os x还是不太一样，到下面这一步就是不行，把haribote.bin写到myos.img。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># makefile</div><div class="line">mkdir -p /tmp/floppy</div><div class="line">mount -o loop myos.img /tmp/floppy -o fat=12 # 这一条在mac不适用</div><div class="line">sleep 1</div><div class="line">cp haribote.bin /tmp/floppy</div><div class="line">sleep 1</div><div class="line">umount /tmp/floppy</div></pre></td></tr></table></figure>
 <p>Os x 上貌似不能直接mount，当然我也尝试了一些其他的办法，最终失败，感觉不太想再花时间在细枝末节上，打算回法国后在ubuntu下开发，或者和书上保持一样，在win下开发。</p>
+<p>*后面通过Docker解决</p>
 <h1 id="Day2"><a href="#Day2" class="headerlink" title="Day2:"></a>Day2:</h1><p>第二天开始阅读《ORANGE’S：一个操作系统的实现》，并打算先阅读，等了解大致情况再动手，不然也只是抄代码，并且在一知半解的情况下容易卡在一些细枝末节的地方。</p>
-<p>同时也可以参考UnixV6，这个是MIT用于教学写的一个类unix的OS，有配套的课程。</p>
+<p>同时也可以参考xv6，这个是MIT用于教学写的一个类unix的OS，有配套的课程。</p>
 <p>两天下来感觉mac用于web开发十分方便，但是内核开发感觉网上的文档、案例偏少，当然主要也是我比较弱，不能够举一反三。一般来说，要不是面向初学者如《30天》而采用win，要不就是使用linux（果然linux才是王道= =）</p>
-<p>下面是在mac上编译uv6的配置（没有测试，纯搬运）</p>
-<blockquote>
-<h3 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h3><ol>
-<li>Install <a href="http://itunes.apple.com/us/app/xcode/id497799835" target="_blank" rel="external">Xcode</a>.  After installing Xcode install the Command Line Tools from the Downloads section of Xcode’s preferences.  I’ve installed Xcode Version 4.5 (4G182).</li>
-<li>Install <a href="http://mxcl.github.com/homebrew/" target="_blank" rel="external">Homebrew</a></li>
-<li><p>Install pre-requisites for building xv6</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;        $ brew install glib gmp mpfr pkgconfig ppl</div><div class="line">&gt;        $ brew install libmpc --use-llvm</div><div class="line">&gt;        $ brew install qemu --use-gcc</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>Install GNU binutils</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;        $ <span class="built_in">cd</span> /tmp</div><div class="line">&gt;        $ curl -O http://ftp.gnu.org/gnu/binutils/binutils-2.22.tar.gz</div><div class="line">&gt;        $ tar -xvzf binutils-2.22.tar.gz</div><div class="line">&gt;        $ ./configure --target=i386-jos-elf --disable-nls --prefix=/opt/gnu</div><div class="line">&gt;        $ make</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>Install GCC 4.5 via Homebrew</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;        $ <span class="built_in">cd</span> /tmp</div><div class="line">&gt;        $ curl -O http://ftp.gnu.org/gnu/gcc/gcc-4.7.2/gcc-4.7.2.tar.gz</div><div class="line">&gt;        $ <span class="built_in">cd</span> gcc-4.7.2</div><div class="line">&gt;        $ ./configure --target=i386-jos-elf --disable-nls --without-headers --with-newlib --disable-threads --disable-shared --disable-libmudflap --disable-libssp --with-system-zlib --disable-lto --with-gmp=/usr/<span class="built_in">local</span> --enable-languages=c --prefix=/opt/gnu</div><div class="line">&gt;        $ LDFLAGS=-L/usr/lib make</div><div class="line">&gt;        $ make install</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<h3 id="Install-and-build-xv6-with-GCC"><a href="#Install-and-build-xv6-with-GCC" class="headerlink" title="Install and build xv6 with GCC"></a>Install and build xv6 with GCC</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;$ git <span class="built_in">clone</span> git://pdos.csail.mit.edu/xv6/xv6.git</div><div class="line">&gt;<span class="built_in">cd</span> xv6</div><div class="line">&gt;make qemu-nox</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
 <h1 id="Day3"><a href="#Day3" class="headerlink" title="Day3:"></a>Day3:</h1><p>目前跟着ORANGE，暂时比较顺利，开发环境仍然是mac。基于freedos下成功进入了保护模式。</p>
 <p>下面就保护模式做一点笔记。</p>
 <p>关于保护模式网上的资料很多，在为什么需要保护模式这个问题上，这里有一个非常直接的要求——我们的系统要运行在32位上，实模式仅支持16位寻址。当然保护模式远远不止如此，但是对于初学者（比如现在的我，囧），它应该是最大的用途之一。</p>
@@ -444,6 +426,43 @@
 <li>陷阱门描述符</li>
 <li>任务门描述符</li>
 </ul>
+<h1 id="Day6"><a href="#Day6" class="headerlink" title="Day6:"></a>Day6:</h1><p>写着是第六天，实际应该是好久之后了= =</p>
+<p>期间已经实现了中断和异常的初始化，并能捕获异常，占个位置以后再详细写。</p>
+<p>现在着手实现进程。</p>
+<p><strong>进场表、进程体、GDT和TSS的关系：</strong></p>
+<ol>
+<li>进程表和GDT。进程表内的LDT选择子对应一个GDT中的描述符，也就是说每一个进程表对应一个GDT中的描述符。</li>
+<li>进程表和进程。进程表用于描述进程。</li>
+<li>GDT和TSS。GDT中有一个描述符对应TSS。</li>
+</ol>
+<p><strong>初始化进场表、进程体、GDT和TSS：</strong></p>
+<ol>
+<li><p>准备任意进程体。</p>
+<p>任意函数即可。</p>
+</li>
+<li><p>初始化进程表。</p>
+<p>进程表结构定义在process.h。在global.c中声明一个全局进程表，它是一个进程的数组，包含所有进程。</p>
+<p>在新建进程前，需要初始化进程表。</p>
+<p>填充GDT中进程LDT的描述符，在protect.c。</p>
+</li>
+<li><p>准备GDT和TSS。</p>
+<p>TSS结构定义在protect.h。</p>
+<p>填充GDT中TSS描述符，在protect.c。</p>
+<p>TSS准备好了，然后加载tr，在kernel.asm。</p>
+</li>
+</ol>
+<p><strong>从启动时间顺序上，第一个进程的启动过程如下：</strong></p>
+<p>准备进程体</p>
+<p>=&gt; 初始化GDT中的TSS和LDT两个描述符，初始化TSS</p>
+<p>=&gt; 准备进程表</p>
+<p>=&gt; 完成跳转 ring0 -&gt; ring1</p>
+<h3 id="添加一个任务的总结"><a href="#添加一个任务的总结" class="headerlink" title="添加一个任务的总结"></a>添加一个任务的总结</h3><p>按orange书所说，或参考minix，建立了task_table包含所有进程信息，通过遍历它初始化进程。</p>
+<ol>
+<li>添加一个进程体，即一个函数，并声明它 (一般在proto.h中声明)</li>
+<li>在task_table中添加一个进程 (global.c)</li>
+<li>添加宏：修改进程数量(++)和定义堆栈空间 (process.h)</li>
+<li>再次编译即可</li>
+</ol>
 
       
     </div>
@@ -558,7 +577,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -575,7 +594,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -610,7 +629,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Day1"><span class="nav-number">1.</span> <span class="nav-text">Day1:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day2"><span class="nav-number">2.</span> <span class="nav-text">Day2:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration"><span class="nav-number">2.0.1.</span> <span class="nav-text">Configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-and-build-xv6-with-GCC"><span class="nav-number">2.0.2.</span> <span class="nav-text">Install and build xv6 with GCC</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day3"><span class="nav-number">3.</span> <span class="nav-text">Day3:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day4"><span class="nav-number">4.</span> <span class="nav-text">Day4:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特权级"><span class="nav-number">4.0.1.</span> <span class="nav-text">特权级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#门"><span class="nav-number">4.0.2.</span> <span class="nav-text">门</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day5"><span class="nav-number">5.</span> <span class="nav-text">Day5:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#页表"><span class="nav-number">5.0.1.</span> <span class="nav-text">页表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中断和异常"><span class="nav-number">5.0.2.</span> <span class="nav-text">中断和异常</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Day1"><span class="nav-number">1.</span> <span class="nav-text">Day1:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day2"><span class="nav-number">2.</span> <span class="nav-text">Day2:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day3"><span class="nav-number">3.</span> <span class="nav-text">Day3:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day4"><span class="nav-number">4.</span> <span class="nav-text">Day4:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特权级"><span class="nav-number">4.0.1.</span> <span class="nav-text">特权级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#门"><span class="nav-number">4.0.2.</span> <span class="nav-text">门</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day5"><span class="nav-number">5.</span> <span class="nav-text">Day5:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#页表"><span class="nav-number">5.0.1.</span> <span class="nav-text">页表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中断和异常"><span class="nav-number">5.0.2.</span> <span class="nav-text">中断和异常</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day6"><span class="nav-number">6.</span> <span class="nav-text">Day6:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加一个任务的总结"><span class="nav-number">6.0.1.</span> <span class="nav-text">添加一个任务的总结</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
