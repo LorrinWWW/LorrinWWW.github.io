@@ -1,0 +1,750 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CNN,knowledge-graph,KGC," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Open-World Knowledge Graph Completion摘要：[1]文首先讨论了Closed-World KGC，它无法处理从 KG 外部加入的新实体，并严重依赖已有KG连接的，不能对弱连接有好的预测。为此定义了 Open-World KGC，可以接收 新的实体并链接到 KG；并依此提出了ConMask模型，在给定关系和实体名、实体描述的前提下，利用attention机制通过关系">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Open-World Knowledge Graph Completion 笔记">
+<meta property="og:url" content="https://LorrinWWW.github.io/2018/02/26/[2018.2.26]Open-World-Knowledge-Graph-Completion/index.html">
+<meta property="og:site_name" content="Jue's Blog">
+<meta property="og:description" content="Open-World Knowledge Graph Completion摘要：[1]文首先讨论了Closed-World KGC，它无法处理从 KG 外部加入的新实体，并严重依赖已有KG连接的，不能对弱连接有好的预测。为此定义了 Open-World KGC，可以接收 新的实体并链接到 KG；并依此提出了ConMask模型，在给定关系和实体名、实体描述的前提下，利用attention机制通过关系">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=G">
+<meta property="og:image" content="https://LorrinWWW.github.io/illustration.png">
+<meta property="og:image" content="https://LorrinWWW.github.io/MWRW.png">
+<meta property="og:image" content="https://LorrinWWW.github.io/arch.png">
+<meta property="og:updated_time" content="2018-03-03T20:21:16.156Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Open-World Knowledge Graph Completion 笔记">
+<meta name="twitter:description" content="Open-World Knowledge Graph Completion摘要：[1]文首先讨论了Closed-World KGC，它无法处理从 KG 外部加入的新实体，并严重依赖已有KG连接的，不能对弱连接有好的预测。为此定义了 Open-World KGC，可以接收 新的实体并链接到 KG；并依此提出了ConMask模型，在给定关系和实体名、实体描述的前提下，利用attention机制通过关系">
+<meta name="twitter:image" content="https://www.zhihu.com/equation?tex=G">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://LorrinWWW.github.io/2018/02/26/[2018.2.26]Open-World-Knowledge-Graph-Completion/"/>
+
+
+
+
+
+  <title> Open-World Knowledge Graph Completion 笔记 | Jue's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Jue's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://LorrinWWW.github.io/2018/02/26/[2018.2.26]Open-World-Knowledge-Graph-Completion/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jue">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jue's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jue's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Open-World Knowledge Graph Completion 笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-26T08:00:00+01:00">
+                2018-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/research/" itemprop="url" rel="index">
+                    <span itemprop="name">research</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Open-World-Knowledge-Graph-Completion"><a href="#Open-World-Knowledge-Graph-Completion" class="headerlink" title="Open-World Knowledge Graph Completion"></a>Open-World Knowledge Graph Completion</h2><p><strong>摘要</strong>：[1]文首先讨论了Closed-World KGC，它无法处理从 KG 外部加入的新实体，并严重依赖已有KG连接的，不能对弱连接有好的预测。为此定义了 Open-World KGC，可以接收 新的实体并链接到 KG；并依此提出了ConMask模型，在给定关系和实体名、实体描述的前提下，利用attention机制通过关系定位实体描述中最相关的词，再以这些词和实体得到要链接的实体。</p>
+<h3 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h3><p>知识图谱（KG）是一种信息网络，它用三元组 $(h,r,t)$ 来表示知识（h: head entity, t: tail entity, r: relation），目前比较出名的KG有 DBPedia，ConceptNet 等，目前的大多数KG都有噪音且不完整，比如基于Wikipedia的DBPedia有460万个实体，但其中一半实体拥有少于5个的关系。</p>
+<p>这说明了大部分的知识图谱仍然是非常不完善的，我们必须从一开始就要考虑系统的修改、补充完善的可能性。这项任务被定义为Knowledge Graph Completion (KGC)。</p>
+<h4 id="Closed-World-KGC"><a href="#Closed-World-KGC" class="headerlink" title="Closed-World KGC"></a>Closed-World KGC</h4><p>给定一个不完整的KG $G=(E,R,T)$ 其中 $E,R,T$ 分别表示实体集，关系集以及三元组集，Closed-World KGC的任务就是通过找到一系列丢失的三元组 $ T’ = { <h,r,t>|h \in E, r \in R, t \in E, <h,r,t> \notin T }$ 来补充现有的 $G$.</h,r,t></h,r,t></p>
+<p>一个很重要的地方在于，Closed-World KGC 假定了新的实体、关系都被原有的 $G$ 包含，对于不在 $G$ 中的实体则一筹莫展。</p>
+<p>目前的Closed-World KGC方法很多往往使用TranE或者低维特征表示模型，前者的核心思想就是 $h+r=t$ ，后者则指 Embedding 等。</p>
+<p>该方法仅对固定的或者缓慢更新的KG有效，对于快速变更的KG则效果一般。</p>
+<h4 id="Open-World-KGC"><a href="#Open-World-KGC" class="headerlink" title="Open-World KGC"></a>Open-World KGC</h4><p>给定一个不完整的KG $G=(E,R,T)$ 其中 $E,R,T$ 分别表示实体集，关系集以及三元组集，Open-World KGC 的任务就是找到 <img src="https://www.zhihu.com/equation?tex=G" alt="G"> 中没有的三元组集，$T’ ={<h,r,t>|h\in E^i,r\in R, t\in E^i,<h,r,t>\notin T}$ 其中 $E^i$ 是G的实体超集。</h,r,t></h,r,t></p>
+<p>Closed-World方法就是根据知识图谱的拓扑结构更新一个随机的向量作为实体和关系的embedding，但对于不在网络中的实体，这个方法就失效了，这个时候就需要用别的特征来代替这个用网络拓扑结构得到的特征。</p>
+<p>一般直觉就是用实体的描述（entity description），根据实体的描述来得到特征，但从非结构化文本中学习向量表示比在网络的拓扑结构中要难得多，原因如下：</p>
+<ol>
+<li>在Closed-world KGC模型中，每个实体都有一个embedding (从与它相连的实体上学得的)，但Open-World KGC模型则需要从实体描述的word embedding中得到entity embedding。而无论实体之间的联系情况是什么，word embedding的更新都会导致有相同词的entities的更新。</li>
+<li>因为使用了非结构化文本，所以Open-World KGC模型可能会引入噪音或者冗余信息。</li>
+</ol>
+<h3 id="2-Closed-World-KGC"><a href="#2-Closed-World-KGC" class="headerlink" title="2. Closed-World KGC"></a>2. Closed-World KGC</h3><p>在 Closed-World KGC 中，最为常用也最为基础的方法是一种给予强化学习(RL)的模型，被称为TransE [2]. 它有一个简单实用的假设：</p>
+<script type="math/tex; mode=display">
+h+r = t</script><p>其中h是head entity的向量，t是tail entity的向量，r是关系向量。</p>
+<p>TransE定义了loss function：</p>
+<script type="math/tex; mode=display">
+\mathcal{L(T)} = \sum_{<h,r,t>\in T} [\gamma + E(<h,r,t>) - E(<h',r',t'>)]_+</script><p>其中 $T​$ 代表一个三元组的集合；$E(<h,r,t>) = ||h+r-t||_{L_n}​$是energy function；$<h,r,t>​$是G中的一个三元组；$&lt;h’,r’,t’&gt;​$代表一个不存在于 $T​$ 的三元组，通过随机替换一部分$<h,r,t>​$来得到。</h,r,t></h,r,t></h,r,t></p>
+<p>这里还略去了很多TransE的变体等其他模型，但它们都是基于Closed-World KGC来做的。</p>
+<h3 id="3-ConMask-for-Open-World-KGC"><a href="#3-ConMask-for-Open-World-KGC" class="headerlink" title="3. ConMask for Open-World KGC"></a>3. ConMask for Open-World KGC</h3><p>首先通过一个例子来说明：</p>
+<p><strong>任务：</strong>填补三元组\<ameen sayani,="" residence,="" ?="" \="">，其中KG中并没有Ameen Sayani这个实体。</ameen></p>
+<p><strong>描述：</strong>“… <strong>Ameen Sayani</strong> was introduced to All India Radio, <strong>Bombay</strong>, by his brother Hamid Sayani. Ameen participated in English programmes there for ten years …” ，</p>
+<p><strong>目标预测实体：</strong>Bombay (or Mumbai)</p>
+<p>为了找到Ameen Sayani的住址，在处理这个任务的过程中，我们不会从头看到尾，而是找到相关的关键词比如家庭或工作相关的词。这里，我们发现Ameen Sayani的工作地点All India Radio在Bombay，因此我们推测Ameen Sayani也住在Bombay（Bombay就是现在的Mumbai）。</p>
+<p>这个过程也可以被归纳为：</p>
+<ol>
+<li>定位与该任务相关的信息。</li>
+<li>根据上下文和相关文本推断。</li>
+<li>根据相关文本推出正确目标实体。</li>
+</ol>
+<p>仿照这个过程，ConMask的工作方式被设计为：</p>
+<ol>
+<li><strong>Relationship-dependent content masking</strong> — 标记那些与任务相关的词语。</li>
+<li><strong>Target fusion</strong> — 从相关文本中抽取目标实体的embedding。</li>
+<li><strong>Target entity resolution</strong> — 通过计算KG中的候选目标实体，2中抽取出的实体embedding以及其它文本特征之间的相似度来选定目标实体。</li>
+</ol>
+<p><img src="illustration.png" width="60%"></p>
+<p>ConMask模型总体结构如上，ConMask通过选择与给定关系相关的词来避免引入不相关的和有噪音的词。对于相关的文本，ConMask通过全连接卷积神经网络（FCN）来提取word-embedding。最后它将提取的embedding于KG中存在的实体进行比较，从而获得一系列目标实体。</p>
+<h4 id="3-1-Relationship-dependent-content-masking"><a href="#3-1-Relationship-dependent-content-masking" class="headerlink" title="3.1 Relationship-dependent content masking"></a>3.1 Relationship-dependent content masking</h4><p>ConMask根据给定的关系预处理输入文本，来选择一些相关的小片段，从而屏蔽掉无关文本。content-masking这一灵感来源于基于attention机制的RNN网络[3]，关于attention之前的笔记也有学习过。</p>
+<p>基于相似度得到选择最相关的词，具体公式如下：</p>
+<script type="math/tex; mode=display">
+\tau(\phi(e), \psi(r)) = W_{\phi(e)} \circ f_w(W_{\phi(e)}, W_{\psi(r)})</script><p>其中 $e$ 是一个实体，$r$ 是某个关系, $\phi$ 是description function并返回一个向量用于表示对一个实体或关系的描述，$\psi$ 是name mapping function并返回一个向量用于表示一个实体或关系的名字， $W<em>{\phi{(e)}} \in \mathbb{R}^{|\phi(r)|\times k} $ 是一个描述矩阵每一行表示一个k维的描述中的word-embedding， $W</em>{\phi{(e)}} \in \mathbb{R}^{|\phi(r)|\times k} $ 是一个名字矩阵每一行表示一个k维的实体名字word-embedding，$\circ$ 是row-wise product，$f_w$ 用于计算的每一行的屏蔽比重。</p>
+<p>作者给了一个简单的$f_w$ ，Maximal Word-Relationship Weights(MWRW)，就是计算实体描述中每个词向量与关系名称的每个词向量的最大cos相似度:</p>
+<script type="math/tex; mode=display">
+f_w^{MWRW}(W_{\phi(e)}, W_{\psi(r)})_{[i]} =  max_j(\frac{\sum_m^k{W_{\phi(e)[i,m]} W_{\psi(r)[j,m]}}}{\sqrt{\sum_m^k{W^2_{\phi(e)[i,m]}}}\sqrt{\sum_m^k{W^2_{\psi(e)[j,m]}}}})</script><p>这个公式会给与给定关系无关的词更小的权重，与关系语义接近的词更大的权重，但权重最高的词一般不是目标实体，如下图所示，给定关系spouse，得到最大权重的是married，虽然married与spouse在语义上接近，但它并不是目标实体，因此作者称这种有着最大MWRW权重的词为指示词（indicator word），因为正确的词一般就在该词附近，在下图例子中可以发现目标实体barack obama就在married后面。</p>
+<p>为了给目标实体word正确的权重，作者改进了这个公式，具体公式如下，这个公式就是每个词的权重不会小于之前 $k_m$ 称为 Maximal Context-Relationship Weights (MCRW)：</p>
+<script type="math/tex; mode=display">
+f_w^{MCRW}(W_{\phi(e)}, W_{\psi(r)})_{[i]} =  max(f_w^{MWRW}(W_{\phi(e)}, W_{\psi(r)})_{[i-k_m:i]})</script><p><img src="MWRW.png"></p>
+<h4 id="3-2-Target-Fusion"><a href="#3-2-Target-Fusion" class="headerlink" title="3.2 Target Fusion"></a>3.2 Target Fusion</h4><p>这一步骤用于输出基于词的实体embedding，这个过程记为$\xi$，使用Conetent Masking $\tau$ 的输出。它使用全连接卷积网络，其结构如下：</p>
+<p><img src="arch.png"></p>
+<p><strong>Semantic Averaging</strong></p>
+<p>我们可以对所有实体进行embedding，但是这会产生大量的参数，使计算变得非常复杂。事实上，因为Target fusion函数用于抽取，所以对不需要抽取的实体名字使用target fusion就会显得很奇怪也很没有必要。</p>
+<p>这里作者提出了一个简单的语义平均法来计算这些实体的embedding：$\eta(W) = \frac{1}{k_l}\sum_i^{k_i}W_i$</p>
+<h4 id="3-3-Loss-function"><a href="#3-3-Loss-function" class="headerlink" title="3.3 Loss function"></a>3.3 Loss function</h4><p>为了加速训练，我们参考 list-wise ranking loss function (Shi and Weninger 2017)，并设计 partial list-wise ranking loss function，拥有正负目标采样。正样本就是训练集的标注内容，记为$E^+$；负样本就是替换正样本的head entity或tail entity所得到的，记为$E^-$ 。</p>
+<script type="math/tex; mode=display">
+\mathcal{L}(h, r, t) =  \begin{cases}
+\sum_{h_+\in E^+}{-\frac{log(S(h_+,r,t,E^+\cup E^-))}{|E^+|}}, & \text{if }p_c > 0.5; \\
+\sum_{h_+\in E^+}{-\frac{log(S(h,r,t_+,E^+\cup E^-))}{|E^+|}}, & \text{if }p_c \le 0.5; .
+\end{cases}</script><p>$p_c$ 服从$[0,1]$的均匀分布，大于0.5时，把输入实体作为tail entity，小于0.5的时候就是作为head entity，表示替换head entity和tail entity的概率各为50%。另有$S$, 即 softmax normalized output of ConMask：</p>
+<script type="math/tex; mode=display">
+S(h,r,t,E^+) = \begin{cases}
+\sum_{e \in E^\pm}^{exp(ConMask(h,r,t))}{exp(ConMask(e,r,t))} & \text{if } p_c > 0.5 \\
+\sum_{e \in E^\pm}^{exp(ConMask(e,r,t))}{exp(ConMask(h,r,t))} & \text{if } p_c \le 0.5 \\
+\end{cases}</script><h3 id="4-Results"><a href="#4-Results" class="headerlink" title="4. Results"></a>4. Results</h3><p>从结果上看，对比其他模型，在开放领域，ConMask获得了最佳的效果；在Closed-World中，尽管ConMask不是为此设计的，但是对比TransE和TransR依然不逊色，结果相仿。</p>
+<p>目前而言，ConMask模型只能预测在实体描述中表达的关系，将来还应考虑扩展它，使其能够发现新的或隐含的关系。</p>
+<h2 id="Bibliographies"><a href="#Bibliographies" class="headerlink" title="Bibliographies"></a>Bibliographies</h2><p>笔记参考：<a href="https://zhuanlan.zhihu.com/p/33026043，http://blog.csdn.net/TgqDT3gGaMdkHasLZv/article/details/79224178" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/33026043，http://blog.csdn.net/TgqDT3gGaMdkHasLZv/article/details/79224178</a></p>
+<p>代码实现：<a href="https://github.com/bxshi/ConMask" target="_blank" rel="external">https://github.com/bxshi/ConMask</a></p>
+<p>[1] Shi, Baoxu, and Tim Weninger. “Open-World Knowledge Graph Completion.” <em>arXiv preprint arXiv:1711.03438</em> (2017).</p>
+<p>[2] Bordes, A., Usunier, N., Garcia-Duran, A., Weston, J., &amp; Yakhnenko, O. (2013). Translating embeddings for modeling multi-relational data. In <em>Advances in neural information processing systems</em> (pp. 2787-2795).</p>
+<p>[3] Chorowski, J. K., Bahdanau, D., Serdyuk, D., Cho, K., &amp; Bengio, Y. (2015). Attention-based models for speech recognition. In <em>Advances in neural information processing systems</em> (pp. 577-585).</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CNN/" rel="tag"># CNN</a>
+          
+            <a href="/tags/knowledge-graph/" rel="tag"># knowledge-graph</a>
+          
+            <a href="/tags/KGC/" rel="tag"># KGC</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/05/[2018.2.5]Nested-LSTMs/" rel="next" title="Nested LSTMs 笔记">
+                <i class="fa fa-chevron-left"></i> Nested LSTMs 笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jue" />
+          <p class="site-author-name" itemprop="name">Jue</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Open-World-Knowledge-Graph-Completion"><span class="nav-number">1.</span> <span class="nav-text">Open-World Knowledge Graph Completion</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">1. Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Closed-World-KGC"><span class="nav-number">1.1.1.</span> <span class="nav-text">Closed-World KGC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Open-World-KGC"><span class="nav-number">1.1.2.</span> <span class="nav-text">Open-World KGC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Closed-World-KGC"><span class="nav-number">1.2.</span> <span class="nav-text">2. Closed-World KGC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-ConMask-for-Open-World-KGC"><span class="nav-number">1.3.</span> <span class="nav-text">3. ConMask for Open-World KGC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-Relationship-dependent-content-masking"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 Relationship-dependent content masking</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-Target-Fusion"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 Target Fusion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-Loss-function"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 Loss function</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Results"><span class="nav-number">1.4.</span> <span class="nav-text">4. Results</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bibliographies"><span class="nav-number">2.</span> <span class="nav-text">Bibliographies</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jue</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

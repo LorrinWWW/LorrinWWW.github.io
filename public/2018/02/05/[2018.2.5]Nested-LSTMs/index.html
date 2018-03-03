@@ -1,0 +1,717 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="LSTM,RNN," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Nested LSTMs摘要：最近，一种新的 Nested LSTMs 网络被提出。在通常的LSTM网络中，我们通过将LSTM单元堆叠，从而形成深度RNN网络，提高其效果；Nested LSTM则通过嵌套而不是堆栈来增添LSTM的深度。在NLSTM中，记忆单元的值是由LSTM单元计算的，其中，LSTM单元具有自身内在的记忆单元。具体而言，NLSTM记忆单元并不是按照等式：$ct^{outer} =">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nested LSTMs 笔记">
+<meta property="og:url" content="https://LorrinWWW.github.io/2018/02/05/[2018.2.5]Nested-LSTMs/index.html">
+<meta property="og:site_name" content="Jue's Blog">
+<meta property="og:description" content="Nested LSTMs摘要：最近，一种新的 Nested LSTMs 网络被提出。在通常的LSTM网络中，我们通过将LSTM单元堆叠，从而形成深度RNN网络，提高其效果；Nested LSTM则通过嵌套而不是堆栈来增添LSTM的深度。在NLSTM中，记忆单元的值是由LSTM单元计算的，其中，LSTM单元具有自身内在的记忆单元。具体而言，NLSTM记忆单元并不是按照等式：$ct^{outer} =">
+<meta property="og:image" content="https://LorrinWWW.github.io/singleLSTM.png">
+<meta property="og:image" content="https://LorrinWWW.github.io/StackedLSTM.png">
+<meta property="og:image" content="https://LorrinWWW.github.io/NestedLSTM.png">
+<meta property="og:image" content="https://LorrinWWW.github.io/ComputationalGraph.png">
+<meta property="og:updated_time" content="2018-03-03T20:21:18.918Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nested LSTMs 笔记">
+<meta name="twitter:description" content="Nested LSTMs摘要：最近，一种新的 Nested LSTMs 网络被提出。在通常的LSTM网络中，我们通过将LSTM单元堆叠，从而形成深度RNN网络，提高其效果；Nested LSTM则通过嵌套而不是堆栈来增添LSTM的深度。在NLSTM中，记忆单元的值是由LSTM单元计算的，其中，LSTM单元具有自身内在的记忆单元。具体而言，NLSTM记忆单元并不是按照等式：$ct^{outer} =">
+<meta name="twitter:image" content="https://LorrinWWW.github.io/singleLSTM.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://LorrinWWW.github.io/2018/02/05/[2018.2.5]Nested-LSTMs/"/>
+
+
+
+
+
+  <title> Nested LSTMs 笔记 | Jue's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Jue's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://LorrinWWW.github.io/2018/02/05/[2018.2.5]Nested-LSTMs/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jue">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jue's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jue's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Nested LSTMs 笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-05T08:00:00+01:00">
+                2018-02-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/research/" itemprop="url" rel="index">
+                    <span itemprop="name">research</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Nested-LSTMs"><a href="#Nested-LSTMs" class="headerlink" title="Nested LSTMs"></a>Nested LSTMs</h2><p><strong>摘要</strong>：最近，一种新的 Nested LSTMs 网络被提出。在通常的LSTM网络中，我们通过将LSTM单元堆叠，从而形成深度RNN网络，提高其效果；Nested LSTM则通过嵌套而不是堆栈来增添LSTM的深度。在NLSTM中，记忆单元的值是由LSTM单元计算的，其中，LSTM单元具有自身内在的记忆单元。具体而言，NLSTM记忆单元并不是按照等式：$c<em>t^{outer} = f_t \odot c</em>{t-1} + i<em>t \odot g_t$ 对（外部）记忆单元的值进行计算，而是使用级联：$(f_t \odot c</em>{t-1}, i_t \odot g_t)$ 将其作为内部LSTM（或NLSTM）记忆单元的输入，并设定 $c_t^{outer} = h_t^{inner}$。在访问内部记忆时，Nested LSTM 相比传统的堆栈 LSTM 有更高的自由度，从而能处理更长时间规模的内部记忆；实验也表明，在参数数量相似的情况下，NLSTM 在多种任务上都超越了堆栈 LSTM。作者认为Nested LSTM 有潜力直接取代堆栈 LSTM。</p>
+<h3 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h3><p>学习长期的依赖关系是当前人工智能领域中，尤其是在nlp领域，机器学习方法的关键性挑战。基于循环神经网络的体系结构已经在使得机器能够模仿这种能力方面取得了显著进展。</p>
+<h4 id="single-layer-LSTM"><a href="#single-layer-LSTM" class="headerlink" title="single-layer LSTM"></a>single-layer LSTM</h4><p><img src="singleLSTM.png" width="90%"></p>
+<p>RNN的输入是以当前的状态为依据，适合学习时间上的抽象特征。在实践中，许多专家已经证明，更为复杂的体系结构是解决许多任务的关键。其中一个原因是梯度消失问题（Hochreiter于1991年、Bengio等人于1994年提出），它使得简单的RNN难以学习长期依赖关系。Hochreiter和Schmidhuber于1997年提出了LSTM，包含能够改善梯度消失问题的记忆机制。单层LSTM如上图，图中的三个单元实际上是同一个单元，它循环地将内部的参数传递给自己。</p>
+<h4 id="Stacked-LSTMs"><a href="#Stacked-LSTMs" class="headerlink" title="Stacked LSTMs"></a>Stacked LSTMs</h4><p><img src="StackedLSTM.png" width="60%"></p>
+<p>堆栈 LSTM 架构使用一系列 LSTM 一层层地堆叠在一起来处理数据，一层的输出成为下一层的输入。上图为一个两层的LSTM网络。</p>
+<p>引入多层的结构，即将多个LSTM单元堆叠，每一层的输出成为下一层的输入。 每层处理我们希望解决的任务的一部分，并将其传递给下一层。额外的隐藏层可以添加到多层感知器神经网络，使其有更深入的“理解”。 额外的隐藏层被认为重新组合了来自先前层的学习表示，并在高度抽象层次上找到新的表示。 例如，从线条到形状到对象。</p>
+<h4 id="Nested-LSTMs-1"><a href="#Nested-LSTMs-1" class="headerlink" title="Nested LSTMs"></a>Nested LSTMs</h4><p>在 NLSTM 中，LSTM 的记忆单元可以访问内部记忆。相比于传统的堆栈 LSTM，这一关键特征使得该模型能实现更有效的时间层级。在 NLSTM 中，外部记忆单元可自由选择读取、编写的相关长期信息到内部单元。相比之下，在Stacked LSTM 中，高层级的激活（类似内部记忆）直接生成输出，因此必须包含所有的与当前预测相关的短期信息。换言之，Stacked LSTM 与Nested LSTM 之间的主要不同在于，NLSTM 可以选择性地访问内部记忆。这使得，即使这些事件与当前事件不相关，内部记忆也能够记住、处理更长时间规模上的事件。我们在后面一章更详细地介绍它。</p>
+<h3 id="2-Model-of-Nested-LSTMs"><a href="#2-Model-of-Nested-LSTMs" class="headerlink" title="2. Model of Nested LSTMs"></a>2. Model of Nested LSTMs</h3><p>LSTM 中的输出门会编码可能与当前的时间步骤不相关，但是仍然值得记忆的信息。Nested LSTM 根据这一直观理解来创造一种记忆的时间层级。以同样的方式被gate控访问内部记忆，因此长期信息只有在情景相关的条件下才能选择性地访问。</p>
+<p><img src="NestedLSTM.png" width="80%"></p>
+<h4 id="The-architecture"><a href="#The-architecture" class="headerlink" title="The architecture"></a>The architecture</h4><p>在 LSTM 网络中，单元状态的更新公式和门控机制可以表示为以下方程式：</p>
+<script type="math/tex; mode=display">
+i_t = \sigma_i (x_t W_{xi} + h_{t-1} W_{hi} + b_i) \\
+f_t = \sigma_t (x_t W_{xf} + h_{t-1} W_{hf} + b_i) \\
+c_t = f_t \odot c_{c-1} + \sigma_c (x_t W_{xc} + h_{t-1} W_{hc} + b_c) \\
+o_t = \sigma_o (x_t W_{xo} + h_{t-1} W_{ho} + b_o) \\
+h_t = o_t \odot \sigma_h(c_t)</script><p>Nested LSTM 使用已学习的状态函数 $c<em>t = m_t(f_t\odot c</em>{t−1}, i<em>t \odot g_t)​$ 来替代 LSTM 中计算 $c_t​$ 的加运算。我们将函数的状态表示为 m 在时间 t 的内部记忆（inner memory），调用该函数以计算 $c_t​$ 和 $m</em>{t+1}​$。我们可以使用另一个 LSTM 单元来实现该记忆函数，就生成了 Nested LSTM。同样，该记忆函数能够由另一个 Nested LSTM 单元替换，因此就能构建任意深的嵌套网络。</p>
+<p>因此，我们得到NLSTM 中记忆函数的输入和隐藏状态：</p>
+<script type="math/tex; mode=display">
+\tilde{h}_{t-1} = f_t \odot c_{t-1} \\
+\tilde{x}_t = i_t \odot \sigma_c (x_t W_{xc} + h_{t-1} W_{hc} + b_c)</script><p>注意如果记忆函数是加性的，那么$c<em>t = f_t \odot c</em>{c-1} + \sigma<em>c (x_t W</em>{xc} + h<em>{t-1} W</em>{hc} + b<em>c) =  \tilde{h}</em>{t-1} + \tilde{x}_t $，整个系统将退化到经典的 LSTM。</p>
+<p><img src="ComputationalGraph.png"></p>
+<p><em>LSTM、Stacked LSTM 和 Nested LSTM 的计算图形。隐藏的状态、外部记忆单元和内部记忆单元分别由h、c和d进行表示。虽然当前的隐藏状态可以直接影响下一个内部记忆单元的内容，但内部记忆只有通过外部记忆才能够影响隐藏状态。</em></p>
+<script type="math/tex; mode=display">
+\widetilde{i}_t = \widetilde{\sigma}_i (\widetilde{x}_t \widetilde{W}_{xi} + \widetilde{h}_{t-1} \widetilde{W}_{hi} + \widetilde{b}_i) \\
+\widetilde{f}_t = \widetilde{\sigma}_t (\widetilde{x}_t \widetilde{W}_{xf} + \widetilde{h}_{t-1} \widetilde{W}_{hf} + \widetilde{b}_i) \\
+\widetilde{c}_t = \widetilde{f}_t \odot \widetilde{c}_{c-1} + \widetilde{\sigma}_c (\widetilde{x}_t \widetilde{W}_{xc} + \widetilde{h}_{t-1} \widetilde{W}_{hc} + \widetilde{b}_c) \\
+\widetilde{o_t} = \widetilde{\sigma}_o (\widetilde{x}_t \widetilde{W}_{xo} + \widetilde{h}_{t-1} \widetilde{W}_{ho} + \widetilde{b}_o) \\
+\widetilde{h}_t = \widetilde{o}_t \odot \widetilde{\sigma}_h(\widetilde{c}_t)</script><p>现在，外部 LSTM 的单元状态更新方式为 $ c<em>t = \tilde{h}</em>{t} $ 。</p>
+<h3 id="3-Experiments"><a href="#3-Experiments" class="headerlink" title="3. Experiments"></a>3. Experiments</h3><p>见附件论文[1]</p>
+<h3 id="4-Conclusion"><a href="#4-Conclusion" class="headerlink" title="4. Conclusion"></a>4. Conclusion</h3><p>Nested LSTM（NLSTM）是LSTM模型的简单扩展，通过嵌套来增加深度，而不是通过堆叠。 NLSTM的内部存储器单元形成内部存储器，其仅通过外部存储器单元被其他计算元件访问，实现了时间层级的形式。</p>
+<p>论文[1]的实验表明，在相似的参数设置下，Nested LSTM 在多种字符级语言建模任务中的表现都超越了Stacked LSTM和single-layer LSTM，并且和Stacked LSTM 的高层级单元相比，LSTM 的内部记忆可以学习更长期的依赖关系。</p>
+<p><a href="https://github.com/hannw/nlstm" target="_blank" rel="external">NLSTM的Tensorflow实现</a></p>
+<p><a href="https://github.com/titu1994/Nested-LSTM" target="_blank" rel="external">NLSTM的Keras实现</a></p>
+<h2 id="Bibliographies"><a href="#Bibliographies" class="headerlink" title="Bibliographies"></a>Bibliographies</h2><p>笔记参考：<a href="http://www.sohu.com/a/220745456_390227，http://posts.careerengine.us/p/5a768ab3381fe136215b3de5?from=latest-posts-panel&amp;type=title" target="_blank" rel="external">http://www.sohu.com/a/220745456_390227，http://posts.careerengine.us/p/5a768ab3381fe136215b3de5?from=latest-posts-panel&amp;type=title</a></p>
+<p>[1] Moniz, Joel Ruben Antony, and David Krueger. “Nested LSTMs.” <em>Asian Conference on Machine Learning</em>. 2017.</p>
+<p>[2] Hochreiter, Sepp, and Jürgen Schmidhuber. “Long short-term memory.” <em>Neural computation</em> 9.8 (1997): 1735-1780.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LSTM/" rel="tag"># LSTM</a>
+          
+            <a href="/tags/RNN/" rel="tag"># RNN</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/29/[2018.1.29]A-convolution BiLSTM-neural-network-model-for-chinese-event-extraction/" rel="next" title="A convolution BiLSTM neural network model for chinese event extraction 笔记">
+                <i class="fa fa-chevron-left"></i> A convolution BiLSTM neural network model for chinese event extraction 笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/26/[2018.2.26]Open-World-Knowledge-Graph-Completion/" rel="prev" title="Open-World Knowledge Graph Completion 笔记">
+                Open-World Knowledge Graph Completion 笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jue" />
+          <p class="site-author-name" itemprop="name">Jue</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nested-LSTMs"><span class="nav-number">1.</span> <span class="nav-text">Nested LSTMs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">1. Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#single-layer-LSTM"><span class="nav-number">1.1.1.</span> <span class="nav-text">single-layer LSTM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Stacked-LSTMs"><span class="nav-number">1.1.2.</span> <span class="nav-text">Stacked LSTMs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Nested-LSTMs-1"><span class="nav-number">1.1.3.</span> <span class="nav-text">Nested LSTMs</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Model-of-Nested-LSTMs"><span class="nav-number">1.2.</span> <span class="nav-text">2. Model of Nested LSTMs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#The-architecture"><span class="nav-number">1.2.1.</span> <span class="nav-text">The architecture</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Experiments"><span class="nav-number">1.3.</span> <span class="nav-text">3. Experiments</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Conclusion"><span class="nav-number">1.4.</span> <span class="nav-text">4. Conclusion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bibliographies"><span class="nav-number">2.</span> <span class="nav-text">Bibliographies</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jue</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

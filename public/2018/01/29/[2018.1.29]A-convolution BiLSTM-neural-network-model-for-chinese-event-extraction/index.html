@@ -1,0 +1,733 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="convolution,BiLSTM,event-extraction," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="A convolution BiLSTM neural network model for chinese event extraction摘要：中文事件提取是信息抽取中的一项具有挑战性的任务，以前的方法高度依赖于复杂的特征工程和复杂的自然语言处理（NLP）工具。 在文献[1]中，提出了一种结合LSTM和CNN的卷积双向LSTM神经网络来捕获句级和词汇信息。最终的测试中达到相当不错的水平。
+1.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A convolution BiLSTM neural network model for chinese event extraction 笔记">
+<meta property="og:url" content="https://LorrinWWW.github.io/2018/01/29/[2018.1.29]A-convolution BiLSTM-neural-network-model-for-chinese-event-extraction/index.html">
+<meta property="og:site_name" content="Jue's Blog">
+<meta property="og:description" content="A convolution BiLSTM neural network model for chinese event extraction摘要：中文事件提取是信息抽取中的一项具有挑战性的任务，以前的方法高度依赖于复杂的特征工程和复杂的自然语言处理（NLP）工具。 在文献[1]中，提出了一种结合LSTM和CNN的卷积双向LSTM神经网络来捕获句级和词汇信息。最终的测试中达到相当不错的水平。
+1.">
+<meta property="og:image" content="https://LorrinWWW.github.io/trigger_labeling.png">
+<meta property="og:image" content="https://LorrinWWW.github.io/character.png">
+<meta property="og:updated_time" content="2018-03-03T20:17:22.105Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A convolution BiLSTM neural network model for chinese event extraction 笔记">
+<meta name="twitter:description" content="A convolution BiLSTM neural network model for chinese event extraction摘要：中文事件提取是信息抽取中的一项具有挑战性的任务，以前的方法高度依赖于复杂的特征工程和复杂的自然语言处理（NLP）工具。 在文献[1]中，提出了一种结合LSTM和CNN的卷积双向LSTM神经网络来捕获句级和词汇信息。最终的测试中达到相当不错的水平。
+1.">
+<meta name="twitter:image" content="https://LorrinWWW.github.io/trigger_labeling.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://LorrinWWW.github.io/2018/01/29/[2018.1.29]A-convolution BiLSTM-neural-network-model-for-chinese-event-extraction/"/>
+
+
+
+
+
+  <title> A convolution BiLSTM neural network model for chinese event extraction 笔记 | Jue's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Jue's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://LorrinWWW.github.io/2018/01/29/[2018.1.29]A-convolution BiLSTM-neural-network-model-for-chinese-event-extraction/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jue">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jue's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jue's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                A convolution BiLSTM neural network model for chinese event extraction 笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-29T08:00:00+01:00">
+                2018-01-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/research/" itemprop="url" rel="index">
+                    <span itemprop="name">research</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="A-convolution-BiLSTM-neural-network-model-for-chinese-event-extraction"><a href="#A-convolution-BiLSTM-neural-network-model-for-chinese-event-extraction" class="headerlink" title="A convolution BiLSTM neural network model for chinese event extraction"></a>A convolution BiLSTM neural network model for chinese event extraction</h2><p><strong>摘要：</strong>中文事件提取是信息抽取中的一项具有挑战性的任务，以前的方法高度依赖于复杂的特征工程和复杂的自然语言处理（NLP）工具。 在文献[1]中，提出了一种结合LSTM和CNN的卷积双向LSTM神经网络来捕获句级和词汇信息。最终的测试中达到相当不错的水平。</p>
+<h3 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h3><p>在事件提取中，我们需要提取事件类别、参与者和其他属性（时间、地点等）。根据Automatic Content Extraction（ACE）定义的事件抽取任务，我们定义：</p>
+<ul>
+<li>触发词：最主要的、用于表达一个事件的词，通常是句子的谓语。</li>
+<li>事件属性：实体、短语或数值。在一个事件中扮演特定作用。</li>
+</ul>
+<p>因此，我们把事件抽取分为两步，即<strong>触发词标注</strong>和<strong>事件属性标注</strong>。例如：</p>
+<p>S1：Intel在中国<strong>成立</strong>了研究中心。</p>
+<p>其中，“成立”表明该句子表达了一个商业事件；Intel、中国、研究中心则是事件的属性，属性将被标注为参与者、地点、时间等。</p>
+<p>目前的 state-of-the-art [2-4] 通常很依赖于特征的选择。这些特征通常可以被划分为<strong>语义特征</strong>和<strong>结构特征</strong>。再给两个包含”成立“的例子，但它在其中并不表达一个商业事件。</p>
+<p>S2：它<strong>成立</strong>于1994年，现在是一支深受欢迎的摇滚乐队。</p>
+<p>S3：医院已<strong>成立</strong>救援中心。</p>
+<p>从结构特征上来看，S2可以被缩写为“它是乐队”，因此“成立”在这个句子中不是一个触发词，这个句子不是一个事件。</p>
+<p>从语义特征上来看，S3中的“救援中心”的语义上看，这个事件不是一个商业行为，因此“成立”不表达一个商业事件。</p>
+<p>传统的方法[2, 3]通常依赖于大量的NLP工具，对于语义特征而言，有词性标注、命名实体识别等；对于结构特征而言，有依存关系分析。尽管最终效果很好，但是这需要大量的人工特征，并且需要忍受传递误差。</p>
+<p>Chen et al. [5] 提出了一个用于完成事件抽取的卷积神经网络。受此激发，本文提出一个卷积双向LSTM神经网络，用来同时捕获语义特征和结构特征。我们首先使用双向LSTM将整个句子中的单词的语义编码成句子级别的特征。 然后，我们可以利用卷积神经网络来捕获突出的局部词汇特征，以便在没有任何POS标签或NER帮助的情况下进行触发词消歧。</p>
+<h3 id="2-Trigger-Labeling"><a href="#2-Trigger-Labeling" class="headerlink" title="2. Trigger Labeling"></a>2. Trigger Labeling</h3><h4 id="2-1-Language-Specific-Issues"><a href="#2-1-Language-Specific-Issues" class="headerlink" title="2.1 Language Specific Issues"></a>2.1 Language Specific Issues</h4><p>由于中文的特殊性，触发词可以被分为两类：</p>
+<ul>
+<li>多词触发词：任何拆开后就无法被人为是触发词的，我们把它组合起来认为是触发词。例如“犯罪嫌疑人都落入法网”，其中“落入法网”被认为是触发词。</li>
+<li>单词触发词：往往是谓语，但也可以是组合词中的一部分。例如“警察击毙了一名歹徒”中的“击毙”，“这是一件预谋的凶杀案”中的“凶杀”</li>
+</ul>
+<p>为了解决这个问题，我们将事件检测视为序列标记任务而不是分类任务。 采用BIO方案，其中标记B是事件触发词的开始，I型是在触发词内，否则标记为O。我们利用卷积双向LSTM神经网络来完成这个任务。</p>
+<p><img src="trigger_labeling.png" alt="trigger-labeling"></p>
+<p>我们基于单词模型的主要架构。 （a）中的每个词wt的局部上下文特征ct（灰色矩形）由CNN计算（b）所示。 我们的卷积神经网络学习了关于中心词“落入”的本地上下文信息的表示。 这里的上下文大小是7（中心词的左右各3个词），我们使用一个大小为4的内核与两个特征映射。 （b）句子中的符号P表示填充词。</p>
+<h4 id="2-2-Word-Based-Method"><a href="#2-2-Word-Based-Method" class="headerlink" title="2.2 Word-Based Method"></a>2.2 Word-Based Method</h4><p><strong>LSTM Network</strong>  在nlp任务中LSTM相对常用，特别的，双向LSTM能够联系历史和未来的信息，能够重复利用句子信息，有利于我们进行判断。因为之前的报告已经叙述过，故这里略写。</p>
+<p><strong>CNN</strong>  卷积神经网络最一开始用于图像领域，近年也在nlp领域大放光彩。这里，我们采用卷积神经网络来提取句子中每个单词的局部上下文信息。</p>
+<p>给定一个包含n个单词{w1, w2, … , wn}的句子和当前中心词wt，卷积运算包含一个内核，将其应用于wt周围的单词以生成特征映射。 我们可以利用不同宽度的多个内核来提取不同粒度的局部特征。 然后在每个map上执行最大汇集，以便仅记录每个特征地图的最大数量。 池的一个特性是它产生一个固定大小的输出向量，这使我们能够应用不同的大小内核。 而通过执行最大操作，我们保持最显着的信息。 最后，将固定长度的输出向量cwt作为关于中心词wt的本地上下文信息的表示。</p>
+<p>在我们的实现中，滑动窗口大小为7（中心词的左右各3个词），并且我们使用不同的内核来捕获各种粒度的上下文信息。</p>
+<p><strong>Output Layer</strong>  我们将BiLSTM的隐藏状态与CNN在每个时间步t提取的上下文特征cwt连接起来。 然后[ht; cwt]被送入softmax层以产生wt的每个标记的对数概率。<br>然而，基于单词的方法仍然不能解决内部词触发引起的一致性问题，即无法识别长词内部的触发词。</p>
+<h4 id="2-3-Character-Based-Method"><a href="#2-3-Character-Based-Method" class="headerlink" title="2.3 Character-Based Method"></a>2.3 Character-Based Method</h4><p>为了解决一致性问题，我们可以采用Character-embedding，唯一的区别就在input layer。</p>
+<p><img src="character.png" alt="character"></p>
+<h3 id="3-Argument-Labeling"><a href="#3-Argument-Labeling" class="headerlink" title="3. Argument Labeling"></a>3. Argument Labeling</h3><p>上面介绍的触发词标注模型依然可以被沿用，我们将介绍用于触发词标注和事件属性标注的模型之间的主要区别。</p>
+<h4 id="3-1-Input-Layer"><a href="#3-1-Input-Layer" class="headerlink" title="3.1 Input Layer"></a>3.1 Input Layer</h4><p>作为一个pipeline系统，除了word embeddings之外，还可以使用从上面触发词标记任务中提取的信息。 因此，我们提出了另外四种类型的特征embedding来形成BiLSTM和CNN的输入层。</p>
+<ul>
+<li>触发位置特征：一个单词是否属于触发词的一部分</li>
+<li>触发类型特征：单词触发类型，NONE类型对于非触发词</li>
+<li>实体位置特征：一个单词是否属于实体的一部分</li>
+<li>实体类型特征：单词的实体类型，NONE类型对于非实体。 ACE数据集提供了实体识别的结果，无需使用外部NLP工具。（<em>思考</em>：若数据集不提供实体信息，两种解决方法：1. 不embed实体特征；2. 借助外部工具）<br>然后，我们通过查表将这些特征转换成矢量，并将它们与原始单词嵌入级联，作为BiLSTM和CNN的最终输入层。</li>
+</ul>
+<h4 id="3-2-Output-Layer"><a href="#3-2-Output-Layer" class="headerlink" title="3.2 Output Layer"></a>3.2 Output Layer</h4><p>值得一提的是，事件属性标注不再是一个序列标注任务，而是一个分类任务。 ACE数据集提供了实体识别的结果，它保证了事件属性只能出现在这些实体。 因此，我们只需要预测标记实体的角色，而不是整个句子中的每个单词。 例如，S4中有三个触发器（粗体字）和三个实体（斜体字），它们共同组成九对要分类的触发词和事件属性候选。</p>
+<p>S7：六起<strong>谋杀案</strong>发生在<em>法国</em>，包括<em>Bob</em>的<strong>暗杀</strong>和<em>Joe</em>的<strong>杀害</strong>。</p>
+<p>我们修改CNN和BiLSTM网络的输出层以适应新的任务。</p>
+<p>对于BiLSTM，我们仍然试图利用其记忆长序列的能力，所以我们把最后一个单词hN的隐藏状态视为句子信息。</p>
+<p>对于CNN，我们把整个句子的所有单词作为上下文，而不是每个中心单词的浅窗口。 最后，我们将来自两个网络的输出向量的串联输入到softmax分类器中，就像处理之前的触发词标注任务一样。</p>
+<h3 id="4-Conclusion"><a href="#4-Conclusion" class="headerlink" title="4. Conclusion"></a>4. Conclusion</h3><p>论文[1]主要提出了卷积双向LSTM神经网络，用以完成中文事件抽取任务，在ACE 2005数据集上获得了不错的结果。我在暑假时，将事件抽取认为为一个序列标注任务，使用BiLSTM+CRF；相比而言，论文[1]的模型考虑更全面，并充分利用已知的实体信息。不过对于现实问题而言，标注实体信息的成本也很高，故在没有实体标注的情况下保持性能也是一个难点。</p>
+<h2 id="Bibliography"><a href="#Bibliography" class="headerlink" title="Bibliography"></a>Bibliography</h2><p>[1] Zeng, Y., Yang, H., Feng, Y., Wang, Z., &amp; Zhao, D. (2016). A convolution BiLSTM neural network model for Chinese event extraction. In <em>Natural Language Understanding and Intelligent Applications</em> (pp. 275-287). Springer, Cham.</p>
+<p>[2] Chen, C., Ng, V.: Joint modeling for Chinese event extraction with rich linguistic features. In: COLING, pp. 529–544. Citeseer (2012)</p>
+<p>[3] Chen, Y., Xu, L., Liu, K., Zeng, D., Zhao, J.: Event extraction via dynamic multipooling convolutional neural networks. In: Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing, vol. 1, pp. 167–176 (2015)</p>
+<p>[4] Li, Q., Ji, H., Huang, L.: Joint event extraction via structured prediction with global features. In: ACL (1), pp. 73–82 (2013)</p>
+<p>[5] Chen, Y., Xu, L., Liu, K., Zeng, D., Zhao, J.: Event extraction via dynamic multipooling convolutional neural networks. In: Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing, vol. 1, pp. 167–176 (2015)</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/convolution/" rel="tag"># convolution</a>
+          
+            <a href="/tags/BiLSTM/" rel="tag"># BiLSTM</a>
+          
+            <a href="/tags/event-extraction/" rel="tag"># event-extraction</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/21/[2018.1.21]Event-detection-and-co-referentce/" rel="next" title="Event detection and co-reference with minimal supervision 笔记">
+                <i class="fa fa-chevron-left"></i> Event detection and co-reference with minimal supervision 笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/05/[2018.2.5]Nested-LSTMs/" rel="prev" title="Nested LSTMs 笔记">
+                Nested LSTMs 笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jue" />
+          <p class="site-author-name" itemprop="name">Jue</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-convolution-BiLSTM-neural-network-model-for-chinese-event-extraction"><span class="nav-number">1.</span> <span class="nav-text">A convolution BiLSTM neural network model for chinese event extraction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Trigger-Labeling"><span class="nav-number">1.2.</span> <span class="nav-text">2. Trigger Labeling</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-Language-Specific-Issues"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 Language Specific Issues</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-Word-Based-Method"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 Word-Based Method</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-Character-Based-Method"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 Character-Based Method</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Argument-Labeling"><span class="nav-number">1.3.</span> <span class="nav-text">3. Argument Labeling</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-Input-Layer"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 Input Layer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-Output-Layer"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 Output Layer</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Conclusion"><span class="nav-number">1.4.</span> <span class="nav-text">4. Conclusion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bibliography"><span class="nav-number">2.</span> <span class="nav-text">Bibliography</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jue</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
