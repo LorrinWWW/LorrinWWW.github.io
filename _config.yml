@@ -3,10 +3,10 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Jue's Blog
-subtitle:
-description:
-author: Jue
+title: Lorrin's Blog
+subtitle: 半路出家的码农 | 法国留学中
+description: 分享一些想法，每周更一篇论文阅读
+author: Lorrin
 language: zh-Hans
 timezone:
 
@@ -14,7 +14,8 @@ timezone:
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://LorrinWWW.github.io
 root: /
-permalink: :year/:month/:day/:title/
+# permalink: :year/:month/:day/:title/
+permalink: :title/
 permalink_defaults:
 
 # Directory
@@ -25,7 +26,7 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render:
+skip_render: 'baidu*.html'
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -48,6 +49,9 @@ default_category: uncategorized
 category_map: 
 tag_map: 
 
+category_generator:
+  per_page: 10
+
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
 ## You can customize the date format as defined in
@@ -63,7 +67,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: icarus
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -71,3 +75,22 @@ deploy:
   type: git
   repository: git@github.com:LorrinWWW/LorrinWWW.github.io.git
   branch: master
+
+sitemap:
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
+
+math:
+  engine: 'mathjax'
+  mathjax:
+    src: "https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js"
+
+kramed:
+  gfm: true
+  pedantic: false
+  sanitize: false
+  tables: true
+  breaks: true
+  smartLists: true
+  smartypants: true
