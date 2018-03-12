@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    <title>Open-World Knowledge Graph Completion 笔记 | Lorrin&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Open-World Knowledge Graph Completion摘要：[1]文首先讨论了Closed-World KGC，它无法处理从 KG 外部加入的新实体，并严重依赖已有KG连接的，不能对弱连接有好的预测。为此定义了 Open-World KGC，可以接收 新的实体并链接到 KG；并依此提出了ConMask模型，在给定关系和实体名、实体描述的前提下，利用attention机制通过关系">
+<meta name="keywords" content="CNN,knowledge-graph,KGC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Open-World Knowledge Graph Completion 笔记">
+<meta property="og:url" content="https://LorrinWWW.github.io/[2018.2.26]Open-World-Knowledge-Graph-Completion/index.html">
+<meta property="og:site_name" content="Lorrin&#39;s Blog">
+<meta property="og:description" content="Open-World Knowledge Graph Completion摘要：[1]文首先讨论了Closed-World KGC，它无法处理从 KG 外部加入的新实体，并严重依赖已有KG连接的，不能对弱连接有好的预测。为此定义了 Open-World KGC，可以接收 新的实体并链接到 KG；并依此提出了ConMask模型，在给定关系和实体名、实体描述的前提下，利用attention机制通过关系">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://oi4yiqiop.bkt.clouddn.com/2018-03-12-202310.jpg">
+<meta property="og:image" content="http://oi4yiqiop.bkt.clouddn.com/2018-03-12-202313.jpg">
+<meta property="og:image" content="http://oi4yiqiop.bkt.clouddn.com/2018-03-12-202312.jpg">
+<meta property="og:updated_time" content="2018-03-12T20:23:16.727Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Open-World Knowledge Graph Completion 笔记">
+<meta name="twitter:description" content="Open-World Knowledge Graph Completion摘要：[1]文首先讨论了Closed-World KGC，它无法处理从 KG 外部加入的新实体，并严重依赖已有KG连接的，不能对弱连接有好的预测。为此定义了 Open-World KGC，可以接收 新的实体并链接到 KG；并依此提出了ConMask模型，在给定关系和实体名、实体描述的前提下，利用attention机制通过关系">
+<meta name="twitter:image" content="http://oi4yiqiop.bkt.clouddn.com/2018-03-12-202310.jpg">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-115582186-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d658b8749c4d1a1df617cd593b1dc4a6";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+    
+
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                
+                <span class="site-title">Lorrin&#39;s Blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">Lorrin</h2>
+            <h3 id="title">半路出家的码农 | 法国留学中</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Paris, France</span>
+            <a id="follow" target="_blank" href="https://github.com/lorrinWWW/">SEGUIR</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                46
+                <span>Entradas</span>
+            </div>
+            <div class="article-info-block">
+                63
+                <span>Etiquetas</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/lorrinWWW/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-[2018.2.26]Open-World-Knowledge-Graph-Completion" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Open-World Knowledge Graph Completion 笔记
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/[2018.2.26]Open-World-Knowledge-Graph-Completion/">
+            <time datetime="2018-02-26T07:00:00.000Z" itemprop="datePublished">2018-02-26</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/research/">research</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/CNN/">CNN</a>, <a class="tag-link" href="/tags/KGC/">KGC</a>, <a class="tag-link" href="/tags/knowledge-graph/">knowledge-graph</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h2 id="Open-World-Knowledge-Graph-Completion"><a href="#Open-World-Knowledge-Graph-Completion" class="headerlink" title="Open-World Knowledge Graph Completion"></a>Open-World Knowledge Graph Completion</h2><p><strong>摘要</strong>：[1]文首先讨论了Closed-World KGC，它无法处理从 KG 外部加入的新实体，并严重依赖已有KG连接的，不能对弱连接有好的预测。为此定义了 Open-World KGC，可以接收 新的实体并链接到 KG；并依此提出了ConMask模型，在给定关系和实体名、实体描述的前提下，利用attention机制通过关系定位实体描述中最相关的词，再以这些词和实体得到要链接的实体。</p>
+<h3 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h3><p>知识图谱（KG）是一种信息网络，它用三元组 $(h,r,t)$ 来表示知识（h: head entity, t: tail entity, r: relation），目前比较出名的KG有 DBPedia，ConceptNet 等，目前的大多数KG都有噪音且不完整，比如基于Wikipedia的DBPedia有460万个实体，但其中一半实体拥有少于5个的关系。</p>
+<p>这说明了大部分的知识图谱仍然是非常不完善的，我们必须从一开始就要考虑系统的修改、补充完善的可能性。这项任务被定义为Knowledge Graph Completion (KGC)。</p>
+<h4 id="Closed-World-KGC"><a href="#Closed-World-KGC" class="headerlink" title="Closed-World KGC"></a>Closed-World KGC</h4><p>给定一个不完整的KG $G=(E,R,T)$ 其中 $E,R,T$ 分别表示实体集，关系集以及三元组集，Closed-World KGC的任务就是通过找到一系列丢失的三元组 $ T’ = { \langle h,r,t \rangle|h \in E, r \in R, t \in E, \langle h,r,t \rangle \notin T }$ 来补充现有的 $G$.</p>
+<p>一个很重要的地方在于，Closed-World KGC 假定了新的实体、关系都被原有的 $G$ 包含，对于不在 $G$ 中的实体则一筹莫展。</p>
+<p>目前的Closed-World KGC方法很多往往使用TranE或者低维特征表示模型，前者的核心思想就是 $h+r=t$ ，后者则指 Embedding 等。</p>
+<p>该方法仅对固定的或者缓慢更新的KG有效，对于快速变更的KG则效果一般。</p>
+<h4 id="Open-World-KGC"><a href="#Open-World-KGC" class="headerlink" title="Open-World KGC"></a>Open-World KGC</h4><p>给定一个不完整的KG $G=(E,R,T)$ 其中 $E,R,T$ 分别表示实体集，关系集以及三元组集，Open-World KGC 的任务就是找到 $G$ 中没有的三元组集，$T’ ={<h,r,t>|h\in E^i,r\in R, t\in E^i,<h,r,t>\notin T}$ 其中 $E^i$ 是G的实体超集。</h,r,t></h,r,t></p>
+<p>Closed-World方法就是根据知识图谱的拓扑结构更新一个随机的向量作为实体和关系的embedding，但对于不在网络中的实体，这个方法就失效了，这个时候就需要用别的特征来代替这个用网络拓扑结构得到的特征。</p>
+<p>一般直觉就是用实体的描述（entity description），根据实体的描述来得到特征，但从非结构化文本中学习向量表示比在网络的拓扑结构中要难得多，原因如下：</p>
+<ol>
+<li>在Closed-world KGC模型中，每个实体都有一个embedding (从与它相连的实体上学得的)，但Open-World KGC模型则需要从实体描述的word embedding中得到entity embedding。而无论实体之间的联系情况是什么，word embedding的更新都会导致有相同词的entities的更新。</li>
+<li>因为使用了非结构化文本，所以Open-World KGC模型可能会引入噪音或者冗余信息。</li>
+</ol>
+<h3 id="2-Closed-World-KGC"><a href="#2-Closed-World-KGC" class="headerlink" title="2. Closed-World KGC"></a>2. Closed-World KGC</h3><p>在 Closed-World KGC 中，最为常用也最为基础的方法是一种给予强化学习(RL)的模型，被称为TransE [2]. 它有一个简单实用的假设：</p>
+<script type="math/tex; mode=display">
+h+r = t</script><p>其中h是head entity的向量，t是tail entity的向量，r是关系向量。</p>
+<p>TransE定义了loss function：</p>
+<script type="math/tex; mode=display">
+\mathcal{L(T)} = \sum_{<h,r,t>\in T} [\gamma + E(\langle h,r,t \rangle) - E(\langle h',r',t' \rangle)]_+</script><p>其中 $T$ 代表一个三元组的集合；$E(\langle h,r,t \rangle) = ||h+r-t||_{L_n}$是energy function；$\langle h,r,t \rangle$是G中的一个三元组；$h’,\langle r’,t’ \rangle$代表一个不存在于 $T$ 的三元组，通过随机替换一部分$\langle h,r,t \rangle$来得到。</p>
+<p>这里还略去了很多TransE的变体等其他模型，但它们都是基于Closed-World KGC来做的。</p>
+<h3 id="3-ConMask-for-Open-World-KGC"><a href="#3-ConMask-for-Open-World-KGC" class="headerlink" title="3. ConMask for Open-World KGC"></a>3. ConMask for Open-World KGC</h3><p>首先通过一个例子来说明：</p>
+<p><strong>任务：</strong>填补三元组 $\langle \text{Ameen Sayani, residence, ?}\rangle$，其中KG中并没有Ameen Sayani这个实体。</p>
+<p><strong>描述：</strong>“… <strong>Ameen Sayani</strong> was introduced to All India Radio, <strong>Bombay</strong>, by his brother Hamid Sayani. Ameen participated in English programmes there for ten years …” ，</p>
+<p><strong>目标预测实体：</strong>Bombay (or Mumbai)</p>
+<p>为了找到Ameen Sayani的住址，在处理这个任务的过程中，我们不会从头看到尾，而是找到相关的关键词比如家庭或工作相关的词。这里，我们发现Ameen Sayani的工作地点All India Radio在Bombay，因此我们推测Ameen Sayani也住在Bombay（Bombay就是现在的Mumbai）。</p>
+<p>这个过程也可以被归纳为：</p>
+<ol>
+<li>定位与该任务相关的信息。</li>
+<li>根据上下文和相关文本推断。</li>
+<li>根据相关文本推出正确目标实体。</li>
+</ol>
+<p>仿照这个过程，ConMask的工作方式被设计为：</p>
+<ol>
+<li><strong>Relationship-dependent content masking</strong> — 标记那些与任务相关的词语。</li>
+<li><strong>Target fusion</strong> — 从相关文本中抽取目标实体的embedding。</li>
+<li><strong>Target entity resolution</strong> — 通过计算KG中的候选目标实体，2中抽取出的实体embedding以及其它文本特征之间的相似度来选定目标实体。</li>
+</ol>
+<p><img src="http://oi4yiqiop.bkt.clouddn.com/2018-03-12-202310.jpg" width="60%"></p>
+<p>ConMask模型总体结构如上，ConMask通过选择与给定关系相关的词来避免引入不相关的和有噪音的词。对于相关的文本，ConMask通过全连接卷积神经网络（FCN）来提取word-embedding。最后它将提取的embedding于KG中存在的实体进行比较，从而获得一系列目标实体。</p>
+<h4 id="3-1-Relationship-dependent-content-masking"><a href="#3-1-Relationship-dependent-content-masking" class="headerlink" title="3.1 Relationship-dependent content masking"></a>3.1 Relationship-dependent content masking</h4><p>ConMask根据给定的关系预处理输入文本，来选择一些相关的小片段，从而屏蔽掉无关文本。content-masking这一灵感来源于基于attention机制的RNN网络[3]，关于attention之前的笔记也有学习过。</p>
+<p>基于相似度得到选择最相关的词，具体公式如下：</p>
+<script type="math/tex; mode=display">
+\tau(\phi(e), \psi(r)) = W_{\phi(e)} \circ f_w(W_{\phi(e)}, W_{\psi(r)})</script><p>其中 $e$ 是一个实体，$r$ 是某个关系, $\phi$ 是description function并返回一个向量用于表示对一个实体或关系的描述，$\psi$ 是name mapping function并返回一个向量用于表示一个实体或关系的名字， $ W<em>{\phi{(e)}} \in \mathbb{R}^{|\phi(r)|\times k} $ 是一个描述矩阵每一行表示一个k维的描述中的word-embedding， $W</em>{\phi{(e)}} \in \mathbb{R}^{|\phi(r)|\times k} $ 是一个名字矩阵每一行表示一个k维的实体名字word-embedding，$\circ$ 是row-wise product，$f_w$ 用于计算的每一行的屏蔽比重。</p>
+<p>作者给了一个简单的$f_w$ ，Maximal Word-Relationship Weights(MWRW)，就是计算实体描述中每个词向量与关系名称的每个词向量的最大cos相似度:</p>
+<script type="math/tex; mode=display">
+f_w^{MWRW}(W_{\phi(e)}, W_{\psi(r)})_{[i]} =  max_j(\frac{\sum_m^k{W_{\phi(e)[i,m]} W_{\psi(r)[j,m]}}}{\sqrt{\sum_m^k{W^2_{\phi(e)[i,m]}}}\sqrt{\sum_m^k{W^2_{\psi(e)[j,m]}}}})</script><p>这个公式会给与给定关系无关的词更小的权重，与关系语义接近的词更大的权重，但权重最高的词一般不是目标实体，如下图所示，给定关系spouse，得到最大权重的是married，虽然married与spouse在语义上接近，但它并不是目标实体，因此作者称这种有着最大MWRW权重的词为指示词（indicator word），因为正确的词一般就在该词附近，在下图例子中可以发现目标实体barack obama就在married后面。</p>
+<p>为了给目标实体word正确的权重，作者改进了这个公式，具体公式如下，这个公式就是每个词的权重不会小于之前 $k_m$ 称为 Maximal Context-Relationship Weights (MCRW)：</p>
+<script type="math/tex; mode=display">
+f_w^{MCRW}(W_{\phi(e)}, W_{\psi(r)})_{[i]} =  max(f_w^{MWRW}(W_{\phi(e)}, W_{\psi(r)})_{[i-k_m:i]})</script><p><img src="http://oi4yiqiop.bkt.clouddn.com/2018-03-12-202313.jpg"></p>
+<h4 id="3-2-Target-Fusion"><a href="#3-2-Target-Fusion" class="headerlink" title="3.2 Target Fusion"></a>3.2 Target Fusion</h4><p>这一步骤用于输出基于词的实体embedding，这个过程记为$\xi$，使用Conetent Masking $\tau$ 的输出。它使用全连接卷积网络，其结构如下：</p>
+<p><img src="http://oi4yiqiop.bkt.clouddn.com/2018-03-12-202312.jpg"></p>
+<p><strong>Semantic Averaging</strong></p>
+<p>我们可以对所有实体进行embedding，但是这会产生大量的参数，使计算变得非常复杂。事实上，因为Target fusion函数用于抽取，所以对不需要抽取的实体名字使用target fusion就会显得很奇怪也很没有必要。</p>
+<p>这里作者提出了一个简单的语义平均法来计算这些实体的embedding：$\eta(W) = \frac{1}{k_l}\sum_i^{k_i}W_i$</p>
+<h4 id="3-3-Loss-function"><a href="#3-3-Loss-function" class="headerlink" title="3.3 Loss function"></a>3.3 Loss function</h4><p>为了加速训练，我们参考 list-wise ranking loss function (Shi and Weninger 2017)，并设计 partial list-wise ranking loss function，拥有正负目标采样。正样本就是训练集的标注内容，记为$E^+$；负样本就是替换正样本的head entity或tail entity所得到的，记为$E^-$ 。</p>
+<script type="math/tex; mode=display">
+\mathcal{L}(h, r, t) =  \begin{cases}
+\sum_{h_+\in E^+}{-\frac{log(S(h_+,r,t,E^+\cup E^-))}{|E^+|}}, & \text{if }p_c > 0.5; \\
+\sum_{h_+\in E^+}{-\frac{log(S(h,r,t_+,E^+\cup E^-))}{|E^+|}}, & \text{if }p_c \le 0.5; .
+\end{cases}</script><p>$p_c$ 服从$[0,1]$的均匀分布，大于0.5时，把输入实体作为tail entity，小于0.5的时候就是作为head entity，表示替换head entity和tail entity的概率各为50%。另有$S$, 即 softmax normalized output of ConMask：</p>
+<script type="math/tex; mode=display">
+S(h,r,t,E^+) = \begin{cases}
+\sum_{e \in E^\pm}^{exp(ConMask(h,r,t))}{exp(ConMask(e,r,t))} & \text{if } p_c > 0.5 \\
+\sum_{e \in E^\pm}^{exp(ConMask(e,r,t))}{exp(ConMask(h,r,t))} & \text{if } p_c \le 0.5 \\
+\end{cases}</script><h3 id="4-Results"><a href="#4-Results" class="headerlink" title="4. Results"></a>4. Results</h3><p>从结果上看，对比其他模型，在开放领域，ConMask获得了最佳的效果；在Closed-World中，尽管ConMask不是为此设计的，但是对比TransE和TransR依然不逊色，结果相仿。</p>
+<p>目前而言，ConMask模型只能预测在实体描述中表达的关系，将来还应考虑扩展它，使其能够发现新的或隐含的关系。</p>
+<h2 id="Bibliographies"><a href="#Bibliographies" class="headerlink" title="Bibliographies"></a>Bibliographies</h2><p>笔记参考：<a href="https://zhuanlan.zhihu.com/p/33026043，http://blog.csdn.net/TgqDT3gGaMdkHasLZv/article/details/79224178" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/33026043，http://blog.csdn.net/TgqDT3gGaMdkHasLZv/article/details/79224178</a></p>
+<p>代码实现：<a href="https://github.com/bxshi/ConMask" target="_blank" rel="noopener">https://github.com/bxshi/ConMask</a></p>
+<p>[1] Shi, Baoxu, and Tim Weninger. “Open-World Knowledge Graph Completion.” <em>arXiv preprint arXiv:1711.03438</em> (2017).</p>
+<p>[2] Bordes, A., Usunier, N., Garcia-Duran, A., Weston, J., &amp; Yakhnenko, O. (2013). Translating embeddings for modeling multi-relational data. In <em>Advances in neural information processing systems</em> (pp. 2787-2795).</p>
+<p>[3] Chorowski, J. K., Bahdanau, D., Serdyuk, D., Cho, K., &amp; Bengio, Y. (2015). Attention-based models for speech recognition. In <em>Advances in neural information processing systems</em> (pp. 577-585).</p>
+
+            </div>
+        
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://LorrinWWW.github.io/[2018.2.26]Open-World-Knowledge-Graph-Completion/" data-id="cjeookh5i0025pldyxrv6yxbg" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://LorrinWWW.github.io/[2018.2.26]Open-World-Knowledge-Graph-Completion/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://LorrinWWW.github.io/[2018.2.26]Open-World-Knowledge-Graph-Completion/">Comentarios</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/[2018.3.10]Several-models-for-kenowledge-graoh-representing-and-completing/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    Several models for knowledge graph representing and completing 几个知识图谱模型
+                
+            </div>
+        </a>
+    
+    
+        <a href="/[2018.2.5]Nested-LSTMs/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">Nested LSTMs 笔记</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Recientes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/[2018.3.10]Several-models-for-kenowledge-graoh-representing-and-completing/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/research/">research</a></p>
+                            <p class="item-title"><a href="/[2018.3.10]Several-models-for-kenowledge-graoh-representing-and-completing/" class="title">Several models for knowledge graph representing and completing 几个知识图谱模型</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T07:00:00.000Z" itemprop="datePublished">2018-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/[2018.2.26]Open-World-Knowledge-Graph-Completion/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/research/">research</a></p>
+                            <p class="item-title"><a href="/[2018.2.26]Open-World-Knowledge-Graph-Completion/" class="title">Open-World Knowledge Graph Completion 笔记</a></p>
+                            <p class="item-date"><time datetime="2018-02-26T07:00:00.000Z" itemprop="datePublished">2018-02-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/[2018.2.5]Nested-LSTMs/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/research/">research</a></p>
+                            <p class="item-title"><a href="/[2018.2.5]Nested-LSTMs/" class="title">Nested LSTMs 笔记</a></p>
+                            <p class="item-date"><time datetime="2018-02-05T07:00:00.000Z" itemprop="datePublished">2018-02-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/[2018.1.29]A-convolution BiLSTM-neural-network-model-for-chinese-event-extraction/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/research/">research</a></p>
+                            <p class="item-title"><a href="/[2018.1.29]A-convolution BiLSTM-neural-network-model-for-chinese-event-extraction/" class="title">A convolution BiLSTM neural network model for chinese event extraction 笔记</a></p>
+                            <p class="item-date"><time datetime="2018-01-29T07:00:00.000Z" itemprop="datePublished">2018-01-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/[2018.1.21]Event-detection-and-co-referentce/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/research/">research</a></p>
+                            <p class="item-title"><a href="/[2018.1.21]Event-detection-and-co-referentce/" class="title">Event detection and co-reference with minimal supervision 笔记</a></p>
+                            <p class="item-date"><time datetime="2018-01-21T07:00:00.000Z" itemprop="datePublished">2018-01-21</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Categorias</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/francais/">francais</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/math/">math</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/math/unfinished/">unfinished</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming/unfinished/">unfinished</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/research/">research</a><span class="category-list-count">9</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Archivos</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">8</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Nube de etiquetas</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Bayes/" style="font-size: 10px;">Bayes</a> <a href="/tags/BiLSTM/" style="font-size: 10px;">BiLSTM</a> <a href="/tags/CNN/" style="font-size: 11.43px;">CNN</a> <a href="/tags/EDP/" style="font-size: 12.86px;">EDP</a> <a href="/tags/FEM/" style="font-size: 10px;">FEM</a> <a href="/tags/GAN/" style="font-size: 10px;">GAN</a> <a href="/tags/Hilbert/" style="font-size: 10px;">Hilbert</a> <a href="/tags/KGC/" style="font-size: 11.43px;">KGC</a> <a href="/tags/LSTM/" style="font-size: 11.43px;">LSTM</a> <a href="/tags/OS/" style="font-size: 11.43px;">OS</a> <a href="/tags/RNN/" style="font-size: 11.43px;">RNN</a> <a href="/tags/Sobolev/" style="font-size: 10px;">Sobolev</a> <a href="/tags/aleatoire/" style="font-size: 10px;">aleatoire</a> <a href="/tags/algo/" style="font-size: 17.14px;">algo</a> <a href="/tags/analyse/" style="font-size: 11.43px;">analyse</a> <a href="/tags/attention/" style="font-size: 10px;">attention</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/classification/" style="font-size: 10px;">classification</a> <a href="/tags/co-reference/" style="font-size: 10px;">co-reference</a> <a href="/tags/complexity/" style="font-size: 10px;">complexity</a> <a href="/tags/compression/" style="font-size: 10px;">compression</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/crawl/" style="font-size: 10px;">crawl</a> <a href="/tags/data-structure/" style="font-size: 10px;">data-structure</a> <a href="/tags/datamining/" style="font-size: 15.71px;">datamining</a> <a href="/tags/deep-learning/" style="font-size: 11.43px;">deep-learning</a> <a href="/tags/distant-supervision/" style="font-size: 10px;">distant-supervision</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/entity-resolution/" style="font-size: 10px;">entity-resolution</a> <a href="/tags/event-detection/" style="font-size: 10px;">event-detection</a> <a href="/tags/event-extraction/" style="font-size: 10px;">event-extraction</a> <a href="/tags/firm/" style="font-size: 10px;">firm</a> <a href="/tags/francais/" style="font-size: 10px;">francais</a> <a href="/tags/graph/" style="font-size: 10px;">graph</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/kernel/" style="font-size: 10px;">kernel</a> <a href="/tags/knowledge-graph/" style="font-size: 12.86px;">knowledge-graph</a> <a href="/tags/language/" style="font-size: 10px;">language</a> <a href="/tags/latex/" style="font-size: 10px;">latex</a> <a href="/tags/limited-supervision/" style="font-size: 10px;">limited-supervision</a> <a href="/tags/machine-learning/" style="font-size: 14.29px;">machine-learning</a> <a href="/tags/management/" style="font-size: 10px;">management</a> <a href="/tags/marked/" style="font-size: 10px;">marked</a> <a href="/tags/math/" style="font-size: 20px;">math</a> <a href="/tags/mathjax/" style="font-size: 10px;">mathjax</a> <a href="/tags/matrix/" style="font-size: 10px;">matrix</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/nlp/" style="font-size: 10px;">nlp</a> <a href="/tags/prediction/" style="font-size: 10px;">prediction</a> <a href="/tags/probability/" style="font-size: 17.14px;">probability</a> <a href="/tags/programming/" style="font-size: 18.57px;">programming</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/qualitative-induction/" style="font-size: 10px;">qualitative-induction</a> <a href="/tags/relation-classification/" style="font-size: 10px;">relation-classification</a> <a href="/tags/relation-extraction/" style="font-size: 14.29px;">relation-extraction</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/sequence-labeling/" style="font-size: 10px;">sequence-labeling</a> <a href="/tags/spider/" style="font-size: 10px;">spider</a> <a href="/tags/statistic/" style="font-size: 11.43px;">statistic</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/weak-supervision/" style="font-size: 10px;">weak-supervision</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">Links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 Lorrin<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://LorrinWWW.github.io/[2018.2.26]Open-World-Knowledge-Graph-Completion/';
+        
+        this.page.identifier = '[2018.2.26]Open-World-Knowledge-Graph-Completion';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'lorrins-blog' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>

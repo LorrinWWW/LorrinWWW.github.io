@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    <title>Nested LSTMs 笔记 | Lorrin&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Nested LSTMs摘要：最近，一种新的 Nested LSTMs 网络被提出。在通常的LSTM网络中，我们通过将LSTM单元堆叠，从而形成深度RNN网络，提高其效果；Nested LSTM则通过嵌套而不是堆栈来增添LSTM的深度。在NLSTM中，记忆单元的值是由LSTM单元计算的，其中，LSTM单元具有自身内在的记忆单元。具体而言，NLSTM记忆单元并不是按照等式：$ct^{outer} =">
+<meta name="keywords" content="LSTM,RNN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nested LSTMs 笔记">
+<meta property="og:url" content="https://LorrinWWW.github.io/[2018.2.5]Nested-LSTMs/index.html">
+<meta property="og:site_name" content="Lorrin&#39;s Blog">
+<meta property="og:description" content="Nested LSTMs摘要：最近，一种新的 Nested LSTMs 网络被提出。在通常的LSTM网络中，我们通过将LSTM单元堆叠，从而形成深度RNN网络，提高其效果；Nested LSTM则通过嵌套而不是堆栈来增添LSTM的深度。在NLSTM中，记忆单元的值是由LSTM单元计算的，其中，LSTM单元具有自身内在的记忆单元。具体而言，NLSTM记忆单元并不是按照等式：$ct^{outer} =">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://oi4yiqiop.bkt.clouddn.com/2018-03-12-202251.jpg">
+<meta property="og:image" content="http://oi4yiqiop.bkt.clouddn.com/2018-03-12-202254.jpg">
+<meta property="og:image" content="http://oi4yiqiop.bkt.clouddn.com/2018-03-12-202253.jpg">
+<meta property="og:image" content="http://oi4yiqiop.bkt.clouddn.com/2018-03-12-202250.jpg">
+<meta property="og:updated_time" content="2018-03-12T20:22:57.676Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nested LSTMs 笔记">
+<meta name="twitter:description" content="Nested LSTMs摘要：最近，一种新的 Nested LSTMs 网络被提出。在通常的LSTM网络中，我们通过将LSTM单元堆叠，从而形成深度RNN网络，提高其效果；Nested LSTM则通过嵌套而不是堆栈来增添LSTM的深度。在NLSTM中，记忆单元的值是由LSTM单元计算的，其中，LSTM单元具有自身内在的记忆单元。具体而言，NLSTM记忆单元并不是按照等式：$ct^{outer} =">
+<meta name="twitter:image" content="http://oi4yiqiop.bkt.clouddn.com/2018-03-12-202251.jpg">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-115582186-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d658b8749c4d1a1df617cd593b1dc4a6";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+    
+
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                
+                <span class="site-title">Lorrin&#39;s Blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">Lorrin</h2>
+            <h3 id="title">半路出家的码农 | 法国留学中</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Paris, France</span>
+            <a id="follow" target="_blank" href="https://github.com/lorrinWWW/">SEGUIR</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                46
+                <span>Entradas</span>
+            </div>
+            <div class="article-info-block">
+                63
+                <span>Etiquetas</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/lorrinWWW/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-[2018.2.5]Nested-LSTMs" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Nested LSTMs 笔记
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/[2018.2.5]Nested-LSTMs/">
+            <time datetime="2018-02-05T07:00:00.000Z" itemprop="datePublished">2018-02-05</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/research/">research</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/LSTM/">LSTM</a>, <a class="tag-link" href="/tags/RNN/">RNN</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h2 id="Nested-LSTMs"><a href="#Nested-LSTMs" class="headerlink" title="Nested LSTMs"></a>Nested LSTMs</h2><p><strong>摘要</strong>：最近，一种新的 Nested LSTMs 网络被提出。在通常的LSTM网络中，我们通过将LSTM单元堆叠，从而形成深度RNN网络，提高其效果；Nested LSTM则通过嵌套而不是堆栈来增添LSTM的深度。在NLSTM中，记忆单元的值是由LSTM单元计算的，其中，LSTM单元具有自身内在的记忆单元。具体而言，NLSTM记忆单元并不是按照等式：$c<em>t^{outer} = f_t \odot c</em>{t-1} + i<em>t \odot g_t$ 对（外部）记忆单元的值进行计算，而是使用级联：$(f_t \odot c</em>{t-1}, i_t \odot g_t)$ 将其作为内部LSTM（或NLSTM）记忆单元的输入，并设定 $c_t^{outer} = h_t^{inner}$。在访问内部记忆时，Nested LSTM 相比传统的堆栈 LSTM 有更高的自由度，从而能处理更长时间规模的内部记忆；实验也表明，在参数数量相似的情况下，NLSTM 在多种任务上都超越了堆栈 LSTM。作者认为Nested LSTM 有潜力直接取代堆栈 LSTM。</p>
+<h3 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h3><p>学习长期的依赖关系是当前人工智能领域中，尤其是在nlp领域，机器学习方法的关键性挑战。基于循环神经网络的体系结构已经在使得机器能够模仿这种能力方面取得了显著进展。</p>
+<h4 id="single-layer-LSTM"><a href="#single-layer-LSTM" class="headerlink" title="single-layer LSTM"></a>single-layer LSTM</h4><p><img src="http://oi4yiqiop.bkt.clouddn.com/2018-03-12-202251.jpg" width="90%"></p>
+<p>RNN的输入是以当前的状态为依据，适合学习时间上的抽象特征。在实践中，许多专家已经证明，更为复杂的体系结构是解决许多任务的关键。其中一个原因是梯度消失问题（Hochreiter于1991年、Bengio等人于1994年提出），它使得简单的RNN难以学习长期依赖关系。Hochreiter和Schmidhuber于1997年提出了LSTM，包含能够改善梯度消失问题的记忆机制。单层LSTM如上图，图中的三个单元实际上是同一个单元，它循环地将内部的参数传递给自己。</p>
+<h4 id="Stacked-LSTMs"><a href="#Stacked-LSTMs" class="headerlink" title="Stacked LSTMs"></a>Stacked LSTMs</h4><p><img src="http://oi4yiqiop.bkt.clouddn.com/2018-03-12-202254.jpg" width="60%"></p>
+<p>堆栈 LSTM 架构使用一系列 LSTM 一层层地堆叠在一起来处理数据，一层的输出成为下一层的输入。上图为一个两层的LSTM网络。</p>
+<p>引入多层的结构，即将多个LSTM单元堆叠，每一层的输出成为下一层的输入。 每层处理我们希望解决的任务的一部分，并将其传递给下一层。额外的隐藏层可以添加到多层感知器神经网络，使其有更深入的“理解”。 额外的隐藏层被认为重新组合了来自先前层的学习表示，并在高度抽象层次上找到新的表示。 例如，从线条到形状到对象。</p>
+<h4 id="Nested-LSTMs-1"><a href="#Nested-LSTMs-1" class="headerlink" title="Nested LSTMs"></a>Nested LSTMs</h4><p>在 NLSTM 中，LSTM 的记忆单元可以访问内部记忆。相比于传统的堆栈 LSTM，这一关键特征使得该模型能实现更有效的时间层级。在 NLSTM 中，外部记忆单元可自由选择读取、编写的相关长期信息到内部单元。相比之下，在Stacked LSTM 中，高层级的激活（类似内部记忆）直接生成输出，因此必须包含所有的与当前预测相关的短期信息。换言之，Stacked LSTM 与Nested LSTM 之间的主要不同在于，NLSTM 可以选择性地访问内部记忆。这使得，即使这些事件与当前事件不相关，内部记忆也能够记住、处理更长时间规模上的事件。我们在后面一章更详细地介绍它。</p>
+<h3 id="2-Model-of-Nested-LSTMs"><a href="#2-Model-of-Nested-LSTMs" class="headerlink" title="2. Model of Nested LSTMs"></a>2. Model of Nested LSTMs</h3><p>LSTM 中的输出门会编码可能与当前的时间步骤不相关，但是仍然值得记忆的信息。Nested LSTM 根据这一直观理解来创造一种记忆的时间层级。以同样的方式被gate控访问内部记忆，因此长期信息只有在情景相关的条件下才能选择性地访问。</p>
+<p><img src="http://oi4yiqiop.bkt.clouddn.com/2018-03-12-202253.jpg" width="80%"></p>
+<h4 id="The-architecture"><a href="#The-architecture" class="headerlink" title="The architecture"></a>The architecture</h4><p>在 LSTM 网络中，单元状态的更新公式和门控机制可以表示为以下方程式：</p>
+<script type="math/tex; mode=display">
+i_t = \sigma_i (x_t W_{xi} + h_{t-1} W_{hi} + b_i) \\
+f_t = \sigma_t (x_t W_{xf} + h_{t-1} W_{hf} + b_i) \\
+c_t = f_t \odot c_{c-1} + \sigma_c (x_t W_{xc} + h_{t-1} W_{hc} + b_c) \\
+o_t = \sigma_o (x_t W_{xo} + h_{t-1} W_{ho} + b_o) \\
+h_t = o_t \odot \sigma_h(c_t)</script><p>Nested LSTM 使用已学习的状态函数 $c<em>t = m_t(f_t\odot c</em>{t−1}, i<em>t \odot g_t)​$ 来替代 LSTM 中计算 $c_t​$ 的加运算。我们将函数的状态表示为 m 在时间 t 的内部记忆（inner memory），调用该函数以计算 $c_t​$ 和 $m</em>{t+1}​$。我们可以使用另一个 LSTM 单元来实现该记忆函数，就生成了 Nested LSTM。同样，该记忆函数能够由另一个 Nested LSTM 单元替换，因此就能构建任意深的嵌套网络。</p>
+<p>因此，我们得到NLSTM 中记忆函数的输入和隐藏状态：</p>
+<script type="math/tex; mode=display">
+\tilde{h}_{t-1} = f_t \odot c_{t-1} \\
+\tilde{x}_t = i_t \odot \sigma_c (x_t W_{xc} + h_{t-1} W_{hc} + b_c)</script><p>注意如果记忆函数是加性的，那么$c<em>t = f_t \odot c</em>{c-1} + \sigma<em>c (x_t W</em>{xc} + h<em>{t-1} W</em>{hc} + b<em>c) =  \tilde{h}</em>{t-1} + \tilde{x}_t $，整个系统将退化到经典的 LSTM。</p>
+<p><img src="http://oi4yiqiop.bkt.clouddn.com/2018-03-12-202250.jpg"></p>
+<p><em>LSTM、Stacked LSTM 和 Nested LSTM 的计算图形。隐藏的状态、外部记忆单元和内部记忆单元分别由h、c和d进行表示。虽然当前的隐藏状态可以直接影响下一个内部记忆单元的内容，但内部记忆只有通过外部记忆才能够影响隐藏状态。</em></p>
+<script type="math/tex; mode=display">
+\widetilde{i}_t = \widetilde{\sigma}_i (\widetilde{x}_t \widetilde{W}_{xi} + \widetilde{h}_{t-1} \widetilde{W}_{hi} + \widetilde{b}_i) \\
+\widetilde{f}_t = \widetilde{\sigma}_t (\widetilde{x}_t \widetilde{W}_{xf} + \widetilde{h}_{t-1} \widetilde{W}_{hf} + \widetilde{b}_i) \\
+\widetilde{c}_t = \widetilde{f}_t \odot \widetilde{c}_{c-1} + \widetilde{\sigma}_c (\widetilde{x}_t \widetilde{W}_{xc} + \widetilde{h}_{t-1} \widetilde{W}_{hc} + \widetilde{b}_c) \\
+\widetilde{o_t} = \widetilde{\sigma}_o (\widetilde{x}_t \widetilde{W}_{xo} + \widetilde{h}_{t-1} \widetilde{W}_{ho} + \widetilde{b}_o) \\
+\widetilde{h}_t = \widetilde{o}_t \odot \widetilde{\sigma}_h(\widetilde{c}_t)</script><p>现在，外部 LSTM 的单元状态更新方式为 $ c<em>t = \tilde{h}</em>{t} $ 。</p>
+<h3 id="3-Experiments"><a href="#3-Experiments" class="headerlink" title="3. Experiments"></a>3. Experiments</h3><p>见附件论文[1]</p>
+<h3 id="4-Conclusion"><a href="#4-Conclusion" class="headerlink" title="4. Conclusion"></a>4. Conclusion</h3><p>Nested LSTM（NLSTM）是LSTM模型的简单扩展，通过嵌套来增加深度，而不是通过堆叠。 NLSTM的内部存储器单元形成内部存储器，其仅通过外部存储器单元被其他计算元件访问，实现了时间层级的形式。</p>
+<p>论文[1]的实验表明，在相似的参数设置下，Nested LSTM 在多种字符级语言建模任务中的表现都超越了Stacked LSTM和single-layer LSTM，并且和Stacked LSTM 的高层级单元相比，LSTM 的内部记忆可以学习更长期的依赖关系。</p>
+<p><a href="https://github.com/hannw/nlstm" target="_blank" rel="noopener">NLSTM的Tensorflow实现</a></p>
+<p><a href="https://github.com/titu1994/Nested-LSTM" target="_blank" rel="noopener">NLSTM的Keras实现</a></p>
+<h2 id="Bibliographies"><a href="#Bibliographies" class="headerlink" title="Bibliographies"></a>Bibliographies</h2><p>笔记参考：<a href="http://www.sohu.com/a/220745456_390227，http://posts.careerengine.us/p/5a768ab3381fe136215b3de5?from=latest-posts-panel&amp;type=title" target="_blank" rel="noopener">http://www.sohu.com/a/220745456_390227，http://posts.careerengine.us/p/5a768ab3381fe136215b3de5?from=latest-posts-panel&amp;type=title</a></p>
+<p>[1] Moniz, Joel Ruben Antony, and David Krueger. “Nested LSTMs.” <em>Asian Conference on Machine Learning</em>. 2017.</p>
+<p>[2] Hochreiter, Sepp, and Jürgen Schmidhuber. “Long short-term memory.” <em>Neural computation</em> 9.8 (1997): 1735-1780.</p>
+
+            </div>
+        
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://LorrinWWW.github.io/[2018.2.5]Nested-LSTMs/" data-id="cjeookh5j0027pldy6ab6s6fs" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://LorrinWWW.github.io/[2018.2.5]Nested-LSTMs/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://LorrinWWW.github.io/[2018.2.5]Nested-LSTMs/">Comentarios</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/[2018.2.26]Open-World-Knowledge-Graph-Completion/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    Open-World Knowledge Graph Completion 笔记
+                
+            </div>
+        </a>
+    
+    
+        <a href="/[2018.1.29]A-convolution BiLSTM-neural-network-model-for-chinese-event-extraction/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">A convolution BiLSTM neural network model for chinese event extraction 笔记</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Recientes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/[2018.3.10]Several-models-for-kenowledge-graoh-representing-and-completing/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/research/">research</a></p>
+                            <p class="item-title"><a href="/[2018.3.10]Several-models-for-kenowledge-graoh-representing-and-completing/" class="title">Several models for knowledge graph representing and completing 几个知识图谱模型</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T07:00:00.000Z" itemprop="datePublished">2018-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/[2018.2.26]Open-World-Knowledge-Graph-Completion/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/research/">research</a></p>
+                            <p class="item-title"><a href="/[2018.2.26]Open-World-Knowledge-Graph-Completion/" class="title">Open-World Knowledge Graph Completion 笔记</a></p>
+                            <p class="item-date"><time datetime="2018-02-26T07:00:00.000Z" itemprop="datePublished">2018-02-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/[2018.2.5]Nested-LSTMs/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/research/">research</a></p>
+                            <p class="item-title"><a href="/[2018.2.5]Nested-LSTMs/" class="title">Nested LSTMs 笔记</a></p>
+                            <p class="item-date"><time datetime="2018-02-05T07:00:00.000Z" itemprop="datePublished">2018-02-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/[2018.1.29]A-convolution BiLSTM-neural-network-model-for-chinese-event-extraction/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/research/">research</a></p>
+                            <p class="item-title"><a href="/[2018.1.29]A-convolution BiLSTM-neural-network-model-for-chinese-event-extraction/" class="title">A convolution BiLSTM neural network model for chinese event extraction 笔记</a></p>
+                            <p class="item-date"><time datetime="2018-01-29T07:00:00.000Z" itemprop="datePublished">2018-01-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/[2018.1.21]Event-detection-and-co-referentce/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/research/">research</a></p>
+                            <p class="item-title"><a href="/[2018.1.21]Event-detection-and-co-referentce/" class="title">Event detection and co-reference with minimal supervision 笔记</a></p>
+                            <p class="item-date"><time datetime="2018-01-21T07:00:00.000Z" itemprop="datePublished">2018-01-21</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Categorias</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/francais/">francais</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/math/">math</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/math/unfinished/">unfinished</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming/unfinished/">unfinished</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/research/">research</a><span class="category-list-count">9</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Archivos</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">8</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Nube de etiquetas</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Bayes/" style="font-size: 10px;">Bayes</a> <a href="/tags/BiLSTM/" style="font-size: 10px;">BiLSTM</a> <a href="/tags/CNN/" style="font-size: 11.43px;">CNN</a> <a href="/tags/EDP/" style="font-size: 12.86px;">EDP</a> <a href="/tags/FEM/" style="font-size: 10px;">FEM</a> <a href="/tags/GAN/" style="font-size: 10px;">GAN</a> <a href="/tags/Hilbert/" style="font-size: 10px;">Hilbert</a> <a href="/tags/KGC/" style="font-size: 11.43px;">KGC</a> <a href="/tags/LSTM/" style="font-size: 11.43px;">LSTM</a> <a href="/tags/OS/" style="font-size: 11.43px;">OS</a> <a href="/tags/RNN/" style="font-size: 11.43px;">RNN</a> <a href="/tags/Sobolev/" style="font-size: 10px;">Sobolev</a> <a href="/tags/aleatoire/" style="font-size: 10px;">aleatoire</a> <a href="/tags/algo/" style="font-size: 17.14px;">algo</a> <a href="/tags/analyse/" style="font-size: 11.43px;">analyse</a> <a href="/tags/attention/" style="font-size: 10px;">attention</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/classification/" style="font-size: 10px;">classification</a> <a href="/tags/co-reference/" style="font-size: 10px;">co-reference</a> <a href="/tags/complexity/" style="font-size: 10px;">complexity</a> <a href="/tags/compression/" style="font-size: 10px;">compression</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/crawl/" style="font-size: 10px;">crawl</a> <a href="/tags/data-structure/" style="font-size: 10px;">data-structure</a> <a href="/tags/datamining/" style="font-size: 15.71px;">datamining</a> <a href="/tags/deep-learning/" style="font-size: 11.43px;">deep-learning</a> <a href="/tags/distant-supervision/" style="font-size: 10px;">distant-supervision</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/entity-resolution/" style="font-size: 10px;">entity-resolution</a> <a href="/tags/event-detection/" style="font-size: 10px;">event-detection</a> <a href="/tags/event-extraction/" style="font-size: 10px;">event-extraction</a> <a href="/tags/firm/" style="font-size: 10px;">firm</a> <a href="/tags/francais/" style="font-size: 10px;">francais</a> <a href="/tags/graph/" style="font-size: 10px;">graph</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/kernel/" style="font-size: 10px;">kernel</a> <a href="/tags/knowledge-graph/" style="font-size: 12.86px;">knowledge-graph</a> <a href="/tags/language/" style="font-size: 10px;">language</a> <a href="/tags/latex/" style="font-size: 10px;">latex</a> <a href="/tags/limited-supervision/" style="font-size: 10px;">limited-supervision</a> <a href="/tags/machine-learning/" style="font-size: 14.29px;">machine-learning</a> <a href="/tags/management/" style="font-size: 10px;">management</a> <a href="/tags/marked/" style="font-size: 10px;">marked</a> <a href="/tags/math/" style="font-size: 20px;">math</a> <a href="/tags/mathjax/" style="font-size: 10px;">mathjax</a> <a href="/tags/matrix/" style="font-size: 10px;">matrix</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/nlp/" style="font-size: 10px;">nlp</a> <a href="/tags/prediction/" style="font-size: 10px;">prediction</a> <a href="/tags/probability/" style="font-size: 17.14px;">probability</a> <a href="/tags/programming/" style="font-size: 18.57px;">programming</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/qualitative-induction/" style="font-size: 10px;">qualitative-induction</a> <a href="/tags/relation-classification/" style="font-size: 10px;">relation-classification</a> <a href="/tags/relation-extraction/" style="font-size: 14.29px;">relation-extraction</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/sequence-labeling/" style="font-size: 10px;">sequence-labeling</a> <a href="/tags/spider/" style="font-size: 10px;">spider</a> <a href="/tags/statistic/" style="font-size: 11.43px;">statistic</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/weak-supervision/" style="font-size: 10px;">weak-supervision</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">Links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 Lorrin<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://LorrinWWW.github.io/[2018.2.5]Nested-LSTMs/';
+        
+        this.page.identifier = '[2018.2.5]Nested-LSTMs';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'lorrins-blog' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>

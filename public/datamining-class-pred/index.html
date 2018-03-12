@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    <title>数据挖掘-分类与预测 | Lorrin&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="基本知识主要分为两个步骤：  建立一个描述已知数据集类别或概念的模型。 分类规则形式、决策树形式，或数学公式形式。  利用所获得的模型进行分类操作。 首先要对模型分类准确率进行估计。 若其准确率可以接受，则可以使用该模型进行分类。          可以根据以下几条标准对各种分类方法进行比较:  预测准确率，它描述(学习所获)模型能够正确预测未知对象类别或(类别)数值的能力。 速度，它描述在构造和">
+<meta name="keywords" content="programming,datamining,classification,prediction">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据挖掘-分类与预测">
+<meta property="og:url" content="https://LorrinWWW.github.io/datamining-class-pred/index.html">
+<meta property="og:site_name" content="Lorrin&#39;s Blog">
+<meta property="og:description" content="基本知识主要分为两个步骤：  建立一个描述已知数据集类别或概念的模型。 分类规则形式、决策树形式，或数学公式形式。  利用所获得的模型进行分类操作。 首先要对模型分类准确率进行估计。 若其准确率可以接受，则可以使用该模型进行分类。          可以根据以下几条标准对各种分类方法进行比较:  预测准确率，它描述(学习所获)模型能够正确预测未知对象类别或(类别)数值的能力。 速度，它描述在构造和">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2016-12-26T15:52:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据挖掘-分类与预测">
+<meta name="twitter:description" content="基本知识主要分为两个步骤：  建立一个描述已知数据集类别或概念的模型。 分类规则形式、决策树形式，或数学公式形式。  利用所获得的模型进行分类操作。 首先要对模型分类准确率进行估计。 若其准确率可以接受，则可以使用该模型进行分类。          可以根据以下几条标准对各种分类方法进行比较:  预测准确率，它描述(学习所获)模型能够正确预测未知对象类别或(类别)数值的能力。 速度，它描述在构造和">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-115582186-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d658b8749c4d1a1df617cd593b1dc4a6";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+    
+
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                
+                <span class="site-title">Lorrin&#39;s Blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">Lorrin</h2>
+            <h3 id="title">半路出家的码农 | 法国留学中</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Paris, France</span>
+            <a id="follow" target="_blank" href="https://github.com/lorrinWWW/">SEGUIR</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                46
+                <span>Entradas</span>
+            </div>
+            <div class="article-info-block">
+                63
+                <span>Etiquetas</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/lorrinWWW/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-datamining-class-pred" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            数据挖掘-分类与预测
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/datamining-class-pred/">
+            <time datetime="2016-12-26T13:56:57.000Z" itemprop="datePublished">2016-12-26</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/programming/">programming</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/classification/">classification</a>, <a class="tag-link" href="/tags/datamining/">datamining</a>, <a class="tag-link" href="/tags/prediction/">prediction</a>, <a class="tag-link" href="/tags/programming/">programming</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h1 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h1><p>主要分为两个步骤：</p>
+<ol>
+<li><p>建立一个描述已知数据集类别或概念的模型。</p>
+<p>分类规则形式、决策树形式，或数学公式形式。</p>
+</li>
+<li><p>利用所获得的模型进行分类操作。</p>
+<p>首先要对模型分类准确率进行估计。</p>
+<p>若其准确率可以接受，则可以使用该模型进行分类。       </p>
+</li>
+</ol>
+<p>可以根据以下几条标准对各种分类方法进行比较:</p>
+<ol>
+<li>预测准确率，它描述(学习所获)模型能够正确预测未知对象类别或(类别)数值的能力。</li>
+<li>速度，它描述在构造和使用模型时的计算效率。 </li>
+<li>鲁棒性，它描述在数据带有噪声和有数据遗失情况下，(学习所获)模型仍能进行正确预测的能力。 </li>
+<li>可扩展性，它描述对处理大量数据并构造相应学习模型所需要的能力。</li>
+<li>易理解性，它描述学习所获模型表示的可理解程度。 在本章的后面各节，将要陆续介绍上述有关问题的实现方法。</li>
+</ol>
+<h1 id="基于决策树的分类"><a href="#基于决策树的分类" class="headerlink" title="基于决策树的分类"></a>基于决策树的分类</h1><ol>
+<li><p>决策树的生成算法</p>
+<ul>
+<li><p>基本决策树算法</p>
+<p>本质是一个贪心算法，自上而下分而治之。</p>
+</li>
+</ul>
+</li>
+<li><p>属性选择方法</p>
+<p>信息量</p>
+<script type="math/tex; mode=display">
+I(s_1,…,s_m) = - \sum_{i=1}^{m}{p_i \log (p_i)}</script><p>利用属性A划分当前样本集合所需要的信息可以计算：</p>
+<script type="math/tex; mode=display">
+E(A) = \sum_{j=1}^{v}{\frac{s_{1j}+s_{2j}+...+s_{mj}}{s}I(s_1,…,s_m) }</script><p>E(A)的值越小，说明其子集划分结果越纯，即越好。而对于一个子集Sj，它的信息为</p>
+<script type="math/tex; mode=display">
+I(s_{1j},…,s_{mj}) = - \sum_{i=1}^{m}{p_{ij} \log (p_{ij})}</script><p>这样利用属性A对当前分支结点进行相应样本集合划分所获得的信息增益是:</p>
+<script type="math/tex; mode=display">
+Gain(A) =I(s_1,…,s_m)- E(A)</script><p>也就是说Gain(A)被认为是利用属性A进行划分后，所获的的信息熵的减少量。</p>
+<p>决策树归纳算法计算每个属性的Gain，选择信息增益最大的属性，作为测试属性并由此产生相应的分支节点。</p>
+</li>
+<li><p>树枝的修剪</p>
+<ol>
+<li><p>事前修剪</p>
+<p>基本原理是设置一个阀值，当某一节点的的样本数少于阀值，则停止细分。难点在于设置一个合理的阀值。</p>
+</li>
+<li><p>事后修剪</p>
+<p>从一个充分生长的树中修建。</p>
+<p>可以使用基于代价成本的方法，也可以使用最短描述长度(MDL)。</p>
+<p>前者计算其分类错误率，若修剪枝导致分类错误率变高，则保留，否则剪枝；后者选择最简单的，无需独立的数据测试</p>
+</li>
+</ol>
+</li>
+<li><p>规则获取</p>
+<p>在已经获得了一个决策树的基础上，可以使用”if…else…”语句描述该决策树。</p>
+</li>
+<li><p>基本决策树方法改进及其扩展性</p>
+</li>
+</ol>
+<h1 id="贝叶斯分类方法"><a href="#贝叶斯分类方法" class="headerlink" title="贝叶斯分类方法"></a>贝叶斯分类方法</h1><p>贝叶斯分类器是一个统计分类器，基于贝叶斯定理。</p>
+<p>简单贝叶斯分类器的分类性能可以与决策树和神经网络相比。</p>
+<p>简单贝叶斯分类器假设一个指定类别中各属性的取值是互相独立的，它可以帮助减少计算量。</p>
+<ol>
+<li><p>贝叶斯定理</p>
+<p>设X为一个类别未知的数据样本，H为某个假设，则：</p>
+<script type="math/tex; mode=display">
+P(H|X) = \frac{P(X|H)P(H)}{P(X)}</script></li>
+<li><p>简单贝叶斯分类方法</p>
+<p>步骤说明如下：</p>
+<ol>
+<li><p>每一个数据都是有一个n维特征向量X={x1,…,xn}构成，分别描述其n个属性(A1,…,An)。</p>
+</li>
+<li><p>若有m个不同的类别(C1,…,Cm)，分类器将未知X归属到类别Ci，当仅当</p>
+<script type="math/tex; mode=display">
+P(C_i|X) = \max(P(C_j|X)|1\le j\le m)</script><p>所以我们要找到最大的</p>
+<script type="math/tex; mode=display">
+P(C_i|X) = \frac{P(X|C_i)P(C_i)}{P(X)}</script></li>
+<li><p>要找到它，只需要P(X|Ci)P(Ci)取最大即可。由于各类别的事前概率是未知的，我们假设P(Ci)是互相相等的，这样，第二步中的式子取最大就转化为了寻找最大的P(X|Ci)</p>
+</li>
+<li><p>由于所含的属性比较多，直接计算P(X|Ci)的计算量还是很大的。由于简单贝叶斯分类器假设各属性独立，则：</p>
+<script type="math/tex; mode=display">
+P(X|C_i) = \prod{P(x_k|C_i)}</script><p>可以根据训练数据样本估算P(xk|Ci)的值。具体如下：</p>
+<ul>
+<li><p>若Ak是符号量</p>
+<script type="math/tex; mode=display">
+P(x_k|Ci)=\frac{s_{ik}}{s_i}</script><p>这里sik为训练样本中类别为Ci且属性Ak取vk的样本数。si为训练样本中类别为Ci的样本数。</p>
+</li>
+<li><p>若Ak是连续量</p>
+<script type="math/tex; mode=display">
+P(x_k|Ci)=g(x_k,\mu_{C_i},\sigma_{C_i}) = \frac{1}{\sqrt{2\pi}\sigma_{C_i}}e^{-\frac{(x-\mu_{C_i})^2}{2\sigma^2_{C_i}}}</script><p>其中$g(x<em>k,\mu</em>{C<em>i},\sigma</em>{C_i})$ï为属性为Ak的高斯规范密度函数。</p>
+</li>
+</ul>
+</li>
+<li><p>为了预测X的分类，我们通过上述方法估计各个类别的正确率，将X归属到可能性最高的类别。</p>
+</li>
+</ol>
+</li>
+<li><p>贝叶斯信念网络</p>
+<p>简单贝叶斯假设属性相互独立，从而简化计算，而实际上属性相互依赖的情况比较常见，所以又出现了贝叶斯信念网络，用于描述这种相互关联的概率分布。</p>
+<p>贝叶斯信念网络提供了一个图形模型来描述其中的因果关系。信念网络包括两个部分。</p>
+<ul>
+<li><p>第一部分是有向无环图</p>
+<p>每一个节点代表随机变量。</p>
+<p>每一条弧代表一个概率依赖。</p>
+<p>给定父节点，每个变量有条件的独立于图中非子节点。</p>
+</li>
+<li><p>第二部分是包含所有变量的条件概率表(CPT)</p>
+<p>对于一个变量Z，CPT定义了P(Z|parent(Z))，由此可以得到一个表。</p>
+<p>例如，LunCancer的父节点是FamilyHistory和Smoker，</p>
+</li>
+</ul>
+</li>
+</ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>FH, S</th>
+<th>FH, ~S</th>
+<th>~FH, S</th>
+<th>~FH, ~S</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LungCancer</td>
+<td>0.8</td>
+<td>0.5</td>
+<td>0.7</td>
+<td>0.1</td>
+</tr>
+<tr>
+<td>~LungCancer</td>
+<td>0.2</td>
+<td>0.5</td>
+<td>0.3</td>
+<td>0.9</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>数据对象的联合概率通过如下公式计算。</p>
+<script type="math/tex; mode=display">
+P(z_1,...,z_n) = \prod{P(z_i|parent(z_i))}</script><ol>
+<li><p>贝叶斯信念网络的学习</p>
+<p>学习算法步骤如下：</p>
+<ol>
+<li><p>计算下降梯度</p>
+<script type="math/tex; mode=display">
+\frac{\partial\ln{P_w(S)}}{\partial w_{ijk}} = \sum_{d=1}^{s}{\frac{P(Y_i=y_{ij}, U_i=u_{ik} |X_d)}{w_{ijk}}}</script><p>​<br>左边是计算训练集合S中每个样本Xd的概率。设这一概率为p。</p>
+<p>由Yi和Ui表示隐含变量，p可通过样本中可观察到的变量以及标准贝叶斯网络推理计算得到。</p>
+</li>
+<li><p>沿梯度方向前进一小步，权重更新计算如下</p>
+<script type="math/tex; mode=display">
+w_{ijk} \leftarrow w_{ijk} + (l)\frac{\partial\ln{P_w(S)}}{\partial w_{ijk}}</script><p>l为学习速率代表学习步长。通常学习速率为较小的常数。</p>
+</li>
+<li><p>重新规格化权重</p>
+<p>保证wijk的取值在0～1，其和等于1.</p>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="神经网络分类方法"><a href="#神经网络分类方法" class="headerlink" title="神经网络分类方法"></a>神经网络分类方法</h1><ol>
+<li><p>多层反馈神经网络</p>
+<p>输入同时赋给第一层(输入层)单元，这些单元输出赋予权重，输出给第二层(隐藏层)。</p>
+<p>隐藏层的带权输出又作为输入再馈给另一隐层。</p>
+<p>最后的隐层结点带权输出馈给输出层单元，最终给出相应样本的预测输出。</p>
+<p>该网络是前馈的，即每一个反馈只能发送到前面的输出层或隐含层。</p>
+<p>它也是全连接的，即每一个层中单元均与前面一层的各单元相连接。</p>
+<p>只要中间隐层足够多的话，多层前馈网络中的线性阈值函数，可以充分逼近任何函数。</p>
+</li>
+<li><p>神经网络结构</p>
+<p>确定结构，即：</p>
+<ul>
+<li>输入层的单元数</li>
+<li>隐含层的个数(和层数)</li>
+<li>每个隐含层的单元数目</li>
+<li>输出层单元数目</li>
+</ul>
+<p>对输入值规格化，一般取值在0～1.</p>
+<p>离散数据可以为每一个取值增加一个节点进行编码。例如A={a0,a1,a2}则我们设立三个输入单元I0, I1, I2，每个单元默认为0，若A=a0，则I1置为1.</p>
+<p>此外没有什么特定的规律或规则来指导隐含层的最佳单元数量，它的确定是一个不断试错的过程。</p>
+</li>
+<li><p>后传方法</p>
+<p>后传方法不断地处理一个训练样本集。将处理结果与训练样本已知类别比较所获误差，修改权重，使网络输出与实际类别之间的均方差最小。权重的修改是后传的，即从前向后的。</p>
+<p>其收敛性不能保证。</p>
+<p>流程(伪代码)：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义sum函数，以变量x对f(x)求和</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum</span><span class="params">(f<span class="params">(x)</span>, x)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化</span></span><br><span class="line">init();</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> !conditions:           <span class="comment"># 条件不满足时</span></span><br><span class="line">    <span class="keyword">for</span> X <span class="keyword">in</span> samples:</span><br><span class="line">        <span class="keyword">for</span> each layer:      <span class="comment"># 每个隐含层和输出层</span></span><br><span class="line">            O[j] = <span class="number">1</span> / (<span class="number">1</span> + exp( - I[j]))</span><br><span class="line">            I[j] = sum(w[i][j]O[i], i) + theta[j]</span><br><span class="line">        <span class="keyword">for</span> each unit of output layer <span class="keyword">as</span> j:    <span class="comment"># 每个输出层单元j，计算向后传播误差</span></span><br><span class="line">            Err[j] = O[j] * (<span class="number">1</span> - O[j]) * (T[j] - O[j])</span><br><span class="line">        <span class="keyword">for</span> each unit of hidden layer <span class="keyword">as</span> j:    <span class="comment"># 每个隐含层单元j，从最后一层到第一层隐含层</span></span><br><span class="line">            Err[j] = O[j] * (<span class="number">1</span> - O[j]) * sum(Err[k] * w[i][j][k], k)</span><br><span class="line">        <span class="keyword">for</span> each w[i][j] <span class="keyword">in</span> the network:       <span class="comment"># network中的权重wij</span></span><br><span class="line">            delta_w[i][j] = (l) * Err[j] * O[i]     <span class="comment"># (l)是学习速率，取值在0～1</span></span><br><span class="line">            w[i][j] += delta_w[i][j]</span><br><span class="line">        <span class="keyword">for</span> each theta[j] <span class="keyword">in</span> the network:      <span class="comment"># network中的偏差thetaij</span></span><br><span class="line">            delta_theta[j] = (l) * Err[j]</span><br><span class="line">            v[i] = theta[j] + delta_theta[j]</span><br></pre></td></tr></table></figure>
+<p>看伪代码基本就能明白它的过程了。虽然伪代码可能写的比较迷。。。</p>
+</li>
+</ol>
+<h1 id="基于关联的分类方法"><a href="#基于关联的分类方法" class="headerlink" title="基于关联的分类方法"></a>基于关联的分类方法</h1><p>略，后面会详细说。</p>
+<h1 id="其他分类"><a href="#其他分类" class="headerlink" title="其他分类"></a>其他分类</h1><p>其他分类我也没有细看，纪录一下名字，以后有时间再看。</p>
+<ol>
+<li><p>k-最邻近方法</p>
+<p>这个很简单，就是比较两个点的欧式距离。比较基本的分类方法，略。</p>
+</li>
+<li><p>基于示例推理</p>
+</li>
+<li><p>遗传算法</p>
+</li>
+<li><p>粗糙集方法</p>
+</li>
+<li><p>模糊集合方法</p>
+</li>
+</ol>
+<h1 id="预测方法"><a href="#预测方法" class="headerlink" title="预测方法"></a>预测方法</h1><ol>
+<li><p>线形与多变量回归</p>
+<p>线性代数、概率统计、数值计算方法里都学过。核心是利用最小二乘法。</p>
+</li>
+<li><p>非线性回归</p>
+<p>例如多项式回归</p>
+<script type="math/tex; mode=display">
+Y = \alpha + \beta_1 X+\beta_2 X^2+\beta_3 X^3</script><p>为了将其转化为线性形式，令：</p>
+<script type="math/tex; mode=display">
+X_1 = X;X_2 = X^2 ; X_3 = X^3</script><p>接下来就用最小二乘法即可。</p>
+</li>
+<li><p>其他回归模型</p>
+<p>对数回归、泊松回归等</p>
+</li>
+</ol>
+<h1 id="分类器准确性"><a href="#分类器准确性" class="headerlink" title="分类器准确性"></a>分类器准确性</h1><p>分层k次交叉验证方法普遍应用于对分类器预测准确性的评估方面。而bagging方法和boosting方法则通过学习和组合多个(单)分类器来帮助提高整个(数据训练样本所获)分类器的预测准确性。</p>
+
+            </div>
+        
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://LorrinWWW.github.io/datamining-class-pred/" data-id="cjeookh5z002opldyecafhenx" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://LorrinWWW.github.io/datamining-class-pred/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://LorrinWWW.github.io/datamining-class-pred/">Comentarios</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/learning-OS-and-building-LorriOS/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    learning OS and building LorriOS
+                
+            </div>
+        </a>
+    
+    
+        <a href="/ML-CNN/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">ML CNN</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Recientes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/[2018.3.10]Several-models-for-kenowledge-graoh-representing-and-completing/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/research/">research</a></p>
+                            <p class="item-title"><a href="/[2018.3.10]Several-models-for-kenowledge-graoh-representing-and-completing/" class="title">Several models for knowledge graph representing and completing 几个知识图谱模型</a></p>
+                            <p class="item-date"><time datetime="2018-03-10T07:00:00.000Z" itemprop="datePublished">2018-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/[2018.2.26]Open-World-Knowledge-Graph-Completion/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/research/">research</a></p>
+                            <p class="item-title"><a href="/[2018.2.26]Open-World-Knowledge-Graph-Completion/" class="title">Open-World Knowledge Graph Completion 笔记</a></p>
+                            <p class="item-date"><time datetime="2018-02-26T07:00:00.000Z" itemprop="datePublished">2018-02-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/[2018.2.5]Nested-LSTMs/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/research/">research</a></p>
+                            <p class="item-title"><a href="/[2018.2.5]Nested-LSTMs/" class="title">Nested LSTMs 笔记</a></p>
+                            <p class="item-date"><time datetime="2018-02-05T07:00:00.000Z" itemprop="datePublished">2018-02-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/[2018.1.29]A-convolution BiLSTM-neural-network-model-for-chinese-event-extraction/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/research/">research</a></p>
+                            <p class="item-title"><a href="/[2018.1.29]A-convolution BiLSTM-neural-network-model-for-chinese-event-extraction/" class="title">A convolution BiLSTM neural network model for chinese event extraction 笔记</a></p>
+                            <p class="item-date"><time datetime="2018-01-29T07:00:00.000Z" itemprop="datePublished">2018-01-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/[2018.1.21]Event-detection-and-co-referentce/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/research/">research</a></p>
+                            <p class="item-title"><a href="/[2018.1.21]Event-detection-and-co-referentce/" class="title">Event detection and co-reference with minimal supervision 笔记</a></p>
+                            <p class="item-date"><time datetime="2018-01-21T07:00:00.000Z" itemprop="datePublished">2018-01-21</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Categorias</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/francais/">francais</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/math/">math</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/math/unfinished/">unfinished</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming/unfinished/">unfinished</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/research/">research</a><span class="category-list-count">9</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Archivos</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">8</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Nube de etiquetas</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Bayes/" style="font-size: 10px;">Bayes</a> <a href="/tags/BiLSTM/" style="font-size: 10px;">BiLSTM</a> <a href="/tags/CNN/" style="font-size: 11.43px;">CNN</a> <a href="/tags/EDP/" style="font-size: 12.86px;">EDP</a> <a href="/tags/FEM/" style="font-size: 10px;">FEM</a> <a href="/tags/GAN/" style="font-size: 10px;">GAN</a> <a href="/tags/Hilbert/" style="font-size: 10px;">Hilbert</a> <a href="/tags/KGC/" style="font-size: 11.43px;">KGC</a> <a href="/tags/LSTM/" style="font-size: 11.43px;">LSTM</a> <a href="/tags/OS/" style="font-size: 11.43px;">OS</a> <a href="/tags/RNN/" style="font-size: 11.43px;">RNN</a> <a href="/tags/Sobolev/" style="font-size: 10px;">Sobolev</a> <a href="/tags/aleatoire/" style="font-size: 10px;">aleatoire</a> <a href="/tags/algo/" style="font-size: 17.14px;">algo</a> <a href="/tags/analyse/" style="font-size: 11.43px;">analyse</a> <a href="/tags/attention/" style="font-size: 10px;">attention</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/classification/" style="font-size: 10px;">classification</a> <a href="/tags/co-reference/" style="font-size: 10px;">co-reference</a> <a href="/tags/complexity/" style="font-size: 10px;">complexity</a> <a href="/tags/compression/" style="font-size: 10px;">compression</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/crawl/" style="font-size: 10px;">crawl</a> <a href="/tags/data-structure/" style="font-size: 10px;">data-structure</a> <a href="/tags/datamining/" style="font-size: 15.71px;">datamining</a> <a href="/tags/deep-learning/" style="font-size: 11.43px;">deep-learning</a> <a href="/tags/distant-supervision/" style="font-size: 10px;">distant-supervision</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/entity-resolution/" style="font-size: 10px;">entity-resolution</a> <a href="/tags/event-detection/" style="font-size: 10px;">event-detection</a> <a href="/tags/event-extraction/" style="font-size: 10px;">event-extraction</a> <a href="/tags/firm/" style="font-size: 10px;">firm</a> <a href="/tags/francais/" style="font-size: 10px;">francais</a> <a href="/tags/graph/" style="font-size: 10px;">graph</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/kernel/" style="font-size: 10px;">kernel</a> <a href="/tags/knowledge-graph/" style="font-size: 12.86px;">knowledge-graph</a> <a href="/tags/language/" style="font-size: 10px;">language</a> <a href="/tags/latex/" style="font-size: 10px;">latex</a> <a href="/tags/limited-supervision/" style="font-size: 10px;">limited-supervision</a> <a href="/tags/machine-learning/" style="font-size: 14.29px;">machine-learning</a> <a href="/tags/management/" style="font-size: 10px;">management</a> <a href="/tags/marked/" style="font-size: 10px;">marked</a> <a href="/tags/math/" style="font-size: 20px;">math</a> <a href="/tags/mathjax/" style="font-size: 10px;">mathjax</a> <a href="/tags/matrix/" style="font-size: 10px;">matrix</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/nlp/" style="font-size: 10px;">nlp</a> <a href="/tags/prediction/" style="font-size: 10px;">prediction</a> <a href="/tags/probability/" style="font-size: 17.14px;">probability</a> <a href="/tags/programming/" style="font-size: 18.57px;">programming</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/qualitative-induction/" style="font-size: 10px;">qualitative-induction</a> <a href="/tags/relation-classification/" style="font-size: 10px;">relation-classification</a> <a href="/tags/relation-extraction/" style="font-size: 14.29px;">relation-extraction</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/sequence-labeling/" style="font-size: 10px;">sequence-labeling</a> <a href="/tags/spider/" style="font-size: 10px;">spider</a> <a href="/tags/statistic/" style="font-size: 11.43px;">statistic</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/weak-supervision/" style="font-size: 10px;">weak-supervision</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">Links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 Lorrin<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://LorrinWWW.github.io/datamining-class-pred/';
+        
+        this.page.identifier = 'datamining-class-pred';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'lorrins-blog' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>

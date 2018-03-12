@@ -3,6 +3,7 @@ title: Generative Adversarial Network
 date: 2017-06-25 14:41:15
 categories: [programming]
 tags: [GAN, deep-learning]
+typora-copy-images-to: ipic
 ---
 
 # Generative Adversarial Network
@@ -45,7 +46,10 @@ tags: [GAN, deep-learning]
 
 
 
+
 ## GAN
+
+<img src="http://oi4yiqiop.bkt.clouddn.com/2018-03-12-202530.png" width="70%">
 
 相当于是由一个生成器和分类器(true or false)
 
@@ -65,6 +69,7 @@ tags: [GAN, deep-learning]
   $$
   G^* = {arg} {min}_G {max}_D V(G,D)
   $$
+
 
 
 
