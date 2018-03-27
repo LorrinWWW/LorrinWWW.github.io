@@ -15,7 +15,7 @@ $$
 
   - 分布函数 la fonction de repartition
     $$
-    F:x\xrightarrow{}F(x) = P(] - \infty,x] ) \\ F:x\xrightarrow{}F(x) = \int_{ ]-\infty,x] }{f(t).\lambda(dt)}
+    F:x\rightarrow F(x) = P(] - \infty,x] ) \\ F:x\xrightarrow{}F(x) = \int_{ ]-\infty,x] } {f(t).\lambda(dt)}
     $$
 
   - 定理
@@ -103,7 +103,7 @@ $$
 
   - 定义
   $$
-  un\ moment\ d'ordre\ n: \int_\Omega{|X|^ndP} < \infty
+  \text{un moment d'ordre n}: \int_\Omega{|X|^ndP} < \infty
   $$
 
   - 性质，若0<p<q，可以得到Lq被Lp包含。
@@ -122,7 +122,7 @@ $$
     $$
     特别的
     $$
-    P(X \in A) = E[1_{\{X\in A\}}] = \int_A{f_X(dx)}
+    P(X \in A) = E[1_{ \{X\in A\} } ] = \int_A{f_X(dx)}
     $$
 
 - Vecteurs aleatoires

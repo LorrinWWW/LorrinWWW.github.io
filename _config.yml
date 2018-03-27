@@ -15,7 +15,7 @@ timezone:
 url: https://LorrinWWW.github.io
 root: /
 # permalink: :year/:month/:day/:title/
-permalink: :title/
+permalink: posts/:title/
 permalink_defaults:
 
 # Directory
@@ -26,7 +26,7 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render: 'baidu*.html'
+skip_render: ['baidu*.html', 'CNAME']
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -86,11 +86,4 @@ math:
   mathjax:
     src: "https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js"
 
-kramed:
-  gfm: true
-  pedantic: false
-  sanitize: false
-  tables: true
-  breaks: true
-  smartLists: true
-  smartypants: true
+
