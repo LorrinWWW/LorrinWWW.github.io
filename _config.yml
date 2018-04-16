@@ -86,4 +86,11 @@ math:
   mathjax:
     src: "https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js"
 
+recommended_posts:
+  timeoutInMillis: 10000 #服务时长，超过此时长，则使用离线推荐模式
+  internalLinks: 3 #内部文章数量
+  externalLinks: 1 #外部文章数量
+  autoDisplay: true, #自动在文章底部显示推荐文章
+  titleHtml: <h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1> #自定义标题
+
 
