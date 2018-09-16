@@ -26,7 +26,7 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render: ['baidu*.html', 'CNAME']
+skip_render: ['baidu*.html', 'CNAME', '_skip_render_*']
 
 # Writing
 new_post_name: :title.md # File name of new posts
