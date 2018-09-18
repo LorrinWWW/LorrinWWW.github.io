@@ -4,15 +4,15 @@
 
 # Site
 title: Lorrin's Blog
-subtitle: 半路出家的码农 | 法国留学中
-description: 分享一些想法，每周更一篇论文阅读
+subtitle: 老和山职业技术学院修电脑专业小硕 | L'ingénieur CentraleSupélec
+description: 分享一些想法，每n周更一篇论文阅读
 author: Lorrin
 language: zh-Hans
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://LorrinWWW.github.io
+url: https://blog.lorrin.info
 root: /
 # permalink: :year/:month/:day/:title/
 permalink: posts/:title/
