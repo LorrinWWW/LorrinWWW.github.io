@@ -3,16 +3,16 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Lorrin's Blog
+title: Jue's Blog
 subtitle: MSCS@ZJU | Ingénieur CentraleSupélec
 description: Schrödinger's update frequency
-author: Lorrin
-language: zh-Hans
+author: Jue Wang
+language: en
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://blog.lorrin.info
+url: https://juewang.me
 root: /
 # permalink: :year/:month/:day/:title/
 permalink: posts/:title/
@@ -91,6 +91,6 @@ recommended_posts:
   internalLinks: 3 #内部文章数量
   externalLinks: 1 #外部文章数量
   autoDisplay: true, #自动在文章底部显示推荐文章
-  titleHtml: <h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1> #自定义标题
+  titleHtml: <h1>Recommend<span style="font-size:0.45em; color:gray">(Powered by <a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>)</span></h1> #自定义标题
 
 
