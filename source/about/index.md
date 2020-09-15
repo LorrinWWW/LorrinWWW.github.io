@@ -13,6 +13,7 @@ My [resume](resume-Jue.Wang.pdf).
 
 ## Updates
 
+- Sep 2020: As the first author, I had one long paper accepted to EMNLP 2020.
 - Apr 2020: As the first author, I had one long paper accepted to ACL 2020.
 - Feb 2020: I had a remote internship at [StatNLP](https://statnlp-research.github.io/) under the guidance of [Prof. Wei Lu](https://istd.sutd.edu.sg/people/faculty/lu-wei).
 - Aug 2019: I was enrolled in ByteCamp hosted by [ByteDance](https://bytedance.com/en), where I mainly deal with Multimodal Classification.
