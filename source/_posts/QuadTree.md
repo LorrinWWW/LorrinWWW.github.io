@@ -38,5 +38,5 @@ tags: [algo, data-structure]
 
 在实验课的内容里，用python进行数据处理，用paraview进行数据可视化。代码其实挺简单（算法就不难= =），实验课还没结束暂时不附代码了，附一个效果图。
 
-![QTree](http://oi4yiqiop.bkt.clouddn.com/QTree.png?imageMogr2/thumbnail/!50p)
+![QTree](https://lorrin-1251763245.cos.ap-shanghai.myqcloud.com/photo/QTree.png?imageMogr2/thumbnail/!50p)
 

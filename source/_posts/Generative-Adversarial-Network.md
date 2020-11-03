@@ -49,7 +49,7 @@ typora-copy-images-to: ipic
 
 ## GAN
 
-<img src="http://oi4yiqiop.bkt.clouddn.com/2018-03-12-202530.png" width="70%">
+<img src="https://lorrin-1251763245.cos.ap-shanghai.myqcloud.com/photo/2018-03-12-202530.png" width="70%">
 
 相当于是由一个生成器和分类器(true or false)
 
