@@ -3,9 +3,9 @@ title: "Jue Wang"
 date: 2020-12-02 16:00:00
 ---
 
-Hello, I am currently a third-year master student in [Data Intelligence Lab](http://59.111.103.237:8081/) of Zhejiang University. I am also an engineering student (Double Degree) at CentraleSupelec. I am advised by [Prof. Lidan Shou](https://person.zju.edu.cn/en/should) at Zhejiang University.
+Hello, I am a PhD student in [Data Intelligence Lab](http://59.111.103.237:8081/) of Zhejiang University. I am also an engineering student (Double Degree) at CentraleSupelec. I am advised by [Prof. Lidan Shou](https://person.zju.edu.cn/en/should) at Zhejiang University.
 
-I work on Natural Language Processing and Data Mining. More specifically, my research interests lie in Information Extraction such as Named Entity Recognition Knowledge Extraction etc., Weak/Semi-Supervised Learning Algorithm and other nlp-related problems as well as AI more broadly. If you want to get in touch, please [send me an email](mailto:zjuwangjue@gmail.com). 
+I work on Natural Language Processing and Data Mining. More specifically, my research interests lie in Information Extraction such as Named Entity Recognition, Relation Extraction, Weak/Semi-Supervised Learning Algorithm, and other nlp-related problems as well as AI more broadly. If you want to get in touch, please [send me an email](mailto:zjuwangjue@gmail.com). 
 
 My [resume](resume-Jue.Wang.pdf). 
 
@@ -22,8 +22,8 @@ My [resume](resume-Jue.Wang.pdf).
 
 ## Education
 
-- **Zhejiang University**, Master in Computer Science (Current), Sep 2018 - Mar 2021(Expected)
-- **Université Paris Saclay (CentraleSupélec)**, Master(Engineer) in General Engineering (Current), Sep 2016 - Mar 2021(Expected)
+- **Zhejiang University**, PhD student in Computer Science (Current), Sep 2018 - Jun 2023 (Expected)
+- **Université Paris Saclay (CentraleSupélec)**, Master (Engineer) in General Engineering (Current), Sep 2016 - Mar 2021(Expected)
 - **Zhejiang University**, Bachelor in Electrical Engineering, Sep 2014 - Jun 2018
 
 ## Contact
