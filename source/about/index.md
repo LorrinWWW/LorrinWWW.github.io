@@ -1,16 +1,17 @@
 ---
 title: "Jue Wang"
-date: 2020-12-02 16:00:00
+date: 2021-6-1 16:00:00
 ---
 
-Hello, I am a PhD student in [Data Intelligence Lab](http://59.111.103.237:8081/) of Zhejiang University. I am also an engineering student (Double Degree) at CentraleSupelec. I am advised by [Prof. Lidan Shou](https://person.zju.edu.cn/en/should) at Zhejiang University.
+Hello, I am a PhD student in [Data Intelligence Lab](http://59.111.103.237:8081/) of Zhejiang University, advised by [Prof. Lidan Shou](https://person.zju.edu.cn/en/should).
 
-I work on Natural Language Processing and Data Mining. More specifically, my research interests lie in Information Extraction such as Named Entity Recognition, Relation Extraction, Weak/Semi-Supervised Learning Algorithm, and other nlp-related problems as well as AI more broadly. If you want to get in touch, please [send me an email](mailto:zjuwangjue@gmail.com). 
+I work on Natural Language Processing and Data Mining. More specifically, my research interests lie in Information Extraction (e.g., Named Entity Recognition and Relation Extraction), NLP in low-resource scenarios (e.g., Weak/Semi-Supervised Learning), and Efficient Algorithms for NLP (e.g., Knowledge Distillation and Network Pruning). If you want to get in touch, please [send me an email](mailto:zjuwangjue@gmail.com). 
 
 My [resume](resume-Jue.Wang.pdf). 
 
 ## Updates
 
+- Jun 2021: I graduated from [CentraleSupélec](https://www.centralesupelec.fr/) with diplôme d'Ingénieur (master degree), cheers!
 - Dec 2020: As the first author, I had one long paper accepted to AAAI 2021.
 - Sep 2020: As the first author, I had one long paper accepted to EMNLP 2020.
 - Apr 2020: As the first author, I had one long paper accepted to ACL 2020.
@@ -23,7 +24,7 @@ My [resume](resume-Jue.Wang.pdf).
 ## Education
 
 - **Zhejiang University**, PhD student in Computer Science (Current), Sep 2018 - Jun 2023 (Expected)
-- **Université Paris Saclay (CentraleSupélec)**, Master (Engineer) in General Engineering (Current), Sep 2016 - Mar 2021(Expected)
+- **Université Paris Saclay (CentraleSupélec)**, Master (Engineer) in General Engineering, Sep 2016 - May 2021
 - **Zhejiang University**, Bachelor in Electrical Engineering, Sep 2014 - Jun 2018
 
 ## Contact
