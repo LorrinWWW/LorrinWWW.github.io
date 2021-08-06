@@ -4,8 +4,8 @@
 
 # Site
 title: Jue's Blog
-subtitle: MSCS@ZJU | Ingénieur CentraleSupélec
-description: Schrödinger's update frequency
+subtitle: Ph.D Student @ ZJU | Ingénieur CentraleSupélec
+description: Effective and Efficient NLP
 author: Jue Wang
 language: en
 timezone:
@@ -46,8 +46,8 @@ highlight:
 
 # Category & Tag
 default_category: uncategorized
-category_map: 
-tag_map: 
+category_map:
+tag_map:
 
 category_generator:
   per_page: 10
@@ -67,7 +67,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: icarus
+theme: hexo-theme-icarus
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -92,5 +92,3 @@ recommended_posts:
   externalLinks: 1 #外部文章数量
   autoDisplay: true, #自动在文章底部显示推荐文章
   titleHtml: <h1>Recommend<span style="font-size:0.45em; color:gray">(Powered by <a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>)</span></h1> #自定义标题
-
-
