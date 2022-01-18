@@ -86,9 +86,6 @@ math:
   mathjax:
     src: "https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js"
     
-exclude_generator:
-    - index
-
 recommended_posts:
   timeoutInMillis: 10000 #服务时长，超过此时长，则使用离线推荐模式
   internalLinks: 3 #内部文章数量
