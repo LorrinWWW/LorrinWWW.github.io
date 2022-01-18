@@ -56,6 +56,9 @@ class Footer extends Component {
                     </div>
                 </div>
             </div>
+            <div id="divmap" style="visibility:hidden; position: absolute; top: 0px">
+		<script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=2&t=n&d=I_238wU69nrKH0DIm55b1z-y84aVsLuSzQSglFoJ1ww&co=ffffff&ct=ffffff&cmo=ffffff&cmn=ffffff"></script>
+	    </div>
         </footer>;
     }
 }
@@ -88,3 +91,5 @@ module.exports = cacheComponent(Footer, 'common.footer', props => {
         visitorCounterTitle: _p('plugin.visitor_count', '<span id="busuanzi_value_site_uv">0</span>')
     };
 });
+
+
