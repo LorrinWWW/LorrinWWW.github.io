@@ -1,6 +1,6 @@
 ---
 title: "Jue Wang"
-date: 2021-6-1 16:00:00
+date: 2022-2-24 16:00:00
 top: 100
 ---
 
@@ -12,6 +12,7 @@ My [resume](resume-Jue.Wang.pdf).
 
 ## Updates
 
+- Feb 2022: As the first author, I had one long paper accepted to ACL 2022.
 - Jun 2021: I graduated from [CentraleSupélec](https://www.centralesupelec.fr/) with diplôme d'Ingénieur (master degree), cheers!
 - Dec 2020: As the first author, I had one long paper accepted to AAAI 2021.
 - Sep 2020: As the first author, I had one long paper accepted to EMNLP 2020.

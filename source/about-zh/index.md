@@ -11,6 +11,7 @@ Hi ~ 我目前是浙江大学数据智能实验室（[Data Intelligence Lab](htt
 
 ## 近期动态
 
+- Feb 2022: As the first author, I had one long paper accepted to ACL 2022.
 - Jun 2021: I graduated from [CentraleSupélec](https://www.centralesupelec.fr/) with diplôme d'Ingénieur (master degree), cheers!
 - Dec 2020: As the first author, I had one long paper accepted to AAAI 2021.
 - Sep 2020: As the first author, I had one long paper accepted to EMNLP 2020.
