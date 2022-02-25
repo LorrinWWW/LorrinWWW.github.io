@@ -4,21 +4,21 @@
   <url>
     <loc>https://juewang.me/posts/about/</loc>
     
-    <lastmod>2021-11-18</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://juewang.me/about/index.html</loc>
-    
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     
   </url>
   
   <url>
     <loc>https://juewang.me/about-zh/index.html</loc>
     
-    <lastmod>2021-06-09</lastmod>
+    <lastmod>2022-02-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://juewang.me/about/index.html</loc>
+    
+    <lastmod>2022-02-25</lastmod>
     
   </url>
   
@@ -424,512 +424,512 @@
 
   <url>
     <loc>https://juewang.me/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://juewang.me/tags/Bayes/</loc>
-    <lastmod>2021-11-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://juewang.me/tags/statistic/</loc>
-    <lastmod>2021-11-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://juewang.me/tags/EDP/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/matrix/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/math/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://juewang.me/tags/Bayes/</loc>
+    <lastmod>2022-02-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://juewang.me/tags/statistic/</loc>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/FEM/</loc>
-    <lastmod>2021-11-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://juewang.me/tags/scrapy/</loc>
-    <lastmod>2021-11-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://juewang.me/tags/python/</loc>
-    <lastmod>2021-11-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://juewang.me/tags/spider/</loc>
-    <lastmod>2021-11-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://juewang.me/tags/crawl/</loc>
-    <lastmod>2021-11-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://juewang.me/tags/Hilbert/</loc>
-    <lastmod>2021-11-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://juewang.me/tags/analyse/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/GAN/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/deep-learning/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://juewang.me/tags/scrapy/</loc>
+    <lastmod>2022-02-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://juewang.me/tags/python/</loc>
+    <lastmod>2022-02-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://juewang.me/tags/spider/</loc>
+    <lastmod>2022-02-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://juewang.me/tags/crawl/</loc>
+    <lastmod>2022-02-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://juewang.me/tags/Hilbert/</loc>
+    <lastmod>2022-02-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://juewang.me/tags/analyse/</loc>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/machine-learning/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/programming/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/algo/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/CNN/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/mongo/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/mongodb/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/docker/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/nlp/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/datamining/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/knowledge-graph/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/probability/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/OS/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/data-structure/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/Sobolev/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/entity-resolution/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/sequence-labeling/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/relation-extraction/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/LSTM/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/RNN/</loc>
-    <lastmod>2021-11-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://juewang.me/tags/distant-supervision/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/relation-classification/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/attention/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://juewang.me/tags/distant-supervision/</loc>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/event-detection/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/co-reference/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/convolution/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/BiLSTM/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/event-extraction/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/limited-supervision/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/weak-supervision/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/KGC/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/neural-network/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/reinforcement-learning/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/summarization/</loc>
-    <lastmod>2021-11-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://juewang.me/tags/NLP/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/regular-expression/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://juewang.me/tags/NLP/</loc>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/review/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/complexity/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/compression/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/classification/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/prediction/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/qualitative-induction/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/graph/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/hexo/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/latex/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/mathjax/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/marked/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/knowledge-reasoning/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/kernel/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/management/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/firm/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/francais/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/language/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/aleatoire/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/vector/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/web/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/chrome/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/rss/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/vps/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -938,49 +938,49 @@
   
   <url>
     <loc>https://juewang.me/categories/math/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/categories/math/unfinished/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/categories/programming/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/categories/programming/unfinished/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/categories/research/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/categories/other/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/categories/francais/</loc>
-    <lastmod>2021-11-18</lastmod>
+    <lastmod>2022-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
