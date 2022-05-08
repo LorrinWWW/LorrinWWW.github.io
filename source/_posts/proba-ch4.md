@@ -3,6 +3,7 @@ title: proba-ch4 高斯向量
 date: 2016-12-01 16:28:52
 categories: math
 tags: [probability, math, vector]
+hidden: true
 ---
 
 定义

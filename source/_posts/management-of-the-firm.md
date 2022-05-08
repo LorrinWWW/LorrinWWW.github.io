@@ -3,6 +3,7 @@ title: 企业管理复习笔记
 date: 2016-12-10 17:48:37
 categories: other
 tags: [management, firm]
+hidden: true
 ---
 
 This is the note of learning "Management of the firm", with the book of GESTION (ecole centrale paris).

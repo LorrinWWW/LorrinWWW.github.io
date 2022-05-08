@@ -3,6 +3,7 @@ title: Note of statistic
 date: 2017-01-28 18:13:13
 categories: [math, unfinished]
 tags: [statistic, math]
+hidden: true
 ---
 
 # 各种定理

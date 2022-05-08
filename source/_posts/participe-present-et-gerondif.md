@@ -3,6 +3,7 @@ title: participe présent et gérondif
 date: 2016-12-06 12:31:56
 categories: francais
 tags: [francais, language]
+hidden: true
 ---
 
 # 现在分词(le participe présent)

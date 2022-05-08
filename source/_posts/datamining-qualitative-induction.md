@@ -3,6 +3,7 @@ title: 数据挖掘-定性归纳
 date: 2016-12-08 21:31:50
 categories: [programming]
 tags: [datamining, qualitative-induction, programming]
+hidden: true
 ---
 
 # 数据泛化和概念对比

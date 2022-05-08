@@ -3,6 +3,7 @@ title: 贝叶斯估计 Bayes estimation
 date: 2017-01-07 16:46:31
 categories: [math]
 tags: [Bayes, statistic]
+hidden: true
 ---
 
 在机器学习中，贝叶斯这个名字被不止一次的提到。正好又看到了贝叶斯参数估计，简单记录方法，可能没有严谨的数学推导，见谅。

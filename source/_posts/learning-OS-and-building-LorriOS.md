@@ -3,6 +3,7 @@ title: learning OS and building LorriOS
 date: 2016-12-28 15:00:08
 categories: [programming, unfinished]
 tags: [OS, kernel]
+hidden: true
 ---
 
 暂时用以记录操作系统的学习，以及开发自己的一个toy OS，作为一个项目日志?(如果能成功的话。。)。写这个东西的目的还是给我自己看的（估计其他人也会看的一头雾水吧，笑），毕竟人不太可能一次就找到正确的道路，所以日志写起来可能非常乱糟糟。所以说这只是一个记录，没有什么真正的参考价值。等这个toy os完成的差不多了，我应该会再来总结和记录一下。

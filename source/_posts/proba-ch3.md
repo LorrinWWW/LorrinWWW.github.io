@@ -3,6 +3,7 @@ title: proba-ch3 实域概率和特征方程
 date: 2016-12-01 14:54:10
 categories: math
 tags: [probability, math]
+hidden: true
 ---
 
 1. 几种常见分布

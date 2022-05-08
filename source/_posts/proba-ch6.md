@@ -5,6 +5,7 @@ tags:
   - math
   - probability
 date: 2016-12-02 21:32:30
+hidden: true
 ---
 
 $$

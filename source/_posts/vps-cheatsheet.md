@@ -3,6 +3,7 @@ title: CheatSheet for Setting up New VPS
 date: 2020-02-09 16:18:11
 categories: other
 tags: [vps]
+hidden: true
 ---
 
 # Basics

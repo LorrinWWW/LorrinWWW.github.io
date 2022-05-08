@@ -5,6 +5,7 @@ tags:
   - math
   - EDP
 date: 2017-03-06 10:04:58
+hidden: true
 ---
 
 # Examples of moedels

@@ -3,6 +3,7 @@ title: Note of NLP
 date: 2017-06-26 20:52:45
 categories: [programming]
 tags: [nlp, machine-learning, deep-learning]
+hidden: true
 ---
 
 # NLP

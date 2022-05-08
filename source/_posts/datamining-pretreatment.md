@@ -3,6 +3,7 @@ title: 数据挖掘-预处理
 date: 2016-12-06 22:05:57
 categories: programming
 tags: [datamining, programming]
+hidden: true
 ---
 
 由于数据的快速膨胀，我们获得的数据往往带有大量的噪声，所以我们需要对其进行一定的预处理。

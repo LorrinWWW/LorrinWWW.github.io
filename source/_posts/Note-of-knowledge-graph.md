@@ -3,6 +3,7 @@ title: Note of knowledge graph
 date: 2017-06-25 11:21:18
 categories: [programming]
 tags: [knowledge-graph, machine-learning, datamining]
+hidden: true
 ---
 
 # 知识图谱 Knowledge graph

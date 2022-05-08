@@ -3,6 +3,7 @@ title: 概率论笔记 Note of probability
 date: 2016-11-30 19:35:53
 categories: [math]
 tags: [math, probability]
+hidden: true
 ---
 
 该笔记只是记录在法国学的一些东西，因为学的是法语的翻译可能有些摸不着头脑，并且记的凌乱，望见谅。

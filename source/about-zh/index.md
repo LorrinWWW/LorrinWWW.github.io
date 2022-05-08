@@ -1,16 +1,19 @@
 ---
 title: "王珏"
-date: 2020-12-28 16:00:00
+date: 2022-4-21 16:00:00
 ---
 
 Hi ~ 我目前是浙江大学数据智能实验室（[Data Intelligence Lab](http://59.111.103.237:8081/)）的博士生，导师是[寿黎但](https://person.zju.edu.cn/en/should)教授。
+我目前在ETH Zurich交流，导师是[Prof. Ce Zhang](https://ds3lab.inf.ethz.ch/members/ce-zhang.html)。
 
-我主要研究 Natural Language Processing 和 Data Mining 相关工作。 具体来说，我的研究兴趣在于 Information Extraction（比如实体识别、关系抽取等），低资源下的NLP（比如弱/半监督学习算法），以及高效NLP算法（比如知识蒸馏等）。可以通过[电子邮件](mailto:zjuwangjue@gmail.com)来联系我。
+我主要研究 Natural Language Processing 相关工作。 具体来说，我的研究兴趣在于 高效NLP算法（比如知识蒸馏等）， Information Extraction（比如实体识别、关系抽取等），以及低资源下的NLP（比如弱/半监督学习算法）。可以通过[电子邮件](mailto:zjuwangjue@gmail.com)来联系我。
 
 这是我的[简历](/about/resume-Jue.Wang.pdf)。
 
 ## 近期动态
 
+- Apr 2022: We got a paper accepted to IJCAI 2022.
+- Mar 2022: I started visiting ETH Zurich.
 - Feb 2022: As the first author, I had one long paper accepted to ACL 2022.
 - Jun 2021: I graduated from [CentraleSupélec](https://www.centralesupelec.fr/) with diplôme d'Ingénieur (master degree), cheers!
 - Dec 2020: As the first author, I had one long paper accepted to AAAI 2021.
@@ -40,4 +43,4 @@ Email: zjuwangjue@gmail.com
 
 ---
 
-[Blog](https://blog.lorrin.info)([RSS](https://blog.lorrin.info/atom.xml)), [Github](https://github.com/LorrinWWW), [知乎](https://www.zhihu.com/people/wang-jue-9/activities), 欢迎关注～
+[Blog](https://juewang.me)([RSS](https://juewang.me/atom.xml)), [Github](https://github.com/LorrinWWW), [知乎](https://www.zhihu.com/people/wang-jue-9/activities), 欢迎关注～

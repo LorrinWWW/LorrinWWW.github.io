@@ -3,6 +3,7 @@ title: proba-ch2 随机变量
 date: 2016-12-01 12:17:33
 categories: math
 tags: [probability, math, aleatoire]
+hidden: true
 ---
 
 - ​

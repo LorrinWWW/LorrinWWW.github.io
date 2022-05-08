@@ -3,6 +3,7 @@ title: 数据挖掘-分类与预测
 date: 2016-12-26 14:56:57
 categories: [programming]
 tags: [datamining, programming, classification, prediction]
+hidden: true
 ---
 
 # 基本知识

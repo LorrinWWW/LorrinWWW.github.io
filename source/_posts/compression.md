@@ -3,6 +3,7 @@ title: 编码解码 compression
 date: 2016-11-27 14:22:11
 categories: programming
 tags: [algo, compression, programming]
+hidden: true
 ---
 
 1. Run length encoding

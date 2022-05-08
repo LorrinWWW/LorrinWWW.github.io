@@ -3,6 +3,7 @@ title: OS notes
 date: 2017-04-15 18:59:08
 categories: [programming, unfinished]
 tags: [OS]
+hidden: true
 ---
 
 # Operating System

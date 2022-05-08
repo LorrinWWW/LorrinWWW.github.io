@@ -3,6 +3,7 @@ title: Hilbert space
 date: 2017-02-11 13:10:06
 categories: [math]
 tags: [Hilbert, math, analyse]
+hidden: true
 ---
 
 # 希尔伯特空间 Hilbert space

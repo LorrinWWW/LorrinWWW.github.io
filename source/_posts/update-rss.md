@@ -3,6 +3,7 @@ title: Set up the RSS feed
 date: 2018-05-12 12:57:31
 categories: [other]
 tags: [hexo, rss]
+hidden: true
 ---
 
 This post is both declaration of the update and a test whether the rss works well.

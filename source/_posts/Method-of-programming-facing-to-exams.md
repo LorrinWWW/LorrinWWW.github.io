@@ -3,6 +3,7 @@ title: 面向考试常用编程思想 Method of programming facing to exams
 date: 2016-11-27 13:49:31
 categories: programming
 tags: [algo, programming]
+hidden: true
 ---
 
 1. 穷举法

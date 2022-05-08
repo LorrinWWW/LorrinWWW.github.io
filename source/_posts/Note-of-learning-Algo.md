@@ -3,6 +3,7 @@ title: 算法笔记 Note of learning Algo
 date: 2016-11-27 12:38:32
 categories: programming
 tags: [algo, programming]
+hidden: true
 ---
 
 # Data Structure

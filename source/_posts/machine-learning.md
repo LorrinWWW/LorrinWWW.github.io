@@ -3,6 +3,7 @@ title: machine learning
 date: 2016-12-12 22:04:47
 categories: [programming, unfinished]
 tags: [machine-learning]
+hidden: true
 ---
 
 # 笔记

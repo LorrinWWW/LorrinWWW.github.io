@@ -1,16 +1,19 @@
 ---
 title: "Jue Wang"
-date: 2022-2-24 16:00:00
+date: 2022-4-21 16:00:00
+top: 100
 ---
 
-Hello, I am a PhD student in [Data Intelligence Lab](http://59.111.103.237:8081/) of Zhejiang University, advised by [Prof. Lidan Shou](https://person.zju.edu.cn/en/should).
+Hello, I am a PhD student in [Data Intelligence Lab](http://59.111.103.237:8081/) of Zhejiang University, advised by [Prof. Lidan Shou](https://person.zju.edu.cn/en/should). I am visiting ETH Zurich now, where I am advised by [Prof. Ce Zhang](https://ds3lab.inf.ethz.ch/members/ce-zhang.html).
 
-I work on Natural Language Processing and Data Mining. More specifically, my research interests lie in Information Extraction (e.g., Named Entity Recognition and Relation Extraction), NLP in low-resource scenarios (e.g., Weak/Semi-Supervised Learning), and Efficient Algorithms for NLP (e.g., Knowledge Distillation and Network Pruning). If you want to get in touch, please [send me an email](mailto:zjuwangjue@gmail.com). 
+I work on Natural Language Processing. More specifically, my research interests lie in Efficient Algorithms for NLP (e.g., Knowledge Distillation and Network Pruning), Information Extraction (e.g., Named Entity Recognition and Relation Extraction), and NLP in low-resource scenarios (e.g., Weak/Semi-Supervised Learning). If you want to get in touch, please [send me an email](mailto:zjuwangjue@gmail.com). 
 
 My [resume](resume-Jue.Wang.pdf). 
 
 ## Updates
 
+- Apr 2022: We got a paper accepted to IJCAI 2022.
+- Mar 2022: I started visiting ETH Zurich.
 - Feb 2022: As the first author, I had one long paper accepted to ACL 2022.
 - Jun 2021: I graduated from [CentraleSupélec](https://www.centralesupelec.fr/) with diplôme d'Ingénieur (master degree), cheers!
 - Dec 2020: As the first author, I had one long paper accepted to AAAI 2021.
@@ -42,4 +45,4 @@ Email: zjuwangjue@gmail.com
 
 ---
 
-[Blog](https://blog.lorrin.info)([RSS](https://blog.lorrin.info/atom.xml)), [Github](https://github.com/LorrinWWW), [知乎](https://www.zhihu.com/people/wang-jue-9/activities), 欢迎关注～
+[Blog](https://juewang.me)([RSS](https://juewang.me/atom.xml)), [Github](https://github.com/LorrinWWW), [知乎](https://www.zhihu.com/people/wang-jue-9/activities), 欢迎关注～

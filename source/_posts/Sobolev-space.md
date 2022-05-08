@@ -3,6 +3,7 @@ title: Sobolev space
 date: 2017-02-11 14:37:53
 categories: [math, unfinished]
 tags: [Sobolev, analyse, math, EDP]
+hidden: true
 ---
 
 # 索伯列夫空间 Sobolev space

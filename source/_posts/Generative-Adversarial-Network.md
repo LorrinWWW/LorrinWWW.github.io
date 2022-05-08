@@ -4,6 +4,7 @@ date: 2017-06-25 14:41:15
 categories: [programming]
 tags: [GAN, deep-learning]
 typora-copy-images-to: ipic
+hidden: true
 ---
 
 # Generative Adversarial Network

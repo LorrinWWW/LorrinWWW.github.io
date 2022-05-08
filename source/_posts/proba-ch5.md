@@ -5,6 +5,7 @@ tags:
   - math
   - probability
 date: 2016-12-01 23:14:28
+hidden: true
 ---
 
 # 数列和随机变量系列

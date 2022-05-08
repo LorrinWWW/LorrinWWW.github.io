@@ -3,6 +3,7 @@ title: ML CNN
 date: 2016-12-14 10:34:43
 categories: [programming, unfinished]
 tags: [machine-learning, programming, algo, CNN]
+hidden: true
 ---
 
 笔记向

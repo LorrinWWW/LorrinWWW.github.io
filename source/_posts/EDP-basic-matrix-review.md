@@ -3,6 +3,7 @@ title: 'EDP基础：矩阵的复习'
 date: 2017-02-07 10:22:27
 categories: [math]
 tags: [EDP, matrix]
+hidden: true
 ---
 
 ## 注意点：

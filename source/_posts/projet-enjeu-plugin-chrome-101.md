@@ -3,6 +3,7 @@ title: Chrome插件开发 - Hello world
 date: 2016-11-30 12:01:24
 categories: programming
 tags: [web, chrome]
+hidden: true
 ---
 
 在学校选的projet是关于chrome插件开发的，这里记录一下。

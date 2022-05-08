@@ -3,6 +3,7 @@ title: 解决hexo使用公式冲突问题 hexo with latex
 date: 2016-11-30 22:19:02
 categories: other
 tags: [hexo, latex, mathjax, marked]
+hidden: true
 ---
 
 在hexo中使用大量公式的同学一定会发现，在hexo很多公式的渲染不正常。这是由于markdown渲染器和latex渲染器冲突的问题（具体说，就是公式中的特殊字符首先被markdown渲染器转义了）。我们可以通过更换Markdown渲染插件来解决这个问题。

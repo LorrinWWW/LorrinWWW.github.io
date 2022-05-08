@@ -3,6 +3,7 @@ title: 数据挖掘笔记 Note of datamining
 date: 2016-12-6 15:35:24
 categories: [programming, unfinished]
 tags: [datamining]
+hidden: true
 ---
 
 # 构成

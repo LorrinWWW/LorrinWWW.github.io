@@ -3,6 +3,7 @@ title: 'MongoDB, Docker and Python'
 date: 2017-06-22 14:53:44
 categories: [programming]
 tags: [mongo, mongodb, docker, python]
+hidden: true
 ---
 
 ## 安装
