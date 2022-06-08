@@ -4,21 +4,14 @@
   <url>
     <loc>https://juewang.me/posts/about/</loc>
     
-    <lastmod>2022-04-21</lastmod>
+    <lastmod>2022-06-08</lastmod>
     
   </url>
   
   <url>
     <loc>https://juewang.me/about/index.html</loc>
     
-    <lastmod>2022-04-21</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://juewang.me/about-zh/index.html</loc>
-    
-    <lastmod>2022-04-21</lastmod>
+    <lastmod>2022-06-08</lastmod>
     
   </url>
   
@@ -144,7 +137,7 @@
 
   <url>
     <loc>https://juewang.me/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -152,182 +145,182 @@
   
   <url>
     <loc>https://juewang.me/tags/deep-learning/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/machine-learning/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/CNN/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/knowledge-graph/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/entity-resolution/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/sequence-labeling/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/relation-extraction/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/LSTM/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/RNN/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/relation-classification/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/attention/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/distant-supervision/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/event-detection/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/co-reference/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/convolution/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/BiLSTM/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/event-extraction/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/limited-supervision/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/weak-supervision/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/KGC/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/neural-network/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/reinforcement-learning/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/summarization/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/NLP/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/regular-expression/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://juewang.me/tags/knowledge-reasoning/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -336,7 +329,7 @@
   
   <url>
     <loc>https://juewang.me/categories/research/</loc>
-    <lastmod>2022-05-08</lastmod>
+    <lastmod>2022-06-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

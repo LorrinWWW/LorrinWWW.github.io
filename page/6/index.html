@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Jue&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Jue Wang (王珏)"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Jue Wang (王珏)"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Effective and Efficient NLP"><meta property="og:type" content="blog"><meta property="og:title" content="Jue&#039;s Blog"><meta property="og:url" content="https://juewang.me/"><meta property="og:site_name" content="Jue&#039;s Blog"><meta property="og:description" content="Effective and Efficient NLP"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://juewang.me/img/og_image.png"><meta property="article:author" content="Jue Wang"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://juewang.me"},"headline":"Jue's Blog","image":["https://juewang.me/img/og_image.png"],"author":{"@type":"Person","name":"Jue Wang"},"publisher":{"@type":"Organization","name":"Jue's Blog","logo":{"@type":"ImageObject","url":"https://juewang.me/img/favicon.svg"}},"description":"Effective and Efficient NLP"}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons/css/academicons.min.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-115582186-1" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'UA-115582186-1');</script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Jue's Blog" type="application/atom+xml">
+</head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/favicon.svg" alt="Jue&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/posts/about/">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2018-04-04T06:00:00.000Z" title="4/4/2018, 8:00:00 AM">2018-04-04</time></span><span class="level-item">Updated&nbsp;<time dateTime="2020-11-03T03:26:06.064Z" title="11/3/2020, 4:26:06 AM">2020-11-03</time></span><span class="level-item"><a class="link-muted" href="/categories/research/">research</a></span><span class="level-item">19 minutes read (About 2860 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/posts/%5B2018.4.4%5DA-Neural-Model-for-Joint-Event-Detection-and-Summarization/">A Neural Model for Joint Event Detection and Summarization 阅读笔记</a></h1><div class="content"><h2 id="A-Neural-Model-for-Joint-Event-Detection-and-Summarization-阅读笔记"><a href="#A-Neural-Model-for-Joint-Event-Detection-and-Summarization-阅读笔记" class="headerlink" title="A Neural Model for Joint Event Detection and Summarization 阅读笔记"></a>A Neural Model for Joint Event Detection and Summarization 阅读笔记</h2><p><strong>摘要</strong>：Twitter事件检测旨在识别推文流中的first stories。一般认为由两个子任务组成。首先，过滤掉普通的或不相关的推文。其次，推文会被自动分类到event cluster中。传统上，尽管这两个任务之间存在相互依赖关系，它们仍被单独处理，并通过pipeline整合。另外，还有一个相关的任务是摘要，即提取能够代表event cluster的简洁摘要。这里和上个暑假看的Wang, Z.[^2]的工作比较相似。</p>
+<p>在本文[^1]中，我们构建了一个joint model来筛选、聚类和摘要推文中的event。特别的，我们利用深度表示学习来对推文进行矢量化处理。Neural stacking model用于整合不同子任务的pipeline，并更好地共享前后参数。实验表明，我们提出的neural joint model比pipeline更有效。</p>
+<h3 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h3><p>有文献证明了推特、微博这类体裁比起传统的媒体，对新闻事件有更快的反应速度，因此今年对于推特的事件监测也是今年的热点之一，引起了广泛关注。我们在本文主要检测一些典型的事件类别，比如地震、DDos攻击等。我们提出了一个神经网络模型，该模型监视特定事件类别的推特流，共同检测并摘要该类别下的新闻事件。</p>
+<img src="https://lorrin-1251763245.cos.ap-shanghai.myqcloud.com/photo/2018-04-04-WX20180404-225501%402x.png" width="60%">
+
+<p>整体的架构如上图所示，给定一个推特流，我们的模型考虑三个子任务：推文过滤，事件聚类和事件摘要。</p>
+<p>典型的推特事件检测模型的核心部分是<strong>聚类</strong>，其中包括增量聚类和locality sensitive hashing。主要的想法是将同一主题的推文进行分组，以便在新推文不属于现有主题类的情况下检测到新主题。这样的聚类算法通常依赖于推特内容的特征，如TFIDF，用于测量推文之间的相似度。</p>
+<p>第二个子任务是<strong>摘要</strong>，它并不直接涉及event detection，但仍然与之高度相关，因为检测到的事件群可能比较大并且包含不同程度信息的推文。 从系统功能的角度来说，对于推特事件检测系统，摘要是十分必要的，因为我们没办法直接读取事件群，只有将其抽取摘要，并将事件摘要作为输出，才能够为我们所用。</p>
+<p>此外，由于大部分推文流包含普通或不相关的信息，推文<strong>过滤</strong>是我们考虑的第三个子任务。 我们的目标是根据其与潜在新事件的相关性对传入推文进行分类，以便只保留信息性推文。 过滤可以在聚类之前或之后进行。 在本文中，我们在聚类之前执行这项任务。</p>
+<p>这三个子任务形成了一个三阶段pipeline（过滤→聚类→摘要），其中各个阶段是密切相关的。 例如，完整描述事件的推文应该在相关性过滤和抽象摘要步骤中得到高分。 另外，更好地理解推文对于相关性过滤和事件聚类都有帮助。 受此启发，我们考虑使用一个joint model进行筛选、聚类和摘要。</p>
+<p>神经网络在近年也在类似任务上展示了良好的表现。我们使用两种联合建模策略。首先，我们以推文的语义表示作为关键连接因素，通过参数共享整合三项任务。其次，我们将neural stacking应用于pipeline，将前一个子模型的隐藏神经层作为其后继子模型的附加输入特征，并将后继的误差传播给前者，使得在培训期间，让前后子模型之间的信息得到更好的共享。</p>
+<h3 id="2-Model"><a href="#2-Model" class="headerlink" title="2. Model"></a>2. Model</h3><p>我们系统的输入是一个推特流，实时输出事件报告。三个主要的子任务定义如下：</p>
+<ul>
+<li><strong>事件筛选</strong>：我们将流中的每条推文分类为与相关事件相关或不相关的事件。由于我们的目标是仅检测某些类型的事件（即地震和DDOS攻击事件），因此我们使用相应的一组关键字来过滤推文流作为预处理步骤。相关分类在预处理步骤之后执行，因为并非所有包含关键字的推文都是相关的。</li>
+<li><strong>事件聚类</strong>：我们在事件检测后对推文进行增量聚类。给定一个提到事件的推文，其任务是确定它是否存在于现有的事件集群中、是否是一个新的事件。这个任务的关键是推文之间的相似度计算。</li>
+<li><strong>事件摘要</strong>：当一个事件集群足够大时，我们通过提取前n个包含最多信息的推文来创建相应事件的报告。这个子任务可以被看作是一个多文档摘要任务。</li>
+</ul>
+<img src="https://lorrin-1251763245.cos.ap-shanghai.myqcloud.com/photo/2018-04-04-WX20180404-232216%402x.png" width="60%">
+
+<p>模型的整体构架如上图，H是推文的embedding，Hd是事件筛选步骤的隐藏层，Hc是聚类的隐藏层，Ps是摘要的输出。我们可以看到，每一个子任务都充分利用了前面的信息，使得各个子模型项目补充辅助，让结果更理想。</p>
+<p>结果表明，与独立的pipeline相比，这种neural stacking方法可以产生更好的子模型。请注意，虽然计算两个tweets之间的相似性的过程是用LSTM模型监督的，但聚类算法是一种无监督的在线聚类算法。</p>
+<h4 id="2-1-Shared-Tweet-Representation"><a href="#2-1-Shared-Tweet-Representation" class="headerlink" title="2.1 Shared Tweet Representation"></a>2.1 Shared Tweet Representation</h4><p>我们使用标准的LSTM模型来学习不同任务之间的推文表示。 假设$X =(w_1,w_2,…,w_n)$是推文，其中$n$是推文长度，$w_i$是第i个标记。 我们使用$w_i$的word embedding将每个$w_i$转换为实值向量$x_i$，通过查找预先训练的word embedding表D获得。我们使用skip-gram算法来训练embedding。<br>LSTM用以生成隐藏序列$(h_1,h_2,…,h_n)$。 在每个步骤t，基于当前向量$x_t$和前一个向量$h_{t-1}$和$h_t = LSTM(x_t，h_{t-1})$计算LSTM模型的隐藏向量$h_t$。 初始状态和所有LSTM参数随机初始化并在训练过程中调整。 我们使用$H = h_n$作为X的共享表示。</p>
+<h4 id="2-2-Joint-Model"><a href="#2-2-Joint-Model" class="headerlink" title="2.2 Joint Model"></a>2.2 Joint Model</h4><h5 id="Event-mention-detection"><a href="#Event-mention-detection" class="headerlink" title="Event mention detection"></a>Event mention detection</h5><p>事件提及检测是一个二元分类任务，使用多层感知器进行描述。给出输入向量H，隐含层用于激发一组高级特征：<br>$$<br>H_d = \sigma(W_d^h H + b_d^h)<br>$$<br>$H_d$被用于softmax输出层的输入：<br>$$<br>P_d = softmax(W_dH_d + B_d)<br>$$<br>这里$W_d^h, b_d^b, W_d$都是模型参数。$P_d$ 长度为2，$P_d(0)$表示推文X相关的概率，$P_d(1)$表示不相关的概率。</p>
+<h5 id="Event-clustering"><a href="#Event-clustering" class="headerlink" title="Event clustering"></a>Event clustering</h5><img src="https://lorrin-1251763245.cos.ap-shanghai.myqcloud.com/photo/2018-04-04-WX20180404-234532%402x.png" width="60%">
+
+<p>我们使用基于流的聚类算法将传入的推文分为不同的事件组，每个事件组表示一个特定的事件。该算法随着流中的每个传入推文增长式地工作，计算新推文与现有事件群中的每条推文之间的相似度分数。新传入的推文与每个事件群中最相似的对应文件之间的相似度用于衡量新推文与事件群集之间的相似度。使用阈值$\mu - 3\cdot \sigma$来检测新推文是否属于现有聚类，其中μ是所有先前相似度分数的均值，σ是标准偏差。如果推特和所有现有群集之间的相似度低于阈值，则建立新的事件群集。否则，将推文添加到最相似的现有事件群集中。<br>为了计算两条推文$X_i$和$X_j$之间的相似度，我们使用了一个连体网络，它采用共享表示向量$H_i$和$H_j$，并通过参数化计算相似概率得分$P_c$:<br>$$<br>H_c = \sigma(W_c^h(H_i \oplus H_j)+ b_c^h) \<br>P_c = softmax(W_cH_c + B_c)<br>$$<br>⊕表示向量级联。 $W_c^h，b_b^c,W_c,b_c$是模型参数。</p>
+<p>为了更好地整合事件提及检测和事件聚类，我们还将$X_i$和$X_j$的隐藏特征矢量$H_d$馈送到Siamese网络，从而<br>$$<br>H_c = \sigma(W_c^h(H_i \oplus H_j \oplus H_{d_i} \oplus H_{d_j})+ b_c^h)<br>$$</p>
+<h5 id="Event-summarization"><a href="#Event-summarization" class="headerlink" title="Event summarization"></a>Event summarization</h5><img src="https://lorrin-1251763245.cos.ap-shanghai.myqcloud.com/photo/2018-04-04-WX20180405-000354%402x.png" width="60%">
+
+<p>为了生成事件集群的摘要，我们使用概率分数$P_s$对集群中的所有推文进行排序。 对于集群中的每个推特X，使用多层感知器来估计$P_s$，其中输入是$H \oplus \bar{H_c^h}$。 这里的矢量$\bar{H_c^h}$是推文X与同一集群中所有其他推特之间的$H_c^h$之和。 它有两个用途。首先，$H_c^h$提供有关整个群集的信息，这对于更好地确定群集中给定推文的相关性很有用。 其次，$H_c^h$还把聚类和摘要联系了起来，从而强化了信息共享。<br>$$<br>P_s = softmax(W_sH_s + B_s)<br>$$<br>where<br>$$<br>H_s = \sigma(W_s^h(H\oplus \bar{H_c^h})+ b_s^h)<br>$$<br>$W_s^h, b_s^b, Ws$是模型的参数</p>
+<h4 id="2-3-Training"><a href="#2-3-Training" class="headerlink" title="2.3 Training"></a>2.3 Training</h4><p>我们的培训目标是尽量减少这三项任务中标注的标签和预测标签之间的cross-entropy loss。 我们应用在线培训，使用Adagrad调整模型参数。为了避免过拟合，对word embedding使用0.2点dropout。隐藏层$H_d, H_c,H_s$的大小都设置为32。我们使用Skip-gram算法训练word embedding，并在训练期间对它们进行微调。 Word embedding的大小是128。</p>
+<h3 id="3-Experiment"><a href="#3-Experiment" class="headerlink" title="3. Experiment"></a>3. Experiment</h3><p>见paper原文</p>
+<h3 id="4-Conclusion"><a href="#4-Conclusion" class="headerlink" title="4. Conclusion"></a>4. Conclusion</h3><p>文献[^1]提出了一个joint model，通过使用全局共享表示和不同子任务之间的堆叠来共同检测、聚类和摘要事件。 实验表明，我们提出的joint model比pipeline模型更有效。该联合神经系统优于采用离散或神经网络进行新闻事件检测和摘要的最新baseline。</p>
+<h2 id="Bibliography"><a href="#Bibliography" class="headerlink" title="Bibliography"></a>Bibliography</h2><p>代码开源：<a target="_blank" rel="noopener" href="https://github.com/wangzq870305/joint_event_detection">https://github.com/wangzq870305/joint_event_detection</a></p>
+<p>[^1]: Wang, Z., &amp; Zhang, Y. (2017, August). A neural model for joint event detection and summarization. In <em>Proceedings of the 26th International Joint Conference on Artificial Intelligence</em> (pp. 4158-4164). AAAI Press.<br>[^2]: Wang, Z., Shou, L., Chen, K., Chen, G., &amp; Mehrotra, S. (2015). On summarization and timeline generation for evolutionary tweet streams. <em>IEEE Transactions on Knowledge and Data Engineering</em>, <em>27</em>(5), 1301-1315.</p>
+</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/5/">Previous</a></div><div class="pagination-next"><a href="/page/7/">Next</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/5/">5</a></li><li><a class="pagination-link is-current" href="/page/6/">6</a></li><li><a class="pagination-link" href="/page/7/">7</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/16/">16</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/avatar.png" alt="Jue Wang"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Jue Wang</p><p class="is-size-6 is-block">Ph.D Student</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Hangzhou, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">16</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Category</p><a href="/categories"><p class="title">1</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">26</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/lorrinWWW" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Scholar" href="https://scholar.google.com/citations?user=PykI8xcAAAAJ&amp;hl=en"><i class="ai ai-google-scholar"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/lorrinWWW/"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/JueWANG26088228"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><!--!--></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/favicon.svg" alt="Jue&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2022 Jue Wang</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div><div id="divmap" style="visibility:hidden; position: absolute; top: 0px"><script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=ffffff&amp;w=2&amp;t=n&amp;d=I_238wU69nrKH0DIm55b1z-y84aVsLuSzQSglFoJ1ww&amp;co=ffffff&amp;ct=ffffff&amp;cmo=ffffff&amp;cmn=ffffff"></script></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

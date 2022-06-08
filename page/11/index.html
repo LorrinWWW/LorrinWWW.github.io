@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Jue&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Jue Wang (王珏)"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Jue Wang (王珏)"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Effective and Efficient NLP"><meta property="og:type" content="blog"><meta property="og:title" content="Jue&#039;s Blog"><meta property="og:url" content="https://juewang.me/"><meta property="og:site_name" content="Jue&#039;s Blog"><meta property="og:description" content="Effective and Efficient NLP"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://juewang.me/img/og_image.png"><meta property="article:author" content="Jue Wang"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://juewang.me"},"headline":"Jue's Blog","image":["https://juewang.me/img/og_image.png"],"author":{"@type":"Person","name":"Jue Wang"},"publisher":{"@type":"Organization","name":"Jue's Blog","logo":{"@type":"ImageObject","url":"https://juewang.me/img/favicon.svg"}},"description":"Effective and Efficient NLP"}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons/css/academicons.min.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-115582186-1" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'UA-115582186-1');</script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Jue's Blog" type="application/atom+xml">
+</head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/favicon.svg" alt="Jue&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/posts/about/">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2018-01-29T07:00:00.000Z" title="1/29/2018, 8:00:00 AM">2018-01-29</time></span><span class="level-item">Updated&nbsp;<time dateTime="2020-11-03T03:26:12.997Z" title="11/3/2020, 4:26:12 AM">2020-11-03</time></span><span class="level-item"><a class="link-muted" href="/categories/research/">research</a></span><span class="level-item">18 minutes read (About 2677 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/posts/%5B2018.1.29%5DA-convolution%20BiLSTM-neural-network-model-for-chinese-event-extraction/">A convolution BiLSTM neural network model for chinese event extraction 笔记</a></h1><div class="content"><h2 id="A-convolution-BiLSTM-neural-network-model-for-chinese-event-extraction"><a href="#A-convolution-BiLSTM-neural-network-model-for-chinese-event-extraction" class="headerlink" title="A convolution BiLSTM neural network model for chinese event extraction"></a>A convolution BiLSTM neural network model for chinese event extraction</h2><p><strong>摘要：</strong>中文事件提取是信息抽取中的一项具有挑战性的任务，以前的方法高度依赖于复杂的特征工程和复杂的自然语言处理（NLP）工具。 在文献[1]中，提出了一种结合LSTM和CNN的卷积双向LSTM神经网络来捕获句级和词汇信息。最终的测试中达到相当不错的水平。</p>
+<h3 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h3><p>在事件提取中，我们需要提取事件类别、参与者和其他属性（时间、地点等）。根据Automatic Content Extraction（ACE）定义的事件抽取任务，我们定义：</p>
+<ul>
+<li>触发词：最主要的、用于表达一个事件的词，通常是句子的谓语。</li>
+<li>事件属性：实体、短语或数值。在一个事件中扮演特定作用。</li>
+</ul>
+<p>因此，我们把事件抽取分为两步，即<strong>触发词标注</strong>和<strong>事件属性标注</strong>。例如：</p>
+<p>S1：Intel在中国<strong>成立</strong>了研究中心。</p>
+<p>其中，“成立”表明该句子表达了一个商业事件；Intel、中国、研究中心则是事件的属性，属性将被标注为参与者、地点、时间等。</p>
+<p>目前的 state-of-the-art [2-4] 通常很依赖于特征的选择。这些特征通常可以被划分为<strong>语义特征</strong>和<strong>结构特征</strong>。再给两个包含”成立“的例子，但它在其中并不表达一个商业事件。</p>
+<p>S2：它<strong>成立</strong>于1994年，现在是一支深受欢迎的摇滚乐队。</p>
+<p>S3：医院已<strong>成立</strong>救援中心。</p>
+<p>从结构特征上来看，S2可以被缩写为“它是乐队”，因此“成立”在这个句子中不是一个触发词，这个句子不是一个事件。</p>
+<p>从语义特征上来看，S3中的“救援中心”的语义上看，这个事件不是一个商业行为，因此“成立”不表达一个商业事件。</p>
+<p>传统的方法[2, 3]通常依赖于大量的NLP工具，对于语义特征而言，有词性标注、命名实体识别等；对于结构特征而言，有依存关系分析。尽管最终效果很好，但是这需要大量的人工特征，并且需要忍受传递误差。</p>
+<p>Chen et al. [5] 提出了一个用于完成事件抽取的卷积神经网络。受此激发，本文提出一个卷积双向LSTM神经网络，用来同时捕获语义特征和结构特征。我们首先使用双向LSTM将整个句子中的单词的语义编码成句子级别的特征。 然后，我们可以利用卷积神经网络来捕获突出的局部词汇特征，以便在没有任何POS标签或NER帮助的情况下进行触发词消歧。</p>
+<h3 id="2-Trigger-Labeling"><a href="#2-Trigger-Labeling" class="headerlink" title="2. Trigger Labeling"></a>2. Trigger Labeling</h3><h4 id="2-1-Language-Specific-Issues"><a href="#2-1-Language-Specific-Issues" class="headerlink" title="2.1 Language Specific Issues"></a>2.1 Language Specific Issues</h4><p>由于中文的特殊性，触发词可以被分为两类：</p>
+<ul>
+<li>多词触发词：任何拆开后就无法被人为是触发词的，我们把它组合起来认为是触发词。例如“犯罪嫌疑人都落入法网”，其中“落入法网”被认为是触发词。</li>
+<li>单词触发词：往往是谓语，但也可以是组合词中的一部分。例如“警察击毙了一名歹徒”中的“击毙”，“这是一件预谋的凶杀案”中的“凶杀”</li>
+</ul>
+<p>为了解决这个问题，我们将事件检测视为序列标记任务而不是分类任务。 采用BIO方案，其中标记B是事件触发词的开始，I型是在触发词内，否则标记为O。我们利用卷积双向LSTM神经网络来完成这个任务。</p>
+<p><img src="https://lorrin-1251763245.cos.ap-shanghai.myqcloud.com/photo/2018-03-12-202231.jpg" alt="trigger-labeling"></p>
+<p>我们基于单词模型的主要架构。 （a）中的每个词wt的局部上下文特征ct（灰色矩形）由CNN计算（b）所示。 我们的卷积神经网络学习了关于中心词“落入”的本地上下文信息的表示。 这里的上下文大小是7（中心词的左右各3个词），我们使用一个大小为4的内核与两个特征映射。 （b）句子中的符号P表示填充词。</p>
+<h4 id="2-2-Word-Based-Method"><a href="#2-2-Word-Based-Method" class="headerlink" title="2.2 Word-Based Method"></a>2.2 Word-Based Method</h4><p><strong>LSTM Network</strong>  在nlp任务中LSTM相对常用，特别的，双向LSTM能够联系历史和未来的信息，能够重复利用句子信息，有利于我们进行判断。因为之前的报告已经叙述过，故这里略写。</p>
+<p><strong>CNN</strong>  卷积神经网络最一开始用于图像领域，近年也在nlp领域大放光彩。这里，我们采用卷积神经网络来提取句子中每个单词的局部上下文信息。</p>
+<p>给定一个包含n个单词{w1, w2, … , wn}的句子和当前中心词wt，卷积运算包含一个内核，将其应用于wt周围的单词以生成特征映射。 我们可以利用不同宽度的多个内核来提取不同粒度的局部特征。 然后在每个map上执行最大汇集，以便仅记录每个特征地图的最大数量。 池的一个特性是它产生一个固定大小的输出向量，这使我们能够应用不同的大小内核。 而通过执行最大操作，我们保持最显着的信息。 最后，将固定长度的输出向量cwt作为关于中心词wt的本地上下文信息的表示。</p>
+<p>在我们的实现中，滑动窗口大小为7（中心词的左右各3个词），并且我们使用不同的内核来捕获各种粒度的上下文信息。</p>
+<p><strong>Output Layer</strong>  我们将BiLSTM的隐藏状态与CNN在每个时间步t提取的上下文特征cwt连接起来。 然后[ht; cwt]被送入softmax层以产生wt的每个标记的对数概率。<br>然而，基于单词的方法仍然不能解决内部词触发引起的一致性问题，即无法识别长词内部的触发词。</p>
+<h4 id="2-3-Character-Based-Method"><a href="#2-3-Character-Based-Method" class="headerlink" title="2.3 Character-Based Method"></a>2.3 Character-Based Method</h4><p>为了解决一致性问题，我们可以采用Character-embedding，唯一的区别就在input layer。</p>
+<p><img src="https://lorrin-1251763245.cos.ap-shanghai.myqcloud.com/photo/2018-03-12-202234.jpg" alt="character"></p>
+<h3 id="3-Argument-Labeling"><a href="#3-Argument-Labeling" class="headerlink" title="3. Argument Labeling"></a>3. Argument Labeling</h3><p>上面介绍的触发词标注模型依然可以被沿用，我们将介绍用于触发词标注和事件属性标注的模型之间的主要区别。</p>
+<h4 id="3-1-Input-Layer"><a href="#3-1-Input-Layer" class="headerlink" title="3.1 Input Layer"></a>3.1 Input Layer</h4><p>作为一个pipeline系统，除了word embeddings之外，还可以使用从上面触发词标记任务中提取的信息。 因此，我们提出了另外四种类型的特征embedding来形成BiLSTM和CNN的输入层。</p>
+<ul>
+<li>触发位置特征：一个单词是否属于触发词的一部分</li>
+<li>触发类型特征：单词触发类型，NONE类型对于非触发词</li>
+<li>实体位置特征：一个单词是否属于实体的一部分</li>
+<li>实体类型特征：单词的实体类型，NONE类型对于非实体。 ACE数据集提供了实体识别的结果，无需使用外部NLP工具。（<em>思考</em>：若数据集不提供实体信息，两种解决方法：1. 不embed实体特征；2. 借助外部工具）<br>然后，我们通过查表将这些特征转换成矢量，并将它们与原始单词嵌入级联，作为BiLSTM和CNN的最终输入层。</li>
+</ul>
+<h4 id="3-2-Output-Layer"><a href="#3-2-Output-Layer" class="headerlink" title="3.2 Output Layer"></a>3.2 Output Layer</h4><p>值得一提的是，事件属性标注不再是一个序列标注任务，而是一个分类任务。 ACE数据集提供了实体识别的结果，它保证了事件属性只能出现在这些实体。 因此，我们只需要预测标记实体的角色，而不是整个句子中的每个单词。 例如，S4中有三个触发器（粗体字）和三个实体（斜体字），它们共同组成九对要分类的触发词和事件属性候选。</p>
+<p>S7：六起<strong>谋杀案</strong>发生在<em>法国</em>，包括<em>Bob</em>的<strong>暗杀</strong>和<em>Joe</em>的<strong>杀害</strong>。</p>
+<p>我们修改CNN和BiLSTM网络的输出层以适应新的任务。</p>
+<p>对于BiLSTM，我们仍然试图利用其记忆长序列的能力，所以我们把最后一个单词hN的隐藏状态视为句子信息。</p>
+<p>对于CNN，我们把整个句子的所有单词作为上下文，而不是每个中心单词的浅窗口。 最后，我们将来自两个网络的输出向量的串联输入到softmax分类器中，就像处理之前的触发词标注任务一样。</p>
+<h3 id="4-Conclusion"><a href="#4-Conclusion" class="headerlink" title="4. Conclusion"></a>4. Conclusion</h3><p>论文[1]主要提出了卷积双向LSTM神经网络，用以完成中文事件抽取任务，在ACE 2005数据集上获得了不错的结果。我在暑假时，将事件抽取认为为一个序列标注任务，使用BiLSTM+CRF；相比而言，论文[1]的模型考虑更全面，并充分利用已知的实体信息。不过对于现实问题而言，标注实体信息的成本也很高，故在没有实体标注的情况下保持性能也是一个难点。</p>
+<h2 id="Bibliography"><a href="#Bibliography" class="headerlink" title="Bibliography"></a>Bibliography</h2><p>[1] Zeng, Y., Yang, H., Feng, Y., Wang, Z., &amp; Zhao, D. (2016). A convolution BiLSTM neural network model for Chinese event extraction. In <em>Natural Language Understanding and Intelligent Applications</em> (pp. 275-287). Springer, Cham.</p>
+<p>[2] Chen, C., Ng, V.: Joint modeling for Chinese event extraction with rich linguistic features. In: COLING, pp. 529–544. Citeseer (2012)</p>
+<p>[3] Chen, Y., Xu, L., Liu, K., Zeng, D., Zhao, J.: Event extraction via dynamic multipooling convolutional neural networks. In: Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing, vol. 1, pp. 167–176 (2015)</p>
+<p>[4] Li, Q., Ji, H., Huang, L.: Joint event extraction via structured prediction with global features. In: ACL (1), pp. 73–82 (2013)</p>
+<p>[5] Chen, Y., Xu, L., Liu, K., Zeng, D., Zhao, J.: Event extraction via dynamic multipooling convolutional neural networks. In: Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing, vol. 1, pp. 167–176 (2015)</p>
+</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/10/">Previous</a></div><div class="pagination-next"><a href="/page/12/">Next</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/10/">10</a></li><li><a class="pagination-link is-current" href="/page/11/">11</a></li><li><a class="pagination-link" href="/page/12/">12</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/16/">16</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/avatar.png" alt="Jue Wang"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Jue Wang</p><p class="is-size-6 is-block">Ph.D Student</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Hangzhou, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">16</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Category</p><a href="/categories"><p class="title">1</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">26</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/lorrinWWW" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Scholar" href="https://scholar.google.com/citations?user=PykI8xcAAAAJ&amp;hl=en"><i class="ai ai-google-scholar"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/lorrinWWW/"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/JueWANG26088228"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><!--!--></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/favicon.svg" alt="Jue&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2022 Jue Wang</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div><div id="divmap" style="visibility:hidden; position: absolute; top: 0px"><script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=ffffff&amp;w=2&amp;t=n&amp;d=I_238wU69nrKH0DIm55b1z-y84aVsLuSzQSglFoJ1ww&amp;co=ffffff&amp;ct=ffffff&amp;cmo=ffffff&amp;cmn=ffffff"></script></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
