@@ -109,7 +109,7 @@ navbar:
         Archives: /archives
         Categories: /categories
         Tags: /tags
-        About: /about
+        About: /posts/about/
     # Links to be shown on the right of the navigation bar
     links:
         Download on GitHub:
@@ -243,6 +243,9 @@ widgets:
         follow_link: 'https://github.com/lorrinWWW'
         # Links to be shown on the bottom of the profile widget
         social_links:
+            Scholar:
+                icon: ai ai-google-scholar
+                url: 'https://scholar.google.com/citations?user=PykI8xcAAAAJ&hl=en'
             Github:
                 icon: fab fa-github
                 url: 'https://github.com/lorrinWWW/'
@@ -279,25 +282,25 @@ widgets:
     #         Hexo: 'https://hexo.io'
     #         Bulma: 'https://bulma.io'
     # Categories widget configurations
-    -
-        # Where should the widget be placed, left sidebar or right sidebar
-        position: right
-        type: recent_posts
-    # Archives widget configurations
-    -
-        # Where should the widget be placed, left sidebar or right sidebar
-        position: right
-        type: categories
-    # Recent posts widget configurations
-    -
-        # Where should the widget be placed, left sidebar or right sidebar
-        position: right
-        type: archives
-    # Tags widget configurations
-    -
-        # Where should the widget be placed, left sidebar or right sidebar
-        position: right
-        type: tags
+    # -
+    #     # Where should the widget be placed, left sidebar or right sidebar
+    #     position: right
+    #     type: recent_posts
+    # # Archives widget configurations
+    # -
+    #     # Where should the widget be placed, left sidebar or right sidebar
+    #     position: right
+    #     type: categories
+    # # Recent posts widget configurations
+    # -
+    #     # Where should the widget be placed, left sidebar or right sidebar
+    #     position: right
+    #     type: archives
+    # # Tags widget configurations
+    # -
+    #     # Where should the widget be placed, left sidebar or right sidebar
+    #     position: right
+    #     type: tags
     # Google FeedBurner email subscription widget configurations
     # -
     #     # Where should the widget be placed, left sidebar or right sidebar
@@ -412,8 +415,8 @@ providers:
     # Name or URL of the fontawesome icon font CDN provider
     iconcdn: fontawesome
 
-excerpt:
-    depth: 10
-    excerpt_excludes: []
-    more_excludes: []
-    hideWholePostExcerpts: true
+# excerpt:
+#     depth: 10
+#     excerpt_excludes: []
+#     more_excludes: []
+#     hideWholePostExcerpts: true

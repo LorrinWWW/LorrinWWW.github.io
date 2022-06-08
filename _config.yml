@@ -4,7 +4,7 @@
 
 # Site
 title: Jue's Blog
-subtitle: Ph.D Student @ ZJU | Ingénieur CentraleSupélec
+subtitle: Ph.D Student @ ZJU
 description: Effective and Efficient NLP
 author: Jue Wang
 language: en
@@ -61,7 +61,7 @@ time_format: HH:mm:ss
 
 # Pagination
 ## Set per_page to 0 to disable pagination
-per_page: 10
+per_page: 1
 pagination_dir: page
 
 # Extensions
@@ -85,10 +85,4 @@ math:
   engine: 'mathjax'
   mathjax:
     src: "https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js"
-    
-recommended_posts:
-  timeoutInMillis: 10000 #服务时长，超过此时长，则使用离线推荐模式
-  internalLinks: 3 #内部文章数量
-  externalLinks: 1 #外部文章数量
-  autoDisplay: true, #自动在文章底部显示推荐文章
-  titleHtml: <h1>Recommend<span style="font-size:0.45em; color:gray">(Powered by <a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>)</span></h1> #自定义标题
+
