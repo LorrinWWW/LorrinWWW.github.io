@@ -1,19 +1,20 @@
 ---
 title: "Jue Wang"
-date: 2022-6-8 16:00:00
+date: 2022-9-15 16:00:00
 top: 100
 ---
 
 Hello, I am a PhD student in [Data Intelligence Lab](http://59.111.103.237:8081/) of Zhejiang University, advised by [Prof. Lidan Shou](https://person.zju.edu.cn/en/should). I am visiting ETH Zurich now, where I am advised by [Prof. Ce Zhang](https://ds3lab.inf.ethz.ch/members/ce-zhang.html).
 
-I work on Natural Language Processing. More specifically, my research interests lie in Efficient Algorithms for NLP (both training and inference), Information Extraction, and NLP in low-resource scenarios. If you want to get in touch, please [send me an email](mailto:zjuwangjue@gmail.com). 
+My research interests lie in Efficient Algorithms for NLP (both training and inference), Information Extraction, and NLP in low-resource scenarios. If you want to get in touch, please [send me an email](mailto:zjuwangjue@gmail.com). 
 
-My [resume](resume-Jue.Wang.pdf). 
+My [resume](/about/resume-Jue.Wang.pdf). 
 
 ## Updates
 
+- Sep 2022: We had one paper accepted to NeurIPS 2022. Congratulation and thanks to all the collaborators!
 - Apr 2022: We got a paper accepted to IJCAI 2022.
-- Mar 2022: I started visiting ETH Zurich.
+- Mar 2022: I had a visit to ETH Zurich.
 - Feb 2022: As the first author, I had one long paper accepted to ACL 2022.
 - Jun 2021: I graduated from [CentraleSupélec](https://www.centralesupelec.fr/) with diplôme d'Ingénieur (master degree), cheers!
 - Dec 2020: As the first author, I had one long paper accepted to AAAI 2021.
@@ -34,14 +35,12 @@ My [resume](resume-Jue.Wang.pdf).
 - **Université Paris Saclay (CentraleSupélec)**, Master (Engineer) in General Engineering, Sep 2016 - Jun 2018
 - **Zhejiang University**, Bachelor in Electrical Engineering, Sep 2014 - Jun 2018
 
-## Preprints
+## Selected Publications
 
 - **[Fine-tuning Language Models over Slow Networks using Activation Compression with Guarantees](https://arxiv.org/abs/2206.01299)**
   **Jue Wang**$^{\*}$, Binhang Yuan$^{\*}$, Luka Rimanic$^{\*}$, Yongjun He, Tri Dao, Beidi Chen, Christopher Re, Ce Zhang.
-  [\[Paper\]](https://arxiv.org/abs/2206.01299)
-
-## Selected Publications
-
+  In Proc. of NeurIPS 2022.
+  [\[Paper\]](https://arxiv.org/abs/2206.01299) [\[Code\]](https://github.com/DS3Lab/AC-SGD)
 - **[SkipBERT: Efficient Inference with Shallow Layer Skipping](https://aclanthology.org/2022.acl-long.503/)**
   **Jue Wang**, Ke Chen, Gang Chen, Lidan Shou, and Julian McAuley.
   In Proc. of ACL 2022.
