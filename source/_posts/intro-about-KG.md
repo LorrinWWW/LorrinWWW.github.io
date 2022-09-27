@@ -3,6 +3,7 @@ title: intro-about-KG
 date: 2018-07-01 20:59:58
 categories: [research]
 tags: [knowledge-graph, knowledge-reasoning, deep-learning, machine-learning]
+hidden: true
 ---
 
 # 知识图谱

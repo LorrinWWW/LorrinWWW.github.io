@@ -63,7 +63,7 @@ This is the note of learning "Management of the firm", with the book of GESTION 
 **Things important:**
 
 - PESTEL:
-  - ​Policy, especially government stability and regulations.
+  - Policy, especially government stability and regulations.
   - Economic, in particular state of the economic situation and economic situation
   - Sociocultural, particularly demography and changing lifestyles.
   - Technological, in particular public and private R&D expenditure.
@@ -106,7 +106,7 @@ This is the note of learning "Management of the firm", with the book of GESTION 
 
      Marketing provides elements for sales support.
 
-3. ​The distinction between strategic and operational marketing
+3. The distinction between strategic and operational marketing
 
    - Strategic marketing is devoted to the conception of the offer: 
 
