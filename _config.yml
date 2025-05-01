@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Jue's Blog
+title: Jue Wang
 subtitle: Ph.D Student @ ZJU
 description: Effective and Efficient NLP
 author: Jue Wang
@@ -12,7 +12,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://juewang.me
+url: https://LorrinWWW.github.io
 root: /
 # permalink: :year/:month/:day/:title/
 permalink: posts/:title/

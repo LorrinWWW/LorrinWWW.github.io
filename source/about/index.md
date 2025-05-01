@@ -1,17 +1,35 @@
 ---
 title: "Jue Wang"
-date: 2022-9-15 16:00:00
+date: 2024-06-11 16:00:00
 top: 100
 ---
 
-Hello, I am a PhD student in [Data Intelligence Lab](http://59.111.103.237:8081/) of Zhejiang University, advised by [Prof. Lidan Shou](https://person.zju.edu.cn/en/should). I am visiting ETH Zurich now, where I am advised by [Prof. Ce Zhang](https://ds3lab.inf.ethz.ch/members/ce-zhang.html).
+Hello, I am currently a postdoc/research scientist at Together AI, under the guidance of [Prof. Ce Zhang](https://zhangce.github.io/). Before that, I got my Ph.D. degree from Zhejiang University, advised by [Prof. Lidan Shou](https://person.zju.edu.cn/en/should).
 
-My research interests lie in Efficient Algorithms for NLP (both training and inference), Information Extraction, and NLP in low-resource scenarios. If you want to get in touch, please [send me an email](mailto:zjuwangjue@gmail.com). 
+My recent research mainly focuses on efficient and cost-effective algorithms and systems for LLMs:
 
-My [resume](/about/resume-Jue.Wang.pdf). 
+- Effecient Inference for Language Models
+  - [Self-Spec (ACL24)](https://arxiv.org/abs/2309.08168), [Compress \& Prompt (ICML24)](https://arxiv.org/abs/2305.11186), [Deja Vu (ICML23, Oral)](https://dl.acm.org/doi/10.5555/3618408.3619327), [SkipBERT (ACL22)](https://aclanthology.org/2022.acl-long.503/)
+- Efficient Distributed Training Systems at Scale
+  - [CocktailSGD (ICML23)](https://dl.acm.org/doi/10.5555/3618408.3619905), [AQ-SGD (NeurIPS22)](https://proceedings.neurips.cc/paper_files/paper/2022/hash/7a43b8eb92cd5f652b78eeee3fb6f910-Abstract-Conference.html)
+- Cost-Effective Algorithms for Enhancing LLMs
+  - [Mixture-of-Agents](https://arxiv.org/abs/2406.04692), [Skill-it! (NeurIPS23, Spotlight)](https://arxiv.org/abs/2307.14430)
+
+<!-- My [resume](/about/resume-Jue.Wang.pdf).  -->
 
 ## Updates
 
+- Jun 2024: Check out [Together MoA](https://www.together.ai/blog/together-moa)! Achieving SoTA results with open-source models only.
+- May 2024: We had a paper accepted to ACL 2024. Congratulation to the collaborators!
+- May 2024: We had a paper accepted to ICML 2024. Congratulation to the collaborators!
+- Sep 2023: We had a paper accepted to NeurIPS.
+- Aug 2023: [LLaMA-7B-32K](https://huggingface.co/togethercomputer/LLaMA-2-7B-32K) and [LLaMA-7B-32K-Instruct](https://huggingface.co/togethercomputer/Llama-2-7B-32K-Instruct) have been released.
+- Jun 2023: [RedPajama-7B-v1](https://www.together.xyz/blog/redpajama-7b) has been released.
+- Apr 2023: We got two papers accepted to ICML 2023!
+- Mar 2023: [OpenChatKit](https://www.together.xyz/blog/openchatkit) has been released, cheers!
+- Nov 2022: Check out our [demo of GPT-JT](https://huggingface.co/spaces/togethercomputer/GPT-JT)!
+- Nov 2022: We had a paper accepted to AAAI 2023. Congratulation to the collaborators!
+- Nov 2022: Check out our [benchmark](https://nlp.stanford.edu/helm/current/?) on LLMs!
 - Sep 2022: We had one paper accepted to NeurIPS 2022. Congratulation and thanks to all the collaborators!
 - Apr 2022: We got a paper accepted to IJCAI 2022.
 - Mar 2022: I had a visit to ETH Zurich.
@@ -31,28 +49,80 @@ My [resume](/about/resume-Jue.Wang.pdf).
 
 ## Education
 
-- **Zhejiang University**, PhD student in Computer Science (Current), Sep 2018 - Jun 2023 (Expected)
+- **Zhejiang University**, PhD in Computer Science, Sep 2018 - Jun 2023
 - **Université Paris Saclay (CentraleSupélec)**, Master (Engineer) in General Engineering, Sep 2016 - Jun 2018
 - **Zhejiang University**, Bachelor in Electrical Engineering, Sep 2014 - Jun 2018
 
-## Selected Publications
+<!---
+## Manuscripts
+--->
 
-- **[Fine-tuning Language Models over Slow Networks using Activation Compression with Guarantees](https://arxiv.org/abs/2206.01299)**
+## Publications
+
+- [**Mixture-of-Agents Enhances Large Language Model Capabilities**](https://arxiv.org/abs/2406.04692)
+  Junlin Wang, **Jue Wang**, Ben Athiwaratkun, Ce Zhang, James Zou
+  ArXiv preprint.
+  [\[Paper\]](https://arxiv.org/abs/2406.04692) [\[Code\]](https://github.com/togethercomputer/moa)
+
+- [**Draft & Verify: Lossless Large Language Model Acceleration via Self-Speculative Decoding**](https://arxiv.org/abs/2309.08168)
+  Jun Zhang, **Jue Wang**, Huan Li, Lidan Shou, Ke Chen, Gang Chen, Sharad Mehrotra
+  ArXiv preprint. Accepted to ACL 2024.
+  [\[Paper\]](https://arxiv.org/abs/2309.08168) [\[Code\]](https://github.com/dilab-zju/self-speculative-decoding)
+
+- [**Compress, Then Prompt: Improving Accuracy-Efficiency Trade-off of LLM Inference with Transferable Prompt**](https://arxiv.org/abs/2305.11186)
+  Zhaozhuo Xu, Zirui Liu, Beidi Chen, Yuxin Tang, **Jue Wang**, Kaixiong Zhou, Xia Hu, Anshumali Shrivastava
+  ArXiv preprint. Accepted to ICML 2024.
+  [\[Paper\]](https://arxiv.org/abs/2305.11186) [\[Code\]](https://github.com/HazyResearch/skill-it)
+
+- [**Skill-it! A Data-Driven Skills Framework for Understanding and Training Language Models**](https://arxiv.org/abs/2307.14430)
+  Mayee F. Chen, Nicholas Roberts, Kush Bhatia, **Jue Wang**, Ce Zhang, Frederic Sala, Christopher Ré
+  In Proc. of NeurIPS 2023.
+  [\[Paper\]](https://arxiv.org/abs/2307.14430)
+
+- [**CocktailSGD: Fine-tuning Foundation Models over 500Mbps Networks**](https://dl.acm.org/doi/10.5555/3618408.3619905)
+  **Jue Wang**$^{\*}$, Yucheng Lu$^{\*}$, Binhang Yuan, Beidi Chen, Percy Liang, Christopher De Sa, Christopher Re, Ce Zhang.
+  In Proc. of ICML 2023.
+  [\[Paper\]]((https://dl.acm.org/doi/10.5555/3618408.3619905)) [\[Code\]](https://github.com/DS3Lab/CocktailSGD)
+
+- [**Deja Vu: Contextual Sparsity for Efficient LLMs at Inference Time**](https://openreview.net/forum?id=wIPIhHd00i)
+  Zichang Liu, **Jue Wang**, Tri Dao, Tianyi Zhou, Binhang Yuan, Zhao Song, Anshumali Shrivastava, Ce Zhang, Yuandong Tian, Christopher Re, Beidi Chen.
+  In Proc. of ICML 2023.
+  [\[Paper\]](https://openreview.net/forum?id=wIPIhHd00i) [\[Code\]](https://github.com/FMInference/DejaVu)
+
+- [**Holistic Evaluation of Language Models**](https://arxiv.org/abs/2211.09110)
+  Percy Liang, Rishi Bommasani, Tony Lee, Dimitris Tsipras, Dilara Soylu, Michihiro Yasunaga, Yian Zhang, Deepak Narayanan, Yuhuai Wu, Ananya Kumar, Benjamin Newman, Binhang Yuan, Bobby Yan, Ce Zhang, Christian Cosgrove, Christopher D. Manning, Christopher Ré, Diana Acosta-Navas, Drew A. Hudson, Eric Zelikman, Esin Durmus, Faisal Ladhak, Frieda Rong, Hongyu Ren, Huaxiu Yao, **Jue Wang**, Keshav Santhanam, Laurel Orr, Lucia Zheng, Mert Yuksekgonul, Mirac Suzgun, Nathan Kim, Neel Guha, Niladri Chatterji, Omar Khattab, Peter Henderson, Qian Huang, Ryan Chi, Sang Michael Xie, Shibani Santurkar, Surya Ganguli, Tatsunori Hashimoto, Thomas Icard, Tianyi Zhang, Vishrav Chaudhary, William Wang, Xuechen Li, Yifan Mai, Yuhui Zhang, Yuta Koreeda.
+  TMLR.
+  [\[Paper\]](https://arxiv.org/abs/2211.09110) [\[Code\]](https://github.com/stanford-crfm/helm/) 
+
+- [**Effective Continual Learning for Text Classification with Lightweight Snapshots**](https://ojs.aaai.org/index.php/AAAI/article/view/26206)
+  **Jue WANG**$^{\*}$, Dajie Dong$^{\*}$, Lidan Shou, Ke Chen, Gang Chen
+  In Proc. of AAAI 2023
+  [\[Paper\]](https://ojs.aaai.org/index.php/AAAI/article/view/26206)
+
+- **[Fine-tuning Language Models over Slow Networks using Activation Compression with Guarantees](https://proceedings.neurips.cc/paper_files/paper/2022/hash/7a43b8eb92cd5f652b78eeee3fb6f910-Abstract-Conference.html)**
   **Jue Wang**$^{\*}$, Binhang Yuan$^{\*}$, Luka Rimanic$^{\*}$, Yongjun He, Tri Dao, Beidi Chen, Christopher Re, Ce Zhang.
   In Proc. of NeurIPS 2022.
-  [\[Paper\]](https://arxiv.org/abs/2206.01299) [\[Code\]](https://github.com/DS3Lab/AC-SGD)
+  [\[Paper\]](https://proceedings.neurips.cc/paper_files/paper/2022/hash/7a43b8eb92cd5f652b78eeee3fb6f910-Abstract-Conference.html) [\[Code\]](https://github.com/DS3Lab/AC-SGD)
+  
 - **[SkipBERT: Efficient Inference with Shallow Layer Skipping](https://aclanthology.org/2022.acl-long.503/)**
   **Jue Wang**, Ke Chen, Gang Chen, Lidan Shou, and Julian McAuley.
   In Proc. of ACL 2022.
   [\[Paper\]](https://aclanthology.org/2022.acl-long.503/) [\[Code\]](https://github.com/LorrinWWW/SkipBERT)
+
+- [**Continual Federated Learning Based on Knowledge Distillation**](https://www.ijcai.org/proceedings/2022/0303)
+  In Proc. of IJCAI 2022.
+  [\[Paper\]](https://www.ijcai.org/proceedings/2022/0303)
+  
 - **[Effective Slot Filling via Weakly-Supervised Dual-Model Learning](https://ojs.aaai.org/index.php/AAAI/article/view/17643)**
   **Jue Wang**, Ke Chen, Lidan Shou, Sai Wu, and Gang Chen.
   In Proc. of AAAI 2021.
   [\[Paper\]](https://ojs.aaai.org/index.php/AAAI/article/view/17643) [\[Code\]](https://github.com/LorrinWWW/weakly-supervised-slot-filling) [\[Video\]](https://slideslive.com/38948796/effective-slot-filling-via-weaklysupervised-dualmodel-learning)
+  
 - **[Two are Better than One: Joint Entity and Relation Extraction with Table-Sequence Encoders](https://aclanthology.org/2020.emnlp-main.133/)**
   **Jue Wang** and Lu Wei.
   In Proc. of EMNLP 2020.
   [\[Paper\]](https://aclanthology.org/2020.emnlp-main.133/) [\[Code\]](https://github.com/LorrinWWW/two-are-better-than-one) [\[Video\]](https://slideslive.com/38939302/two-are-better-than-one-joint-entity-and-relation-extraction-with-tablesequence-encoders)
+  
 - **[Pyramid: A Layered Model for Nested Named Entity Recognition](https://aclanthology.org/2020.acl-main.525/)**
   **Jue Wang**, Lidan Shou, Ke Chen, and Gang Chen.
   In Proc. of ACL 2020.
@@ -61,8 +131,8 @@ My [resume](/about/resume-Jue.Wang.pdf).
 
 ## Contact
 
-College of Computer Science and Technology, Zhejiang University
+251 Rhode Island St,
 
-38 Zheda Rd, Xihu Qu, Hangzhou, Zhejiang, 310027
+Together AI, San Francisco, CA 94103
 
 Email: zjuwangjue@gmail.com
