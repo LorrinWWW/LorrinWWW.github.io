@@ -4,7 +4,7 @@ date: 2025-05-01 16:00:00
 top: 100
 ---
 
-Hello, I am currently a senior stuff researcher at Together AI, working closely with [Prof. Ce Zhang](https://zhangce.github.io/). Before that, I got my Ph.D. degree from Zhejiang University, advised by [Prof. Lidan Shou](https://person.zju.edu.cn/en/should).
+Hello, I am currently a senior staff researcher at Together AI, working closely with [Prof. Ce Zhang](https://zhangce.github.io/). Before that, I got my Ph.D. degree from Zhejiang University, advised by [Prof. Lidan Shou](https://person.zju.edu.cn/en/should).
 
 My recent research mainly focuses on efficient and cost-effective algorithms and systems for LLMs:
 
