@@ -230,9 +230,9 @@ widgets:
         # Author name
         author: Jue Wang
         # Author title
-        author_title: Ph.D Student
+        author_title: Researcher
         # Author's current location
-        location: Hangzhou, China
+        location: Ann Arbor, Michigan
         # URL or path to the avatar image
         avatar:
         # Whether show the rounded avatar image
@@ -249,6 +249,9 @@ widgets:
             Github:
                 icon: fab fa-github
                 url: 'https://github.com/lorrinWWW/'
+            Lindedin:
+                icon: fab fa-linkedin
+                url: 'https://www.linkedin.com/in/juewang-me/'
             # Facebook:
             #     icon: fab fa-facebook
             #     url: 'https://facebook.com'

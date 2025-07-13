@@ -1,6 +1,6 @@
 ---
 title: "Jue Wang"
-date: 2025-05-01 16:00:00
+date: 2025-07-01 16:00:00
 top: 100
 ---
 
@@ -68,13 +68,15 @@ My recent research mainly focuses on efficient and cost-effective algorithms and
 - [**Ladder Residual: Redefining Tensor Parallelism in Transformers for Accelerated Inference**](https://arxiv.org/abs/2501.06589)
   Muru Zhang, Mayank Mishra, Zhongzhu Zhou, William Brandon, **Jue Wang**, Yoon Kim, Jonathan Ragan-Kelley, Shuaiwen Leon Song, Ben Athiwaratkun, Tri Dao
   Accepted to ICML 2025.
-  [\[Paper\]](https://arxiv.org/abs/2501.06589)
-- **FloE: On-the-Fly MoE Inference on Memory-constrained GPU**
+  [\[Paper\]](https://arxiv.org/abs/2501.06589) [\[Code\]](https://github.com/mayank31398/ladder-residual-inference)
+- [**FloE: On-the-Fly MoE Inference on Memory-constrained GPU**](https://arxiv.org/abs/2505.05950)
   Yuxin Zhou, zheng li, Jun Zhang, **Jue Wang**, Yiping Wang, Zhongle Xie, Ke Chen, Lidan Shou
   Accepted to ICML 2025.
-- **Improving Model Alignment Through Collective Intelligence of Open-Source Models**
+  [\[Paper\]](https://arxiv.org/abs/2505.05950)
+- [**Improving Model Alignment Through Collective Intelligence of Open-Source Models**](https://arxiv.org/abs/2505.03059)
   Junlin Wang, Roy Xie, Shang Zhu, **Jue Wang**, Ben Athiwaratkun, Bhuwan Dhingra, Shuaiwen Leon Song, Ce Zhang, James Zou
   Accepted to ICML 2025.
+  [\[Paper\]](https://arxiv.org/abs/2505.03059)
 - [**Mixture-of-Agents Enhances Large Language Model Capabilities**](https://arxiv.org/abs/2406.04692)
   Junlin Wang, **Jue Wang**, Ben Athiwaratkun, Ce Zhang, James Zou
   Accepted to ICLR 2025.
