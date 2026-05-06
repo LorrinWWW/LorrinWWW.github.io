@@ -1,6 +1,6 @@
 ---
 title: "Jue Wang"
-date: 2025-05-01 16:00:00
+date: 2026-03-20 16:00:00
 top: 100
 ---
 
@@ -18,6 +18,10 @@ My recent research mainly focuses on efficient and cost-effective algorithms and
 <!-- My [resume](/about/resume-Jue.Wang.pdf).  -->
 
 ## Updates
+
+- Mar 2026: Congrats to the team on the [TorchSpec](https://pytorch.org/blog/torchspec-speculative-decoding-training-at-scale/) release -- excited to see speculative decoding training scaled up effectively!
+- Jan 2026: We got 3 papers accepted to MLSys and 1 paper accepted to ICLR 2026! Congratulation to the collaborators!
+- Dec 2025: I'm happy to serve as the HPCA 2026 Artifact Evaluation Chair. Have fun in Sydney!
 
 - May 2025: We got three papers accepted to ICML 2025! Congratulation to the collaborators!
 - Jan 2025: We got three papers accepted to ICLR 2025! Congratulation to the collaborators!

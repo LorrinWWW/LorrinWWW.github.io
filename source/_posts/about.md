@@ -1,6 +1,6 @@
 ---
 title: "Jue Wang"
-date: 2025-07-01 16:00:00
+date: 2026-05-06 16:00:00
 top: 100
 ---
 
@@ -19,6 +19,10 @@ My recent research mainly focuses on efficient and cost-effective algorithms and
 
 ## Updates
 
+- May 2026: Congrats to the team on the [TokenSpeed](https://lightseek.org/blog/lightseek-tokenspeed.html) release! Happy to to have been part of it and to work with such talented folks.
+- Mar 2026: Congrats to the team on the [TorchSpec](https://pytorch.org/blog/torchspec-speculative-decoding-training-at-scale/) release -- excited to see speculative decoding training scaled up effectively!
+- Jan 2026: We got 3 papers accepted to MLSys and 1 paper accepted to ICLR 2026! Congratulation to the collaborators!
+- Dec 2025: I'm happy to serve as the HPCA 2026 Artifact Evaluation Chair. Have fun in Sydney!
 - May 2025: We got three papers accepted to ICML 2025! Congratulation to the collaborators!
 - Jan 2025: We got three papers accepted to ICLR 2025! Congratulation to the collaborators!
 - Jun 2024: Check out [Together MoA](https://www.together.ai/blog/together-moa)! Achieving SoTA results with open-source models only.
@@ -60,7 +64,7 @@ My recent research mainly focuses on efficient and cost-effective algorithms and
 
 - **Zhejiang University**, PhD in Computer Science, Sep 2018 - Jun 2023
 - **ETH Zurich**, Academic Guest, Mar 2021 - Sep 2021
-- **Université Paris Saclay (CentraleSupélec)**, Master (Engineer) in General Engineering, Sep 2016 - Jun 2018
+- **Université Paris Saclay (CentraleSupélec)**, Master (Engineer) in General Engineering, Sep 2016 - Jun 2018
 - **Zhejiang University**, Bachelor in Electrical Engineering, Sep 2014 - Jun 2018
 
 ## Publications
@@ -68,15 +72,13 @@ My recent research mainly focuses on efficient and cost-effective algorithms and
 - [**Ladder Residual: Redefining Tensor Parallelism in Transformers for Accelerated Inference**](https://arxiv.org/abs/2501.06589)
   Muru Zhang, Mayank Mishra, Zhongzhu Zhou, William Brandon, **Jue Wang**, Yoon Kim, Jonathan Ragan-Kelley, Shuaiwen Leon Song, Ben Athiwaratkun, Tri Dao
   Accepted to ICML 2025.
-  [\[Paper\]](https://arxiv.org/abs/2501.06589) [\[Code\]](https://github.com/mayank31398/ladder-residual-inference)
-- [**FloE: On-the-Fly MoE Inference on Memory-constrained GPU**](https://arxiv.org/abs/2505.05950)
+  [\[Paper\]](https://arxiv.org/abs/2501.06589)
+- **FloE: On-the-Fly MoE Inference on Memory-constrained GPU**
   Yuxin Zhou, zheng li, Jun Zhang, **Jue Wang**, Yiping Wang, Zhongle Xie, Ke Chen, Lidan Shou
   Accepted to ICML 2025.
-  [\[Paper\]](https://arxiv.org/abs/2505.05950)
-- [**Improving Model Alignment Through Collective Intelligence of Open-Source Models**](https://arxiv.org/abs/2505.03059)
+- **Improving Model Alignment Through Collective Intelligence of Open-Source Models**
   Junlin Wang, Roy Xie, Shang Zhu, **Jue Wang**, Ben Athiwaratkun, Bhuwan Dhingra, Shuaiwen Leon Song, Ce Zhang, James Zou
   Accepted to ICML 2025.
-  [\[Paper\]](https://arxiv.org/abs/2505.03059)
 - [**Mixture-of-Agents Enhances Large Language Model Capabilities**](https://arxiv.org/abs/2406.04692)
   Junlin Wang, **Jue Wang**, Ben Athiwaratkun, Ce Zhang, James Zou
   Accepted to ICLR 2025.
