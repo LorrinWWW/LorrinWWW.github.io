@@ -1,26 +1,28 @@
 ---
 title: "Jue Wang"
-date: 2026-03-20 16:00:00
+date: 2026-07-29 16:00:00
 top: 100
 ---
 
-Hello, I am currently a senior staff researcher at Together AI, working closely with [Prof. Ce Zhang](https://zhangce.github.io/). Before that, I got my Ph.D. degree from Zhejiang University, advised by [Prof. Lidan Shou](https://person.zju.edu.cn/en/should).
+Hello, I am currently a Principal Research Scientist at Together AI, working closely with [Prof. Ce Zhang](https://zhangce.github.io/). Before that, I got my Ph.D. degree from Zhejiang University, advised by [Prof. Lidan Shou](https://person.zju.edu.cn/en/should).
 
 My recent research mainly focuses on efficient and cost-effective algorithms and systems for LLMs:
 
-- Effecient Inference for Language Models
-  - [Ladder Residual (ICML25)](https://arxiv.org/abs/2501.06589), [FloE (ICML25)](#), [Self-Spec (ACL24)](https://arxiv.org/abs/2309.08168), [Compress \& Prompt (ICML24)](https://arxiv.org/abs/2305.11186), [Deja Vu (ICML23, Oral)](https://dl.acm.org/doi/10.5555/3618408.3619327), [SkipBERT (ACL22)](https://aclanthology.org/2022.acl-long.503/)
+- Efficient Inference for Language Models
+  - [SonicSampler (COLM26)](https://arxiv.org/abs/2607.20475), [Kitty (MLSys26)](https://proceedings.mlsys.org/paper_files/paper/2026/hash/e4d8d1b5120be349d3fff8878650cf45-Abstract-Conference.html), [Ladder Residual (ICML25)](https://proceedings.mlr.press/v267/zhang25bg.html), [FloE (ICML25)](https://proceedings.mlr.press/v267/zhou25j.html), [Self-Spec (ACL24)](https://arxiv.org/abs/2309.08168), [Compress \& Prompt (ICML24)](https://arxiv.org/abs/2305.11186), [Deja Vu (ICML23, Oral)](https://dl.acm.org/doi/10.5555/3618408.3619327), [SkipBERT (ACL22)](https://aclanthology.org/2022.acl-long.503/)
 - Efficient Training Systems at Scale
-  - [LoRAM (ICLR25)](https://arxiv.org/abs/2502.13533) [CocktailSGD (ICML23)](https://dl.acm.org/doi/10.5555/3618408.3619905), [AQ-SGD (NeurIPS22)](https://proceedings.neurips.cc/paper_files/paper/2022/hash/7a43b8eb92cd5f652b78eeee3fb6f910-Abstract-Conference.html)
+  - [Beat the Long Tail (MLSys26)](https://arxiv.org/abs/2511.13841), [LoRAM (ICLR25)](https://arxiv.org/abs/2502.13533), [CocktailSGD (ICML23)](https://dl.acm.org/doi/10.5555/3618408.3619905), [AQ-SGD (NeurIPS22)](https://proceedings.neurips.cc/paper_files/paper/2022/hash/7a43b8eb92cd5f652b78eeee3fb6f910-Abstract-Conference.html)
 - Cost-Effective Algorithms for Enhancing LLMs
-  - [MoAA (ICML25)](#), [Mixture-of-Agents (ICLR25, Spotlight)](https://arxiv.org/abs/2406.04692), [Scaling-context (ICLR25)](https://arxiv.org/abs/2504.12637), [Skill-it! (NeurIPS23, Spotlight)](https://arxiv.org/abs/2307.14430)
+  - [Squeeze Evolve (COLM26)](https://arxiv.org/abs/2604.07725), [MoAA (ICLR25)](https://openreview.net/forum?id=K4N9UvsuNB), [Mixture-of-Agents (ICLR25, Spotlight)](https://arxiv.org/abs/2406.04692), [Scaling-context (ICLR25)](https://arxiv.org/abs/2504.12637), [Skill-it! (NeurIPS23, Spotlight)](https://arxiv.org/abs/2307.14430)
 
 <!-- My [resume](/about/resume-Jue.Wang.pdf).  -->
 
 ## Updates
 
+- July 2026: Congrats to the teams on having two papers accepted to COLM 2026!
+- May 2026: Congrats to the team on the [TokenSpeed](https://lightseek.org/blog/lightseek-tokenspeed.html) release! Happy to have co-created it and to work with such talented folks.
+- May 2026: We had three papers accepted to MLSys 2026 and one paper accepted to ICLR 2026. Congratulations to the collaborators!
 - Mar 2026: Congrats to the team on the [TorchSpec](https://pytorch.org/blog/torchspec-speculative-decoding-training-at-scale/) release -- excited to see speculative decoding training scaled up effectively!
-- Jan 2026: We got 3 papers accepted to MLSys and 1 paper accepted to ICLR 2026! Congratulation to the collaborators!
 - Dec 2025: I'm happy to serve as the HPCA 2026 Artifact Evaluation Chair. Have fun in Sydney!
 
 - May 2025: We got three papers accepted to ICML 2025! Congratulation to the collaborators!
@@ -56,8 +58,10 @@ My recent research mainly focuses on efficient and cost-effective algorithms and
 
 ## Work Experience
 
-- **Together AI**, Senior Staff Researcher, May 2025 - Now
-- **Together AI**, Staff Researcher, July 2023 - May 2025
+- **Together AI**, Principal Research Scientist, May 2026 - Present
+- **Together AI**, Senior Staff Research Scientist, May 2025 - May 2026
+- **Together AI**, Staff Research Scientist, Dec 2024 - May 2025
+- **Together AI**, Senior Research Scientist, July 2023 - Dec 2024
 - **Rokid**, Research Intern, Jun 2018 - Sep 2018
 
 ## Education
@@ -69,26 +73,45 @@ My recent research mainly focuses on efficient and cost-effective algorithms and
 
 ## Publications
 
-- [**Ladder Residual: Redefining Tensor Parallelism in Transformers for Accelerated Inference**](https://arxiv.org/abs/2501.06589)
+- [**SonicSampler: Unified Tile-Aware Kernels for LLM Sampling and Speculative Verification**](https://arxiv.org/abs/2607.20475)
+  Pragaash Ponnusamy, Shivam Sahni, **Jue Wang**, Tri Dao.
+  Accepted to COLM 2026.
+- [**Squeeze Evolve: Unified Multi-Model Orchestration for Verifier-Free Evolution**](https://arxiv.org/abs/2604.07725)
+  Monishwaran Maheswaran, Leon Lakhani, Zhongzhu Zhou, Shijia Yang, Junxiong Wang, Coleman Hooper, Yuezhou Hu, Rishabh Tiwari, **Jue Wang**, Harman Singh, Qingyang Wu, Yuqing Jian, Ce Zhang, Kurt Keutzer, Tri Dao, Xiaoxia Wu, Ben Athiwaratkun, James Zou, Chenfeng Xu.
+  Accepted to COLM 2026.
+- [**Kitty: Accurate and Efficient 2-bit KV Cache Quantization with Dynamic Channel-wise Precision Boost**](https://proceedings.mlsys.org/paper_files/paper/2026/hash/e4d8d1b5120be349d3fff8878650cf45-Abstract-Conference.html)
+  Haojun Xia, Xiaoxia Wu, Jisen Li, Robert Wu, Junxiong Wang, **Jue Wang**, Chenxi Li, Aman Singhal, Alay Dilipbhai Shah, Alpay Ariyak, Donglin Zhuang, Zhongzhu Zhou, Ben Athiwaratkun, Zhen Zheng, Shuaiwen Leon Song.
+  In Proc. of MLSys 2026.
+- [**Search Your Block Floating Point Scales!**](https://arxiv.org/abs/2605.12464)
+  Tanmaey Gupta, Hayden Prairie, Xiaoxia Wu, Reyna Abhyankar, Qingyang Wu, Austin Silveria, Pragaash Ponnusamy, **Jue Wang**, Ben Athiwaratkun, Shuaiwen Leon Song, Tri Dao, Daniel Y. Fu, Christopher De Sa.
+  Accepted to MLSys 2026.
+- [**Beat the Long Tail: Distribution-Aware Speculative Decoding for RL Training**](https://proceedings.mlsys.org/paper_files/paper/2026/hash/cbc4ab80cd77aa0eb87da062fbcddb46-Abstract-Conference.html)
+  Zelei Shao, Vikranth Srivatsa, Sanjana Srivastava, Qingyang Wu, Alpay Ariyak, Xiaoxia Wu, Ameen Patel, **Jue Wang**, Percy Liang, Tri Dao, Ce Zhang, Yiying Zhang, Ben Athiwaratkun, Chenfeng Xu, Junxiong Wang.
+  In Proc. of MLSys 2026.
+- [**When Does Divide and Conquer Work for Long Context LLM? A Noise Decomposition Framework**](https://openreview.net/forum?id=ddQFUuHDDt)
+  Zhen Xu, Shang Zhu, **Jue Wang**, Junlin Wang, Ben Athiwaratkun, Chi Wang, James Zou, Ce Zhang.
+  In Proc. of ICLR 2026.
+
+- [**Ladder Residual: Redefining Tensor Parallelism in Transformers for Accelerated Inference**](https://proceedings.mlr.press/v267/zhang25bg.html)
   Muru Zhang, Mayank Mishra, Zhongzhu Zhou, William Brandon, **Jue Wang**, Yoon Kim, Jonathan Ragan-Kelley, Shuaiwen Leon Song, Ben Athiwaratkun, Tri Dao
-  Accepted to ICML 2025.
+  In Proc. of ICML 2025.
   [\[Paper\]](https://arxiv.org/abs/2501.06589)
-- **FloE: On-the-Fly MoE Inference on Memory-constrained GPU**
+- [**FloE: On-the-Fly MoE Inference on Memory-constrained GPU**](https://proceedings.mlr.press/v267/zhou25j.html)
   Yuxin Zhou, zheng li, Jun Zhang, **Jue Wang**, Yiping Wang, Zhongle Xie, Ke Chen, Lidan Shou
-  Accepted to ICML 2025.
-- **Improving Model Alignment Through Collective Intelligence of Open-Source Models**
+  In Proc. of ICML 2025.
+- [**Improving Model Alignment Through Collective Intelligence of Open-Source Models**](https://openreview.net/forum?id=K4N9UvsuNB)
   Junlin Wang, Roy Xie, Shang Zhu, **Jue Wang**, Ben Athiwaratkun, Bhuwan Dhingra, Shuaiwen Leon Song, Ce Zhang, James Zou
-  Accepted to ICML 2025.
+  In Proc. of ICLR 2025.
 - [**Mixture-of-Agents Enhances Large Language Model Capabilities**](https://arxiv.org/abs/2406.04692)
   Junlin Wang, **Jue Wang**, Ben Athiwaratkun, Ce Zhang, James Zou
-  Accepted to ICLR 2025.
+  In Proc. of ICLR 2025.
   [\[Paper\]](https://arxiv.org/abs/2406.04692) [\[Code\]](https://github.com/togethercomputer/moa)
 - [**Scaling Instruction-tuned LLMs to Million-token Contexts via Hierarchical Synthetic Data Generation**](https://arxiv.org/abs/2504.12637)
   Linda He, **Jue Wang**, Maurice Weber, Shang Zhu, Ben Athiwaratkun, Ce Zhang
-  Accepted to ICLR 2025.
+  In Proc. of ICLR 2025.
 - [**Train Small, Infer Large: Memory-Efficient LoRA Training for Large Language Models**](https://arxiv.org/abs/2502.13533)
   Jun Zhang, **Jue Wang**, Huan Li, Lidan Shou, Ke Chen, Yang You, Guiming Xie, Xuejian Gong, Kunlong Zhou
-  Accepted to ICLR 2025.
+  In Proc. of ICLR 2025.
 - [**Draft & Verify: Lossless Large Language Model Acceleration via Self-Speculative Decoding**](https://arxiv.org/abs/2309.08168)
   Jun Zhang, **Jue Wang**, Huan Li, Lidan Shou, Ke Chen, Gang Chen, Sharad Mehrotra
   In Proc. of ACL 2024.

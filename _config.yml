@@ -4,7 +4,7 @@
 
 # Site
 title: Jue Wang
-subtitle: LLM Inference @ Together AI
+subtitle: Principal Research Scientist @ Together AI
 description: Effective and Efficient NLP
 author: Jue Wang
 language: en
@@ -85,4 +85,3 @@ math:
   engine: 'mathjax'
   mathjax:
     src: "https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js"
-
